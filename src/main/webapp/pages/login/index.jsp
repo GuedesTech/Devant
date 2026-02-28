@@ -3,6 +3,7 @@
 <html>
 <head>
     <title>Instituto Devant</title>
+    <link rel="icon" type="image/png" href="<%= request.getContextPath() %>minimalismo.png">
     <link rel="stylesheet" href="<%= request.getContextPath() %>/pages/login/style.css">
 </head>
 

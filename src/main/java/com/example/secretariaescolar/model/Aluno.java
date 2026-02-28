@@ -5,6 +5,7 @@ public class Aluno extends Usuario {
     private int id_aluno;
     private String matricula;
     private int id_turma;
+    private String nomeTurma;
 
     public Aluno(int id_aluno, String matricula, int id_turma,
                  String nome, String login, String senha, int id_tipo_user) {
@@ -48,4 +49,7 @@ public class Aluno extends Usuario {
     public void setId_turma(int id_turma) {
         this.id_turma = id_turma;
     }
+
+    public String getNomeTurma() { return nomeTurma; }
+    public void setNomeTurma(String nomeTurma) { this.nomeTurma = nomeTurma; }
 }

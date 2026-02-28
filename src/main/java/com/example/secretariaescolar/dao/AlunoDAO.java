@@ -125,4 +125,49 @@ public class AlunoDAO {
 
         return false; // matrícula não existe ou erro
     }
+
+    public Aluno buscarPorIdUser(int idUser) {
+
+        String sql = """
+        SELECT u.id_user, u.nome, u.login, u.foto,
+               a.id_aluno, a.matricula, a.id_turma,
+               t.nome AS nome_turma
+        FROM usuario u
+        INNER JOIN aluno a ON u.id_user = a.id_user
+        INNER JOIN turma t ON t.id_turma = a.id_turma
+        WHERE u.id_user = ?
+    """;
+
+        try (Connection conn = Conexao.conectar();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, idUser);
+
+            try (ResultSet rs = stmt.executeQuery()) {
+
+                if (rs.next()) {
+                    Aluno aluno = new Aluno();
+
+                    aluno.setId_user(rs.getInt("id_user"));
+                    aluno.setNome(rs.getString("nome"));
+                    aluno.setLogin(rs.getString("login"));
+                    aluno.setFoto(rs.getString("foto")); // pode ser null
+
+                    aluno.setId_aluno(rs.getInt("id_aluno"));
+                    aluno.setMatricula(rs.getString("matricula"));
+                    aluno.setId_turma(rs.getInt("id_turma"));
+
+                    // ✅ aqui vem o nome da turma
+                    aluno.setNomeTurma(rs.getString("nome_turma"));
+
+                    return aluno;
+                }
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
 }

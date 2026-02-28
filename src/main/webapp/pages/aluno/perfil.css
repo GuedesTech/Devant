@@ -1,0 +1,325 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+:root{
+    --teal: #294c56;
+    --navy: #283565;
+    --white: #ffffff;
+}
+
+*{ box-sizing: border-box; }
+
+html, body{ height: 100%; }
+
+body{
+    margin: 0;
+    font-family: "Poppins", sans-serif;
+    background: var(--white);
+    color: var(--navy);
+}
+
+/* =========================
+   TOPBAR
+========================= */
+.topbar{
+    background: var(--teal);
+    height: 78px;
+    display: flex;
+    align-items: center;
+}
+
+.topbar-inner{
+    width: 100%;
+    padding: 0 70px;   /* controla o espaço lateral */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* esquerda: logo */
+.topbar-left{
+    width: 160px;                 /* reserva espaço p/ manter menu centralizado */
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    text-decoration: none;
+}
+
+.topbar-logo{
+    height: 40px;                 /* controle do tamanho da logo */
+    width: auto;
+    margin-right: 10px;
+    display: block;
+}
+
+/* centro: menu */
+.topbar-nav{
+    position: relative; /* necessário pro indicador ficar preso no nav */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 44px;
+
+    padding-bottom: 16px; /* espaço pra linha branca ficar abaixo */
+}
+
+.topbar-link{
+    position: relative;
+    color: var(--white);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 18px;
+    opacity: 0.95;
+    padding: 8px 2px;
+}
+
+.topbar-link:hover{ opacity: 1; }
+
+/* ===== Indicador animado do menu ===== */
+.nav-indicador{
+    position: absolute;
+    left: 0;
+    bottom: 6px;              /* controla a distância da linha */
+    height: 6px;
+    width: 40px;              /* o JS ajusta */
+    background: var(--white);
+    border-radius: 999px;
+    transition: left 0.35s ease, width 0.35s ease;
+    opacity: 0.95;
+
+    /* opcional (fica mais bonito e parecido com o print) */
+    box-shadow: 0 6px 14px rgba(0,0,0,0.18);
+}
+
+/* REMOVIDO: o ::after antigo do item ativo */
+/*
+.topbar-link.is-active::after{
+    content: "";
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: -12px;
+    width: 60px;
+    height: 6px;
+    border-radius: 999px;
+    background: var(--white);
+    opacity: 0.95;
+}
+*/
+
+/* direita: espaço (balanceamento) */
+.topbar-right{
+    width: 160px;
+}
+
+/* =========================
+   PAGE / CARD
+========================= */
+.page{
+    width: min(1100px, 92%);
+    margin: 32px auto 0;
+}
+
+.card{
+    background: var(--white);
+    border-radius: 18px;
+    padding: 26px 18px 28px;
+}
+
+/* Cabeçalho "Meu Perfil" + linha + botões */
+.card-header{
+    padding: 0 6px;
+}
+
+.page-title{
+    margin: 0;
+    color: var(--navy);
+    font-size: 26px;
+    font-weight: 700;
+}
+
+.title-line{
+    margin-top: 10px;
+    height: 2px;
+    width: 100%;
+    background: var(--navy);
+    opacity: 0.35;
+    border-radius: 999px;
+}
+
+/* =========================
+   BOTÕES (Notas / Observações)
+========================= */
+.pill-row{
+    margin-top: 16px;
+    display: flex;
+    gap: 12px;
+}
+
+.pill{
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+
+    height: 36px;
+    padding: 0 16px;
+    border-radius: 999px;
+
+    background: var(--teal);
+    color: var(--white);
+    text-decoration: none;
+
+    font-weight: 600;
+    font-size: 13px;
+
+    /* sombra leve (transparente) */
+    box-shadow: 0 10px 18px rgba(40, 53, 101, 0.12);
+}
+
+.pill:hover{
+    filter: brightness(1.05);
+}
+
+.pill-arrow{
+    font-weight: 800;
+    font-size: 14px;
+    line-height: 1;
+    opacity: 0.95;
+}
+
+/* =========================
+   PROFILE (foto + infos)
+========================= */
+.profile{
+    margin-top: 22px;
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    gap: 18px;
+    align-items: start;
+    padding: 6px;
+}
+
+.avatar-wrap{
+    width: 96px;
+    height: 96px;
+    border-radius: 999px;
+    overflow: hidden;
+    background: var(--white);
+}
+
+.avatar{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.student-name{
+    margin: 2px 0 16px;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--navy);
+}
+
+.info-block{
+    margin: 10px 0 0;
+}
+
+.info-label{
+    margin: 0;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--navy);
+    opacity: 0.55;
+}
+
+.info-value{
+    margin: 2px 0 0;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--navy);
+}
+
+/* =========================
+   AJUSTES: MAIS “CHEIO” NA TELA
+   (não mexe em header nem nos botões)
+========================= */
+
+/* Aumenta o container e reduz sensação de vazio */
+.page{
+    width: min(1280px, 94%);   /* mais largo */
+    margin: 40px auto 0;       /* desce um pouco */
+}
+
+/* Card mais “presente” */
+.card{
+    padding: 34px 28px 40px;   /* mais padding */
+}
+
+/* Título maior */
+.page-title{
+    font-size: 30px;
+}
+
+/* Linha um pouco mais marcada */
+.title-line{
+    height: 2px;
+    opacity: 0.4;
+}
+
+/* =========================
+   PERFIL EM COLUNA (foto + nome como “título”)
+========================= */
+.profile{
+    margin-top: 26px;
+    display: flex;            /* troca grid por coluna */
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 10px 6px;
+}
+
+/* Foto maior + borda escura */
+.avatar-wrap{
+    width: 140px;
+    height: 140px;
+    border-radius: 999px;
+    overflow: hidden;
+    background: var(--white);
+    border: 4px solid var(--navy);         /* borda escura */
+    box-shadow: 0 14px 28px rgba(40, 53, 101, 0.14);
+}
+
+.avatar{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Nome bem maior (como título) */
+.student-name{
+    margin: 6px 0 6px;
+    font-size: 30px;
+    font-weight: 800;
+    color: var(--navy);
+}
+
+/* Informações embaixo do “título” */
+.profile-info{
+    width: 100%;
+    margin-top: 6px;
+}
+
+/* Aumenta textos das infos */
+.info-label{
+    font-size: 16px;
+}
+
+.info-value{
+    font-size: 18px;
+}
+
+/* Dá mais respiro entre os blocos */
+.info-block{
+    margin-top: 14px;
+}

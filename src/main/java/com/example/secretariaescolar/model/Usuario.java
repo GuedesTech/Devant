@@ -7,6 +7,7 @@ public class Usuario {
     private String login;
     private String senha;
     private int id_tipo_user;
+    private String foto;
 
     public Usuario(String nome, String login, String senha, int id_tipo_user) {
         this.nome = nome;
@@ -55,5 +56,13 @@ public class Usuario {
 
     public void setId_tipo_user(int id_tipo_user) {
         this.id_tipo_user = id_tipo_user;
+    }
+
+    public String getFoto() {
+        return foto;
+    }
+
+    public void setFoto(String foto) {
+        this.foto = foto;
     }
 }

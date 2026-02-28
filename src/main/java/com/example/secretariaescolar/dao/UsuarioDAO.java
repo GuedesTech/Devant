@@ -39,10 +39,10 @@ public class UsuarioDAO {
     public Usuario autenticar(String login, String senha) {
 
         String sql = """
-            SELECT id_user, nome, login, id_tipo_user
-            FROM usuario
-            WHERE login = ? AND senha = ?
-            """;
+    SELECT id_user, nome, login, id_tipo_user, foto
+    FROM usuario
+    WHERE login = ? AND senha = ?
+    """;
 
         try (Connection conn = Conexao.conectar();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -58,6 +58,7 @@ public class UsuarioDAO {
                 user.setNome(rs.getString("nome"));
                 user.setLogin(rs.getString("login"));
                 user.setId_tipo_user(rs.getInt("id_tipo_user"));
+                user.setFoto(rs.getString("foto"));
                 return user;
             }
 

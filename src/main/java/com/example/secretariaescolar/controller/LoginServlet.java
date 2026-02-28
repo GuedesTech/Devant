@@ -42,7 +42,7 @@ public class LoginServlet extends HttpServlet {
                 }
 
                 if (tipo == 1) {
-                    response.sendRedirect("pages/aluno/dashboard.jsp");
+                    response.sendRedirect(request.getContextPath() + "/aluno/perfil");
                 } else if (tipo == 2) {
                     response.sendRedirect("pages/professor/dashboard.jsp");
                 } else {
