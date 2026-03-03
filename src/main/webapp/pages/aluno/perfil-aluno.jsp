@@ -41,9 +41,8 @@
 
         <nav class="topbar-nav" aria-label="Navegação principal">
             <a class="topbar-link is-active" href="<%= ctx %>/aluno/perfil">Perfil</a>
-            <a class="topbar-link" href="<%= ctx %>/materias-aluno.htm">Disciplinas</a>
+            <a class="topbar-link" href="<%= ctx %>/aluno/disciplinas">Disciplinas</a>
 
-            <!-- indicador animado -->
             <span class="nav-indicador" aria-hidden="true"></span>
         </nav>
 
@@ -58,12 +57,10 @@
             <div class="title-line" aria-hidden="true"></div>
 
             <div class="pill-row">
-                <a class="pill" href="<%= ctx %>/notas-aluno.htm">
+                <a class="pill" href="<%= ctx %>/aluno/notas">
                     Notas <span class="pill-arrow">&gt;</span>
                 </a>
-                <a class="pill" href="<%= ctx %>/observacoes-aluno.htm">
-                    Observações <span class="pill-arrow">&gt;</span>
-                </a>
+                <a class="pill" href="<%= ctx %>/aluno/observacoes">Observações <span class="pill-arrow">&gt;</span></a>
             </div>
         </div>
 
@@ -96,5 +93,52 @@
 
     </section>
 </main>
+
+<script>
+    (function () {
+        const nav = document.querySelector(".topbar-nav");
+        const indicador = nav ? nav.querySelector(".nav-indicador") : null;
+        const links = nav ? nav.querySelectorAll(".topbar-link") : [];
+        if (!nav || !indicador || links.length === 0) return;
+
+        function moverPara(el) {
+            const rect = el.getBoundingClientRect();
+            const navRect = nav.getBoundingClientRect();
+            indicador.style.width = rect.width + "px";
+            indicador.style.left = (rect.left - navRect.left) + "px";
+        }
+
+        // posiciona ao carregar
+        const ativo = nav.querySelector(".topbar-link.is-active") || links[0];
+        moverPara(ativo);
+
+        window.addEventListener("resize", () => {
+            const a = nav.querySelector(".topbar-link.is-active") || links[0];
+            moverPara(a);
+        });
+
+        // anima antes de navegar
+        links.forEach((a) => {
+            a.addEventListener("click", (e) => {
+                // deixa abrir em nova aba normal
+                if (e.ctrlKey || e.metaKey || e.shiftKey || e.altKey) return;
+
+                const href = a.getAttribute("href");
+                if (!href) return;
+
+                e.preventDefault();
+
+                // move indicador para o link clicado
+                moverPara(a);
+
+                // pequena espera para a animação aparecer
+                setTimeout(() => {
+                    window.location.href = href;
+                }, 220);
+            });
+        });
+    })();
+</script>
+
 </body>
 </html>

@@ -63,16 +63,16 @@ public class DisciplinaDAO {
     // Listar todas as disciplinas
     public List<Disciplina> listarTodas() {
         List<Disciplina> disciplinas = new ArrayList<>();
-        String sql = "SELECT * FROM disciplina";
+        String sql = "SELECT id_disciplina, nome FROM disciplina ORDER BY nome";
 
         try (PreparedStatement stmt = conn.prepareStatement(sql);
              ResultSet rs = stmt.executeQuery()) {
 
             while (rs.next()) {
-                Disciplina disciplina = new Disciplina(
-                        rs.getInt("id_disciplina")
-                );
-                disciplinas.add(disciplina);
+                Disciplina d = new Disciplina();
+                d.setId_disciplina(rs.getInt("id_disciplina"));
+                d.setNome(rs.getString("nome"));
+                disciplinas.add(d);
             }
 
         } catch (SQLException e) {
@@ -81,5 +81,4 @@ public class DisciplinaDAO {
 
         return disciplinas;
     }
-
 }

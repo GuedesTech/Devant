@@ -1,19 +1,18 @@
 package com.example.secretariaescolar.controller;
 
-import com.example.secretariaescolar.dao.DisciplinaDAO;
-import com.example.secretariaescolar.model.Disciplina;
+import com.example.secretariaescolar.dao.AlunoDAO;
+import com.example.secretariaescolar.model.Aluno;
 import com.example.secretariaescolar.model.Usuario;
-import com.example.secretariaescolar.util.Conexao;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
 
 import java.io.IOException;
-import java.sql.Connection;
 import java.util.List;
+import java.util.Map;
 
-@WebServlet("/aluno/disciplinas")
-public class DisciplinasAlunoServlet extends HttpServlet {
+@WebServlet("/professor/alunos")
+public class AlunosProfessorServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -27,21 +26,22 @@ public class DisciplinasAlunoServlet extends HttpServlet {
         }
 
         Usuario usuario = (Usuario) session.getAttribute("usuario");
-        if (usuario.getId_tipo_user() != 1) {
+
+        if (usuario.getId_tipo_user() != 2) {
             response.sendRedirect(request.getContextPath() + "/pages/login/index.jsp");
             return;
         }
 
-        try (Connection conn = Conexao.conectar()) {
-            DisciplinaDAO disciplinaDAO = new DisciplinaDAO(conn);
-            List<Disciplina> disciplinas = disciplinaDAO.listarTodas();
+        AlunoDAO alunoDAO = new AlunoDAO();
 
-            request.setAttribute("disciplinas", disciplinas);
-            request.getRequestDispatcher("/pages/aluno/disciplinas-aluno.jsp")
-                    .forward(request, response);
+        List<Aluno> alunos = alunoDAO.listarTodosComFoto();
+        Map<Integer, Double> mediaPorAluno = alunoDAO.buscarMediaPorAluno();
 
-        } catch (Exception e) {
-            throw new ServletException("Erro ao carregar disciplinas", e);
-        }
+        request.setAttribute("alunos", alunos);
+        request.setAttribute("mediaPorAluno", mediaPorAluno);
+        request.setAttribute("totalAlunos", alunos.size());
+
+        request.getRequestDispatcher("/pages/professor/alunos.jsp")
+                .forward(request, response);
     }
 }

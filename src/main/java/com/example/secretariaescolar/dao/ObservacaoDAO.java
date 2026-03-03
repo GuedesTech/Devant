@@ -1,96 +1,118 @@
 package com.example.secretariaescolar.dao;
 
 import com.example.secretariaescolar.model.Observacao;
+import com.example.secretariaescolar.util.Conexao;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ObservacaoDAO {
-    private Connection conn;
-
-    public ObservacaoDAO(Connection conn) {
-        this.conn = conn;
-    }
 
     // Professor envia observação para o aluno
-    public void salvar(Observacao observacao) {
+    public boolean salvar(Observacao o) {
         String sql = """
-            INSERT INTO observacao (mensagem, data, id_aluno, id_professor)
-            VALUES (?, ?, ?, ?)
+            INSERT INTO observacao (mensagem, data, id_aluno, id_professor, id_disciplina, tipo)
+            VALUES (?, ?, ?, ?, ?, ?)
         """;
 
-        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setString(1, observacao.getMensagem());
-            stmt.setDate(2, Date.valueOf(observacao.getData()));
-            stmt.setInt(3, observacao.getId_aluno());
-            stmt.setInt(4, observacao.getId_professor());
+        try (Connection conn = Conexao.conectar();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-            stmt.executeUpdate();
+            stmt.setString(1, o.getMensagem());
+            stmt.setDate(2, Date.valueOf(o.getData()));
+            stmt.setInt(3, o.getId_aluno());
+            stmt.setInt(4, o.getId_professor());
+            stmt.setInt(5, o.getId_disciplina());
+            stmt.setInt(6, o.getTipo());
+
+            return stmt.executeUpdate() > 0;
+
         } catch (SQLException e) {
             System.out.println("Erro ao enviar a observação: " + e.getMessage());
+            return false;
         }
     }
 
-    // Aluno visualiza suas observações
+    // Aluno visualiza suas observações (com nome do professor + disciplina)
     public List<Observacao> listarPorAluno(int idAluno) {
-        List<Observacao> observacoes = new ArrayList<>();
+        List<Observacao> lista = new ArrayList<>();
 
         String sql = """
-            SELECT * FROM observacao
-            WHERE id_aluno = ?
-            ORDER BY data DESC
-        """;
+        SELECT 
+            o.id_observacao,
+            o.mensagem,
+            o.data,
+            o.id_aluno,
+            o.id_professor,
+            o.id_disciplina,
+            o.tipo,
 
-        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            u.nome AS nome_professor
+
+        FROM observacao o
+        INNER JOIN professor p ON p.id_professor = o.id_professor
+        INNER JOIN usuario u ON u.id_user = p.id_user
+        WHERE o.id_aluno = ?
+        ORDER BY o.data DESC, o.id_observacao DESC
+    """;
+
+        try (Connection conn = Conexao.conectar();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
             stmt.setInt(1, idAluno);
-            ResultSet rs = stmt.executeQuery();
 
-            while (rs.next()) {
-                Observacao obs = new Observacao(
-                        rs.getInt("id_observacao"),
-                        rs.getString("mensagem"),
-                        rs.getDate("data").toLocalDate(),
-                        rs.getInt("id_aluno"),
-                        rs.getInt("id_professor")
-                );
-                observacoes.add(obs);
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+
+                    Observacao o = new Observacao();
+                    o.setId_observacao(rs.getInt("id_observacao"));
+                    o.setMensagem(rs.getString("mensagem"));
+                    o.setData(rs.getDate("data").toLocalDate());
+                    o.setId_aluno(rs.getInt("id_aluno"));
+                    o.setId_professor(rs.getInt("id_professor"));
+                    o.setId_disciplina(rs.getInt("id_disciplina"));
+                    o.setTipo(rs.getInt("tipo"));
+
+                    o.setNomeProfessor(rs.getString("nome_professor"));
+
+                    lista.add(o);
+                }
             }
+
         } catch (SQLException e) {
-            System.out.println("Erro ao visualizar suas observações: " + e.getMessage());
+            e.printStackTrace();
         }
 
-        return observacoes;
+        return lista;
     }
 
-    // Professor visualiza observações que enviou (opcional)
-    public List<Observacao> listarPorProfessor(int idProfessor) {
-        List<Observacao> observacoes = new ArrayList<>();
-
-        String sql = """
-            SELECT * FROM observacao
-            WHERE id_professor = ?
-            ORDER BY data DESC
-        """;
-
-        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setInt(1, idProfessor);
-            ResultSet rs = stmt.executeQuery();
-
-            while (rs.next()) {
-                Observacao obs = new Observacao(
-                        rs.getInt("id_observacao"),
-                        rs.getString("mensagem"),
-                        rs.getDate("data").toLocalDate(),
-                        rs.getInt("id_aluno"),
-                        rs.getInt("id_professor")
-                );
-                observacoes.add(obs);
+    public int contarPorAlunoETipo(int idAluno, int tipo) {
+        String sql = "SELECT COUNT(*) FROM observacao WHERE id_aluno = ? AND tipo = ?";
+        try (Connection conn = Conexao.conectar();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, idAluno);
+            stmt.setInt(2, tipo);
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) return rs.getInt(1);
             }
         } catch (SQLException e) {
-            System.out.println("Erro ao visualizar as observações enviadas: " + e.getMessage());
+            e.printStackTrace();
         }
+        return 0;
+    }
 
-        return observacoes;
+    public int contarTotalPorAluno(int idAluno) {
+        String sql = "SELECT COUNT(*) FROM observacao WHERE id_aluno = ?";
+        try (Connection conn = Conexao.conectar();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, idAluno);
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) return rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
     }
 }

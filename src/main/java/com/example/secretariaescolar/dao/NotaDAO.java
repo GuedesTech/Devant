@@ -4,6 +4,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.example.secretariaescolar.model.MediaDisciplina;
 import com.example.secretariaescolar.model.Nota;
 import com.example.secretariaescolar.util.Conexao;
 
@@ -171,5 +172,151 @@ public class NotaDAO {
             System.out.println("Erro ao deletar nota: " + e.getMessage());
             return false;
         }
+    }
+
+    public List<MediaDisciplina> listarMediasPorDisciplina(int idAluno) {
+        List<MediaDisciplina> lista = new ArrayList<>();
+
+        String sql = """
+            SELECT d.nome AS disciplina,
+                   ROUND(AVG(n.valor), 2) AS media
+            FROM nota n
+            JOIN disciplina d ON d.id_disciplina = n.id_disciplina
+            WHERE n.id_aluno = ?
+            GROUP BY d.nome
+            ORDER BY d.nome
+        """;
+
+        try (Connection conn = Conexao.conectar();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, idAluno);
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    lista.add(new MediaDisciplina(
+                            rs.getString("disciplina"),
+                            rs.getDouble("media")
+                    ));
+                }
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return lista;
+    }
+
+    // Quantas disciplinas com média >= 7
+    public int contarDisciplinasAcimaOuIgual7(int idAluno) {
+        String sql = """
+            SELECT COUNT(*) AS qtd
+            FROM (
+                SELECT n.id_disciplina
+                FROM nota n
+                WHERE n.id_aluno = ?
+                GROUP BY n.id_disciplina
+                HAVING AVG(n.valor) >= 7
+            ) x
+        """;
+
+        try (Connection conn = Conexao.conectar();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, idAluno);
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) return rs.getInt("qtd");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return 0;
+    }
+
+    // Quantas disciplinas com média < 7
+    public int contarDisciplinasAbaixo7(int idAluno) {
+        String sql = """
+            SELECT COUNT(*) AS qtd
+            FROM (
+                SELECT n.id_disciplina
+                FROM nota n
+                WHERE n.id_aluno = ?
+                GROUP BY n.id_disciplina
+                HAVING AVG(n.valor) < 7
+            ) x
+        """;
+
+        try (Connection conn = Conexao.conectar();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, idAluno);
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) return rs.getInt("qtd");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return 0;
+    }
+
+    public double calcularMediaGeral(int idAluno) {
+        String sql = "SELECT ROUND(AVG(valor), 2) AS media FROM nota WHERE id_aluno = ?";
+
+        try (Connection conn = Conexao.conectar();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, idAluno);
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) return rs.getDouble("media");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return 0.0;
+    }
+
+    public List<MediaDisciplina> listarMediasPorDisciplinaPorSemestre(int idAluno, String semestre) {
+        List<MediaDisciplina> lista = new ArrayList<>();
+
+        String sql = """
+        SELECT d.nome AS disciplina,
+               ROUND(AVG(n.valor), 2) AS media
+        FROM nota n
+        JOIN disciplina d ON d.id_disciplina = n.id_disciplina
+        WHERE n.id_aluno = ? AND n.semestre = ?
+        GROUP BY d.nome
+        ORDER BY d.nome
+    """;
+
+        try (Connection conn = Conexao.conectar();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, idAluno);
+            stmt.setString(2, semestre);
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    lista.add(new MediaDisciplina(
+                            rs.getString("disciplina"),
+                            rs.getDouble("media")
+                    ));
+                }
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return lista;
     }
 }

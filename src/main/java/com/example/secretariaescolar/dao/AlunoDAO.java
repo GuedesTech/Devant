@@ -5,7 +5,9 @@ import com.example.secretariaescolar.util.Conexao;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class AlunoDAO {
 
@@ -169,5 +171,80 @@ public class AlunoDAO {
         }
 
         return null;
+    }
+
+    public Integer buscarIdAlunoPorIdUser(int idUser) {
+        String sql = "SELECT id_aluno FROM aluno WHERE id_user = ?";
+        try (Connection conn = Conexao.conectar();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, idUser);
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) return rs.getInt("id_aluno");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public List<Aluno> listarTodosComFoto() {
+
+        List<Aluno> lista = new ArrayList<>();
+
+        String sql = """
+        SELECT u.id_user, u.nome, u.login, u.foto,
+               a.id_aluno, a.matricula, a.id_turma
+        FROM usuario u
+        INNER JOIN aluno a ON u.id_user = a.id_user
+        ORDER BY u.nome ASC
+    """;
+
+        try (Connection conn = Conexao.conectar();
+             PreparedStatement stmt = conn.prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery()) {
+
+            while (rs.next()) {
+                Aluno aluno = new Aluno();
+                aluno.setId_user(rs.getInt("id_user"));
+                aluno.setNome(rs.getString("nome"));
+                aluno.setLogin(rs.getString("login"));
+                aluno.setFoto(rs.getString("foto"));
+
+                aluno.setId_aluno(rs.getInt("id_aluno"));
+                aluno.setMatricula(rs.getString("matricula"));
+                aluno.setId_turma(rs.getInt("id_turma"));
+
+                lista.add(aluno);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return lista;
+    }
+
+    public Map<Integer, Double> buscarMediaPorAluno() {
+        Map<Integer, Double> map = new HashMap<>();
+
+        String sql = """
+        SELECT n.id_aluno, ROUND(AVG(n.valor), 1) AS media
+        FROM nota n
+        GROUP BY n.id_aluno
+    """;
+
+        try (Connection conn = Conexao.conectar();
+             PreparedStatement stmt = conn.prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery()) {
+
+            while (rs.next()) {
+                map.put(rs.getInt("id_aluno"), rs.getDouble("media"));
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return map;
     }
 }
