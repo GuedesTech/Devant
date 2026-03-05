@@ -86,7 +86,7 @@
                         <i data-feather="users" class="w-7 h-7 text-[#274855]"></i>
                         <span class="w-full block text-[80%]">Total Alunos: 1</span>
                     </div>
-                    <button onclick="window.location.href='adicionar-aluno.htm'"
+                    <button onclick="window.location.href='${pageContext.request.contextPath}/ad,/adicionar-aluno.jsp'"
                         class="h-9 inline-flex items-center gap-2 bg-[#7F95AB] border border-[#274855] rounded-[10px] px-4 py-2 text-white font-semibold whitespace-nowrap hover:bg-[#667788] transition-all duration-200 ease-in-out">
                         <i data-feather="plus" class="w-7 h-7 text-white"></i>
                         <span class="w-full block text-[80%]">Adicionar Aluno</span>
