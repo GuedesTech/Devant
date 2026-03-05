@@ -47,12 +47,6 @@ public class TurmaDetalheProfessorServlet extends HttpServlet {
             return;
         }
 
-        // ===== filtro do ranking =====
-        // best (default) | worst
-        String rank = request.getParameter("rank");
-        if (rank == null || rank.isBlank()) rank = "best";
-        if (!rank.equals("best") && !rank.equals("worst")) rank = "best";
-
         TurmaDAO turmaDAO = new TurmaDAO();
         Turma turma = turmaDAO.buscarPorId(idTurma);
 
@@ -72,13 +66,8 @@ public class TurmaDetalheProfessorServlet extends HttpServlet {
         // ===== gráfico =====
         Map<Integer, Integer> distribuicao = turmaDAO.buscarDistribuicaoNotasArredondadas(idTurma);
 
-        // ===== ranking (TOP 5 ou BOTTOM 5) =====
-        List<Map<String, Object>> ranking;
-        if ("worst".equals(rank)) {
-            ranking = turmaDAO.buscarRankingBottom5(idTurma);
-        } else {
-            ranking = turmaDAO.buscarRankingTop5(idTurma);
-        }
+        List<Map<String, Object>> ranking = turmaDAO.buscarRankingTop5(idTurma);
+        request.setAttribute("ranking", ranking);
 
         // ===== observações =====
         int totalObs = turmaDAO.contarObservacoesDaTurma(idTurma);
@@ -102,8 +91,7 @@ public class TurmaDetalheProfessorServlet extends HttpServlet {
         request.setAttribute("topPositivo", topPositivo);
         request.setAttribute("topNegativo", topNegativo);
 
-        // pra deixar a opção marcada no menu do filtro
-        request.setAttribute("rankFiltro", rank);
+
 
         request.getRequestDispatcher("/pages/professor/turma-detalhe.jsp")
                 .forward(request, response);

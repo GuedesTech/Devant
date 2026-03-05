@@ -361,42 +361,6 @@ public class TurmaDAO {
         return list;
     }
 
-    public List<Map<String, Object>> buscarRankingBottom5(int idTurma) {
-        List<Map<String, Object>> list = new ArrayList<>();
-
-        String sql = """
-        SELECT a.id_aluno, u.nome, ROUND(AVG(n.valor), 1) AS media
-        FROM aluno a
-        JOIN usuario u ON u.id_user = a.id_user
-        LEFT JOIN nota n ON n.id_aluno = a.id_aluno
-        WHERE a.id_turma = ?
-        GROUP BY a.id_aluno, u.nome
-        ORDER BY COALESCE(ROUND(AVG(n.valor), 1), 0) ASC, u.nome ASC
-        LIMIT 5
-    """;
-
-        try (Connection conn = Conexao.conectar();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-
-            stmt.setInt(1, idTurma);
-
-            try (ResultSet rs = stmt.executeQuery()) {
-                while (rs.next()) {
-                    Map<String, Object> m = new HashMap<>();
-                    m.put("id_aluno", rs.getInt("id_aluno"));
-                    m.put("nome", rs.getString("nome"));
-                    double media = rs.getDouble("media");
-                    m.put("media", rs.wasNull() ? 0.0 : media);
-                    list.add(m);
-                }
-            }
-        } catch (SQLException e) {
-            System.err.println("Erro ao buscar ranking bottom5: " + e.getMessage());
-        }
-
-        return list;
-    }
-
     public int contarObservacoesDaTurma(int idTurma) {
         String sql = """
         SELECT COUNT(*) AS total

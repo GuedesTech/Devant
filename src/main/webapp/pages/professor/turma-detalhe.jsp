@@ -46,7 +46,7 @@
         valoresSb.append(v);
         if (i < 10) valoresSb.append(",");
     }
-    String valoresJS = valoresSb.toString(); // ex: "0,1,2,0,5,..."
+    String valoresJS = valoresSb.toString();
 
     String fotoPos = (topPositivo != null) ? (String) topPositivo.get("foto") : null;
 
@@ -70,11 +70,6 @@
     String fotoNegSrc = !semFotoNeg
             ? (ctx + "/pages/uploads/" + fotoNeg)
             : (ctx + "/pages/aluno/foto_sem_foto.png");
-%>
-
-<%
-    String rankFiltro = (String) request.getAttribute("rankFiltro");
-    if (rankFiltro == null) rankFiltro = "best";
 %>
 
 <!DOCTYPE html>
@@ -167,21 +162,6 @@
             <div class="box ranking">
                 <div class="box-head">
                     <div class="box-title">Ranking de Alunos</div>
-                    <div class="filter-wrap" id="rankFilterWrap">
-                        <button type="button" class="filter-btn" id="rankFilterBtn" aria-haspopup="true" aria-expanded="false">
-                            <img src="<%= ctx %>/pages/professor/filter.png" class="filter-img" alt="Filtrar">
-                        </button>
-
-                        <div class="filter-menu" id="rankFilterMenu" role="menu" aria-label="Filtros do ranking">
-                            <button type="button"
-                                    class="filter-opt <%= "best".equals(rankFiltro) ? "is-active" : "" %>"
-                                    data-rank="best">Maiores Notas</button>
-
-                            <button type="button"
-                                    class="filter-opt <%= "worst".equals(rankFiltro) ? "is-active" : "" %>"
-                                    data-rank="worst">Menores Notas</button>
-                        </div>
-                    </div>
                 </div>
 
                 <div class="ranking-list">
@@ -452,46 +432,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   document.addEventListener("keydown", (e) => {
     if(e.key === "Escape") fechar();
-  });
-});
-</script>
-
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-  const wrap = document.getElementById("rankFilterWrap");
-  const btn  = document.getElementById("rankFilterBtn");
-  const menu = document.getElementById("rankFilterMenu");
-  if (!wrap || !btn || !menu) return;
-
-  function openMenu() {
-    wrap.classList.add("is-open");
-    btn.setAttribute("aria-expanded", "true");
-  }
-  function closeMenu() {
-    wrap.classList.remove("is-open");
-    btn.setAttribute("aria-expanded", "false");
-  }
-
-  btn.addEventListener("click", (e) => {
-    e.stopPropagation();
-    wrap.classList.contains("is-open") ? closeMenu() : openMenu();
-  });
-
-  document.addEventListener("click", () => closeMenu());
-
-  menu.querySelectorAll(".filter-opt").forEach(opt => {
-    opt.addEventListener("click", () => {
-      const rank = opt.dataset.rank || "best";
-
-      const url = new URL(window.location.href);
-      // garante que mantém id_turma
-      if (!url.searchParams.get("id_turma")) {
-        url.searchParams.set("id_turma", "<%= (turma!=null ? turma.getId_turma() : 0) %>");
-      }
-      url.searchParams.set("rank", rank);
-
-      window.location.href = url.toString();
-    });
   });
 });
 </script>
