@@ -276,11 +276,6 @@ public class TurmaDAO {
         }
         return 0;
     }
-
-    /**
-     * Distribuição para o gráfico: arredonda a nota e conta quantas vezes apareceu.
-     * Retorna map<nota_int, quantidade>
-     */
     public Map<Integer, Integer> buscarDistribuicaoNotasArredondadas(int idTurma) {
         Map<Integer, Integer> map = new HashMap<>();
 
@@ -385,13 +380,21 @@ public class TurmaDAO {
         List<Map<String, Object>> list = new ArrayList<>();
 
         String sql = """
-        SELECT u.nome, o.mensagem, o.data, o.tipo
-        FROM observacao o
-        JOIN aluno a ON a.id_aluno = o.id_aluno
-        JOIN usuario u ON u.id_user = a.id_user
-        WHERE a.id_turma = ?
-        ORDER BY o.data DESC, o.id_observacao DESC
-        LIMIT ?
+        SELECT
+                   a.id_aluno,
+                   u_aluno.nome AS nome,
+                   o.mensagem,
+                   o.tipo,
+                   o.data,
+                   u_prof.nome AS nome_professor
+               FROM observacao o
+               JOIN aluno a           ON a.id_aluno = o.id_aluno
+               JOIN usuario u_aluno   ON u_aluno.id_user = a.id_user
+               JOIN professor p       ON p.id_professor = o.id_professor
+               JOIN usuario u_prof    ON u_prof.id_user = p.id_user
+               WHERE a.id_turma = ?
+               ORDER BY o.data DESC, o.id_observacao DESC
+               LIMIT ?;
     """;
 
         try (Connection conn = Conexao.conectar();
@@ -407,6 +410,7 @@ public class TurmaDAO {
                     m.put("mensagem", rs.getString("mensagem"));
                     m.put("data", rs.getDate("data")); // Date
                     m.put("tipo", rs.getInt("tipo"));
+                    m.put("nome_professor", rs.getString("nome_professor"));
                     list.add(m);
                 }
             }

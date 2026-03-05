@@ -247,4 +247,74 @@ public class AlunoDAO {
 
         return map;
     }
+
+    public List<Aluno> listarPorTurmaComFoto(int idTurma) {
+
+        List<Aluno> lista = new ArrayList<>();
+
+        String sql = """
+        SELECT u.id_user, u.nome, u.login, u.foto,
+               a.id_aluno, a.matricula, a.id_turma
+        FROM usuario u
+        INNER JOIN aluno a ON u.id_user = a.id_user
+        WHERE a.id_turma = ?
+        ORDER BY u.nome ASC
+    """;
+
+        try (Connection conn = Conexao.conectar();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, idTurma);
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    Aluno aluno = new Aluno();
+                    aluno.setId_user(rs.getInt("id_user"));
+                    aluno.setNome(rs.getString("nome"));
+                    aluno.setLogin(rs.getString("login"));
+                    aluno.setFoto(rs.getString("foto"));
+
+                    aluno.setId_aluno(rs.getInt("id_aluno"));
+                    aluno.setMatricula(rs.getString("matricula"));
+                    aluno.setId_turma(rs.getInt("id_turma"));
+
+                    lista.add(aluno);
+                }
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return lista;
+    }
+
+    public Map<Integer, Double> buscarMediaPorAlunoDaTurma(int idTurma) {
+        Map<Integer, Double> map = new HashMap<>();
+
+        String sql = """
+        SELECT n.id_aluno, ROUND(AVG(n.valor), 1) AS media
+        FROM nota n
+        INNER JOIN aluno a ON a.id_aluno = n.id_aluno
+        WHERE a.id_turma = ?
+        GROUP BY n.id_aluno
+    """;
+
+        try (Connection conn = Conexao.conectar();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, idTurma);
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    map.put(rs.getInt("id_aluno"), rs.getDouble("media"));
+                }
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return map;
+    }
 }

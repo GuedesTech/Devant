@@ -90,7 +90,3 @@
     font-weight: 900;
     color: var(--navy);
 }
-
-@media (max-width: 980px){
-    .alunos-grid{ grid-template-columns: 1fr; }
-}

@@ -15,9 +15,12 @@
       <change afterPath="$PROJECT_DIR$/../.idea/misc.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../.idea/modules.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/secretariaescolar/controller/AlunosTurmaProfessorServlet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/pages/professor/alunosTurma.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/secretariaescolar/controller/TurmaDetalheProfessorServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/secretariaescolar/controller/TurmaDetalheProfessorServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/secretariaescolar/dao/AlunoDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/secretariaescolar/dao/AlunoDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/secretariaescolar/dao/TurmaDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/secretariaescolar/dao/TurmaDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/pages/professor/alunos.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/pages/professor/alunos.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/pages/professor/turma-detalhe.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/pages/professor/turma-detalhe.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/pages/professor/turma-detalhe.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/pages/professor/turma-detalhe.jsp" afterDir="false" />
     </list>
@@ -32,8 +35,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="Jsp File" />
+        <option value="Class" />
       </list>
     </option>
   </component>

@@ -119,7 +119,7 @@
                     <img src="<%= request.getContextPath() %>/pages/professor/pessoas.png" style="height: 17.5px; width: 24px"><span>Total Alunos: <strong><%= totalAlunos %></strong></span>
                 </div>
 
-                <a class="btn-primary" href="<%= ctx %>/professor/alunos?turma=<%= (turma!=null?turma.getId_turma():0) %>">
+                <a class="btn-primary" href="<%= ctx %>/professor/alunos-turma?id_turma=<%= turma.getId_turma() %>">
                     Ver alunos <span class="btn-arrow">›</span>
                 </a>
             </div>
@@ -129,7 +129,7 @@
             <!-- ===== Gráfico ===== -->
             <div class="box grafico">
                 <div class="box-title">Quantidade de alunos por média</div>
-                <div class="box-sub">Ano de 2026</div>
+                <div class="box-sub">*As médias das notas estão arredondadas.</div>
 
                 <div class="chart-wrap">
                     <canvas id="graficoNotas"></canvas>
@@ -188,15 +188,11 @@
                 </div>
             </div>
 
-            <!-- ===== Últimas Observações ===== -->
             <div class="box obs">
                 <div class="box-head">
                     <div class="box-title">Últimas Observações</div>
                     <div class="filter-wrap" id="obsFilterWrap">
                         <div class="filter-menu" id="obsFilterMenu" role="menu" aria-label="Filtros de observações">
-                            <button type="button" class="filter-opt is-active" data-obs="all">Observações gerais</button>
-                            <button type="button" class="filter-opt" data-obs="pos">Observações positivas</button>
-                            <button type="button" class="filter-opt" data-obs="neg">Observações negativas</button>
                         </div>
                     </div>
                 </div>
@@ -213,7 +209,6 @@
                             String paraNome = String.valueOf(o.get("nome"));
                             String msg = String.valueOf(o.get("mensagem"));
 
-                            // ===== Nome do professor =====
                             String deNome = null;
                             if (o.get("professor") != null) deNome = String.valueOf(o.get("professor"));
                             else if (o.get("de") != null) deNome = String.valueOf(o.get("de"));
@@ -221,21 +216,18 @@
                             else if (o.get("nome_professor") != null) deNome = String.valueOf(o.get("nome_professor"));
                             else deNome = "Professor";
 
-                            // ===== Tipo da observação =====
                             Object tipoObj = o.get("tipo");
                             int tipo = 1;
                             if (tipoObj instanceof Number) {
                                 tipo = ((Number) tipoObj).intValue();
                             }
 
-                            // ===== Data =====
                             Date d = (Date) o.get("data");
                             String dataStr = "";
                             if (d != null) {
                                 dataStr = d.toLocalDate().format(fmt);
                             }
 
-                            // ===== Escape do texto para atributo HTML =====
                             String msgAttr = msg
                                     .replace("&","&amp;")
                                     .replace("\"","&quot;")
@@ -265,19 +257,17 @@
                     </div>
 
                     <%
-                            } // fecha FOR
-                        } // fecha ELSE
+                            }
+                        }
                     %>
                 </div>
             </div>
 
-            <!-- ===== Total observações ===== -->
             <div class="box totalobs">
                 <div class="kpi-number"><%= totalObs %></div>
                 <div class="kpi-label">Número total de observações</div>
             </div>
 
-            <!-- ===== Top positivo ===== -->
             <div class="box topcard pos">
                 <div class="top-title">Aluno com mais observações positivas</div>
                 <div class="top-user">
@@ -285,12 +275,24 @@
                         <img class="avatar-small" src="<%= fotoPosSrc %>" alt="Foto do aluno" />
                     </div>
                     <div class="top-name">
-                        <%= (topPositivo != null ? String.valueOf(topPositivo.get("nome")) : "—") %>
+                        <%
+                            String nomePos = (topPositivo != null) ? String.valueOf(topPositivo.get("nome")) : "";
+                            String nomeFormatadoPos = "—";
+
+                            if(!nomePos.isBlank()){
+                                String[] partes = nomePos.split(" ");
+                                if(partes.length > 1){
+                                    nomeFormatadoPos = partes[0] + " " + partes[1].charAt(0) + ".";
+                                } else {
+                                    nomeFormatadoPos = partes[0];
+                                }
+                            }
+                        %>
+                        <%= nomeFormatadoPos %>
                     </div>
                 </div>
             </div>
 
-            <!-- ===== Top negativo ===== -->
             <div class="box topcard neg">
                 <div class="top-title">Aluno com mais observações negativas</div>
                 <div class="top-user">
@@ -298,7 +300,21 @@
                         <img class="avatar-small" src="<%= fotoNegSrc %>" alt="Foto do aluno" />
                     </div>
                     <div class="top-name">
-                        <%= (topNegativo != null ? String.valueOf(topNegativo.get("nome")) : "—") %>
+                        <%
+                            String nomeNeg = (topNegativo != null) ? String.valueOf(topNegativo.get("nome")) : "";
+                            String nomeFormatadoNeg = "—";
+
+                            if(!nomeNeg.isBlank()){
+                                String[] partes = nomeNeg.split(" ");
+                                if(partes.length > 1){
+                                    nomeFormatadoNeg = partes[0] + " " + partes[1].charAt(0) + ".";
+                                } else {
+                                    nomeFormatadoNeg = partes[0];
+                                }
+                            }
+                        %>
+
+                        <%= nomeFormatadoNeg %>
                     </div>
                 </div>
             </div>
@@ -345,10 +361,9 @@
 
   const valores = [<%= valoresJS %>];
 
-  // cores por faixa (>=9 verde, 6-8 azul, <=5 vermelho)
   const colors = labels.map(n => {
-    if (n >= 9) return "#8FCF92";
-    if (n >= 6) return "#A6B1D9";
+    if (n > 7) return "#8FCF92";
+    if (n == 7) return "#A6B1D9";
     return "#D16F6F";
   });
 

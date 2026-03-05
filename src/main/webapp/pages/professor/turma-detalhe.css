@@ -124,15 +124,34 @@
 
 .legend{
     margin-top: 10px;
-    display:flex;
-    gap: 14px;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* 2 colunas */
+    gap: 10px 14px;
+    align-items: center;
     font-size: 12px;
     font-weight: 700;
     color: rgba(40,53,101,0.60);
 }
 
-.leg{ display:flex; align-items:center; gap: 8px; }
+.leg{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.legend .leg:nth-child(1){
+    justify-self: start;
+}
+
+.legend .leg:nth-child(2){
+    justify-self: end;
+}
+
+.legend .leg:nth-child(3){
+    grid-column: 1 / -1;     /* ocupa as 2 colunas */
+    justify-self: center;     /* centraliza */
+}
+
 .dot{
     width: 10px;
     height: 10px;
@@ -150,6 +169,7 @@
     justify-content: center;
     min-height: 124px;
     text-align: center;
+    height: 100%;
 }
 
 .kpi-number{
@@ -174,20 +194,24 @@
 /* ===== Ranking (linha 2, col 2-5) ===== */
 .ranking{
     grid-column: 3 / 6;   /* ocupa 3 colunas */
-    grid-row: 2 / 3;      /* começa abaixo dos KPIs */
+    grid-row: 2 / 3;
+    height: 100%;
+    font-size: 20px;
 }
 
 .ranking-list{
-    margin-top: 10px;
+    margin-top: 22px; /* aumenta o espaço acima */
     display:flex;
     flex-direction: column;
     gap: 10px;
 }
 
 .rank-item{
+    font-size: 30px;
     display:grid;
     grid-template-columns: 6px 1fr auto;
-    gap: 10px;
+    gap: 20px;
+    padding-bottom: 10px;
     align-items: center;
 }
 
@@ -252,11 +276,10 @@
     white-space: nowrap;
 }
 
-/* ===== Total obs + cards finais (linha 3, col 3-5) ===== */
 .totalobs{
     grid-column: 3 / 4;
     grid-row: 3 / 4;
-    min-height: 160px;
+    height: 100%;
     display:flex;
     flex-direction: column;
     justify-content:center;
@@ -265,7 +288,7 @@
 
 .topcard{
     grid-row: 3 / 4;
-    min-height: 160px;
+    height: 100%;
     display:flex;
     flex-direction: column;
     justify-content:center;
@@ -284,13 +307,14 @@
 }
 
 .top-title{
-    font-size: 11px;
+    font-size: 12px;
     font-weight: 800;
     color: rgba(40,53,101,0.65);
 }
 
 .top-user{
-    margin-top: 14px;
+    margin-top: 25px;
+    font-size: 20px;
     display:flex;
     flex-direction: column;
     gap: 10px;
@@ -298,9 +322,6 @@
 }
 
 .avatar-ph{
-    width: 58px;
-    height: 58px;
-    border-radius: 999px;
     background: rgba(40,53,101,0.12);
     display:flex;
     align-items:center;
@@ -310,7 +331,7 @@
 
 .top-name{
     font-weight: 900;
-    font-size: 14px;
+    font-size: 25px;
     color: var(--navy);
 }
 
@@ -329,17 +350,15 @@
     gap: 10px;
 }
 
-/* o quadrado/círculo da foto NÃO pode crescer */
 .topcard .avatar-wrap-small{
-    width: 64px !important;
-    height: 64px !important;
-    border-radius: 999px !important;  /* círculo (troca por 12px se quiser quadrado) */
+    width: 120px !important;
+    height: 120px !important;
+    border-radius: 999px !important;
     overflow: hidden !important;
     background: rgba(40,53,101,0.12);
     flex: 0 0 auto !important;
 }
 
-/* a imagem nunca pode estourar o container */
 .topcard img.avatar-small{
     width: 100% !important;
     height: 100% !important;
@@ -348,7 +367,6 @@
     display: block !important;
 }
 
-/* só pra garantir que nada no topcard vire "gigante" */
 .topcard{
     min-height: 150px;
 }
@@ -477,7 +495,7 @@
 }
 
 .obs-text{
-    min-width: 0; /* também ajuda no grid */
+    min-width: 0;
 }
 
 .obs-line{
@@ -490,7 +508,7 @@
 
 .obs-item{
     display: grid;
-    grid-template-columns: 6px minmax(0, 1fr) auto; /* <- ESSENCIAL pro ellipsis */
+    grid-template-columns: 6px minmax(0, 1fr) auto;
     gap: 10px;
     align-items: center;
 
