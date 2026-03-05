@@ -47,6 +47,34 @@
         if (i < 10) valoresSb.append(",");
     }
     String valoresJS = valoresSb.toString(); // ex: "0,1,2,0,5,..."
+
+    String fotoPos = (topPositivo != null) ? (String) topPositivo.get("foto") : null;
+
+    boolean semFotoPos = (fotoPos == null)
+            || fotoPos.isBlank()
+            || "null".equalsIgnoreCase(fotoPos.trim())
+            || "[null]".equalsIgnoreCase(fotoPos.trim());
+
+    String fotoPosSrc = !semFotoPos
+            ? (ctx + "/pages/uploads/" + fotoPos)
+            : (ctx + "/pages/aluno/foto_sem_foto.png");
+
+
+    String fotoNeg = (topNegativo != null) ? (String) topNegativo.get("foto") : null;
+
+    boolean semFotoNeg = (fotoNeg == null)
+            || fotoNeg.isBlank()
+            || "null".equalsIgnoreCase(fotoNeg.trim())
+            || "[null]".equalsIgnoreCase(fotoNeg.trim());
+
+    String fotoNegSrc = !semFotoNeg
+            ? (ctx + "/pages/uploads/" + fotoNeg)
+            : (ctx + "/pages/aluno/foto_sem_foto.png");
+%>
+
+<%
+    String rankFiltro = (String) request.getAttribute("rankFiltro");
+    if (rankFiltro == null) rankFiltro = "best";
 %>
 
 <!DOCTYPE html>
@@ -93,8 +121,7 @@
 
             <div class="actions-row">
                 <div class="chip">
-                    <span class="chip-ico">👥</span>
-                    <span>Total Alunos: <strong><%= totalAlunos %></strong></span>
+                    <img src="<%= request.getContextPath() %>/pages/professor/pessoas.png" style="height: 17.5px; width: 24px"><span>Total Alunos: <strong><%= totalAlunos %></strong></span>
                 </div>
 
                 <a class="btn-primary" href="<%= ctx %>/professor/alunos?turma=<%= (turma!=null?turma.getId_turma():0) %>">
@@ -106,8 +133,8 @@
         <div class="grid">
             <!-- ===== Gráfico ===== -->
             <div class="box grafico">
-                <div class="box-title">Quantidade de alunos por nota</div>
-                <div class="box-sub">Janeiro - Junho 2024</div>
+                <div class="box-title">Quantidade de alunos por média</div>
+                <div class="box-sub">Ano de 2026</div>
 
                 <div class="chart-wrap">
                     <canvas id="graficoNotas"></canvas>
@@ -140,7 +167,21 @@
             <div class="box ranking">
                 <div class="box-head">
                     <div class="box-title">Ranking de Alunos</div>
-                    <div class="filter-ico">⟱</div>
+                    <div class="filter-wrap" id="rankFilterWrap">
+                        <button type="button" class="filter-btn" id="rankFilterBtn" aria-haspopup="true" aria-expanded="false">
+                            <img src="<%= ctx %>/pages/professor/filter.png" class="filter-img" alt="Filtrar">
+                        </button>
+
+                        <div class="filter-menu" id="rankFilterMenu" role="menu" aria-label="Filtros do ranking">
+                            <button type="button"
+                                    class="filter-opt <%= "best".equals(rankFiltro) ? "is-active" : "" %>"
+                                    data-rank="best">Maiores Notas</button>
+
+                            <button type="button"
+                                    class="filter-opt <%= "worst".equals(rankFiltro) ? "is-active" : "" %>"
+                                    data-rank="worst">Menores Notas</button>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="ranking-list">
@@ -171,7 +212,13 @@
             <div class="box obs">
                 <div class="box-head">
                     <div class="box-title">Últimas Observações</div>
-                    <div class="filter-ico">⟱</div>
+                    <div class="filter-wrap" id="obsFilterWrap">
+                        <div class="filter-menu" id="obsFilterMenu" role="menu" aria-label="Filtros de observações">
+                            <button type="button" class="filter-opt is-active" data-obs="all">Observações gerais</button>
+                            <button type="button" class="filter-opt" data-obs="pos">Observações positivas</button>
+                            <button type="button" class="filter-opt" data-obs="neg">Observações negativas</button>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="obs-list">
@@ -182,28 +229,64 @@
                     <%
                     } else {
                         for (Map<String, Object> o : ultimasObs) {
-                            String nome = String.valueOf(o.get("nome"));
-                            String msg = String.valueOf(o.get("mensagem"));
-                            int tipo = (o.get("tipo") != null) ? (Integer) o.get("tipo") : 1;
 
+                            String paraNome = String.valueOf(o.get("nome"));
+                            String msg = String.valueOf(o.get("mensagem"));
+
+                            // ===== Nome do professor =====
+                            String deNome = null;
+                            if (o.get("professor") != null) deNome = String.valueOf(o.get("professor"));
+                            else if (o.get("de") != null) deNome = String.valueOf(o.get("de"));
+                            else if (o.get("autor") != null) deNome = String.valueOf(o.get("autor"));
+                            else if (o.get("nome_professor") != null) deNome = String.valueOf(o.get("nome_professor"));
+                            else deNome = "Professor";
+
+                            // ===== Tipo da observação =====
+                            Object tipoObj = o.get("tipo");
+                            int tipo = 1;
+                            if (tipoObj instanceof Number) {
+                                tipo = ((Number) tipoObj).intValue();
+                            }
+
+                            // ===== Data =====
                             Date d = (Date) o.get("data");
                             String dataStr = "";
                             if (d != null) {
                                 dataStr = d.toLocalDate().format(fmt);
                             }
+
+                            // ===== Escape do texto para atributo HTML =====
+                            String msgAttr = msg
+                                    .replace("&","&amp;")
+                                    .replace("\"","&quot;")
+                                    .replace("'","&#39;")
+                                    .replace("<","&lt;")
+                                    .replace(">","&gt;");
                     %>
-                    <div class="obs-item">
-                        <span class="mini-bar <%= (tipo==2?"neg":"pos") %>"></span>
+
+                    <div class="obs-item"
+                         role="button"
+                         tabindex="0"
+                         data-de="<%= deNome %>"
+                         data-para="<%= paraNome %>"
+                         data-data="<%= dataStr %>"
+                         data-texto="<%= msgAttr %>"
+                         data-tipo="<%= tipo %>">
+
+                        <span class="mini-bar <%= (tipo==2 ? "neg" : "pos") %>"></span>
+
                         <div class="obs-text">
                             <div class="obs-line">
-                                <strong>Para:</strong> <%= nome %> - <%= msg %>
+                                <strong>Para:</strong> <%= paraNome %> - <%= msg %>
                             </div>
                         </div>
+
                         <div class="obs-date"><%= dataStr %></div>
                     </div>
+
                     <%
-                            }
-                        }
+                            } // fecha FOR
+                        } // fecha ELSE
                     %>
                 </div>
             </div>
@@ -218,7 +301,9 @@
             <div class="box topcard pos">
                 <div class="top-title">Aluno com mais observações positivas</div>
                 <div class="top-user">
-                    <div class="avatar-ph">👤</div>
+                    <div class="avatar-wrap-small">
+                        <img class="avatar-small" src="<%= fotoPosSrc %>" alt="Foto do aluno" />
+                    </div>
                     <div class="top-name">
                         <%= (topPositivo != null ? String.valueOf(topPositivo.get("nome")) : "—") %>
                     </div>
@@ -229,13 +314,14 @@
             <div class="box topcard neg">
                 <div class="top-title">Aluno com mais observações negativas</div>
                 <div class="top-user">
-                    <div class="avatar-ph">👤</div>
+                    <div class="avatar-wrap-small">
+                        <img class="avatar-small" src="<%= fotoNegSrc %>" alt="Foto do aluno" />
+                    </div>
                     <div class="top-name">
                         <%= (topNegativo != null ? String.valueOf(topNegativo.get("nome")) : "—") %>
                     </div>
                 </div>
             </div>
-
         </div>
     </section>
 </main>
@@ -313,6 +399,126 @@
     }
   });
 </script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const overlay = document.getElementById("overlay");
+  const popup = document.getElementById("popup");
+  const btnBack = document.getElementById("btnBack");
+
+  const popDe = document.getElementById("popDe");
+  const popPara = document.getElementById("popPara");
+  const popData = document.getElementById("popData");
+  const popTexto = document.getElementById("popTexto");
+
+  function abrir(item){
+    if(!overlay || !popup) return;
+
+    const de = item.dataset.de || "—";
+    const para = item.dataset.para || "—";
+    const data = item.dataset.data || "—";
+    const texto = item.dataset.texto || "—";
+    const tipo = item.dataset.tipo;
+
+    popDe.textContent = de;
+    popPara.textContent = "Para: " + para;
+    popData.textContent = data;
+    popTexto.textContent = texto;
+
+    popup.classList.toggle("tipo2", String(tipo) === "2");
+    overlay.classList.add("is-open");
+  }
+
+  function fechar(){
+    overlay && overlay.classList.remove("is-open");
+  }
+
+  // clique + teclado
+  document.querySelectorAll(".obs-item").forEach(item => {
+    item.addEventListener("click", () => abrir(item));
+    item.addEventListener("keydown", (e) => {
+      if(e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        abrir(item);
+      }
+    });
+  });
+
+  btnBack && btnBack.addEventListener("click", fechar);
+
+  overlay && overlay.addEventListener("click", (e) => {
+    if(e.target === overlay) fechar();
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if(e.key === "Escape") fechar();
+  });
+});
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const wrap = document.getElementById("rankFilterWrap");
+  const btn  = document.getElementById("rankFilterBtn");
+  const menu = document.getElementById("rankFilterMenu");
+  if (!wrap || !btn || !menu) return;
+
+  function openMenu() {
+    wrap.classList.add("is-open");
+    btn.setAttribute("aria-expanded", "true");
+  }
+  function closeMenu() {
+    wrap.classList.remove("is-open");
+    btn.setAttribute("aria-expanded", "false");
+  }
+
+  btn.addEventListener("click", (e) => {
+    e.stopPropagation();
+    wrap.classList.contains("is-open") ? closeMenu() : openMenu();
+  });
+
+  document.addEventListener("click", () => closeMenu());
+
+  menu.querySelectorAll(".filter-opt").forEach(opt => {
+    opt.addEventListener("click", () => {
+      const rank = opt.dataset.rank || "best";
+
+      const url = new URL(window.location.href);
+      // garante que mantém id_turma
+      if (!url.searchParams.get("id_turma")) {
+        url.searchParams.set("id_turma", "<%= (turma!=null ? turma.getId_turma() : 0) %>");
+      }
+      url.searchParams.set("rank", rank);
+
+      window.location.href = url.toString();
+    });
+  });
+});
+</script>
+
+<div class="overlay" id="overlay">
+    <div class="popup" id="popup" role="dialog" aria-modal="true" aria-label="Detalhe da observação">
+        <div class="popup-head">
+            <div class="popup-user">
+                <img class="popup-avatar" id="popAvatar" src="<%= ctx %>/pages/aluno/foto_sem_foto.png" alt="Foto">
+                <div>
+                    <div class="popup-name" id="popDe">—</div>
+                    <div class="popup-sub" id="popPara">—</div>
+                </div>
+            </div>
+
+            <div class="popup-date" id="popData">—</div>
+        </div>
+
+        <div class="popup-body">
+            <div id="popTexto">—</div>
+        </div>
+
+        <button class="popup-back" id="btnBack" type="button">
+            <span class="arrow">‹</span> Voltar
+        </button>
+    </div>
+</div>
 
 </body>
 </html>

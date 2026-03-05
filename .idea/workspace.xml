@@ -15,38 +15,12 @@
       <change afterPath="$PROJECT_DIR$/../.idea/misc.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../.idea/modules.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/secretariaescolar/controller/AlunosProfessorServlet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/secretariaescolar/controller/BoletimDisciplinaServlet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/secretariaescolar/controller/NotasAlunoServlet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/secretariaescolar/controller/TurmaDetalheProfessorServlet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/secretariaescolar/controller/TurmasProfessorServlet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/secretariaescolar/dao/BoletimDAO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/secretariaescolar/model/MediaDisciplina.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/pages/aluno/boletim-disciplina.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/pages/aluno/notas-aluno.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/pages/aluno/notas.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/pages/professor/abrir.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/pages/professor/alunos.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/pages/professor/alunos.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/pages/professor/pessoas.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/pages/professor/turma-detalhe.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/pages/professor/turma-detalhe.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/pages/professor/turmas-prof.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/pages/professor/turmas-prof.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/webContexts.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/webContexts.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/secretariaescolar/controller/DisciplinasAlunoServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/secretariaescolar/controller/DisciplinasAlunoServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/secretariaescolar/controller/LoginServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/secretariaescolar/controller/LoginServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/secretariaescolar/controller/ObservacoesAlunoServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/secretariaescolar/controller/ObservacoesAlunoServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/secretariaescolar/dao/AlunoDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/secretariaescolar/dao/AlunoDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/secretariaescolar/dao/DisciplinaDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/secretariaescolar/dao/DisciplinaDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/secretariaescolar/dao/NotaDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/secretariaescolar/dao/NotaDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/secretariaescolar/dao/ObservacaoDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/secretariaescolar/dao/ObservacaoDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/secretariaescolar/controller/TurmaDetalheProfessorServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/secretariaescolar/controller/TurmaDetalheProfessorServlet.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/secretariaescolar/dao/TurmaDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/secretariaescolar/dao/TurmaDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/secretariaescolar/model/Observacao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/secretariaescolar/model/Observacao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/pages/aluno/disciplinas-aluno.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/pages/aluno/disciplinas-aluno.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/pages/aluno/observacoes-aluno.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/pages/aluno/observacoes-aluno.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/pages/aluno/perfil-aluno.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/pages/aluno/perfil-aluno.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/pages/professor/turma-detalhe.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/pages/professor/turma-detalhe.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/pages/professor/turma-detalhe.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/pages/professor/turma-detalhe.jsp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -455,7 +429,12 @@
       <workItem from="1772388226204" duration="4953000" />
       <workItem from="1772394318233" duration="22651000" />
       <workItem from="1772446029735" duration="1372000" />
-      <workItem from="1772533708435" duration="4073000" />
+      <workItem from="1772533708435" duration="5126000" />
+      <workItem from="1772561140405" duration="2341000" />
+      <workItem from="1772571357546" duration="5506000" />
+      <workItem from="1772588612944" duration="3878000" />
+      <workItem from="1772618675783" duration="4324000" />
+      <workItem from="1772666400221" duration="1529000" />
     </task>
     <servers />
   </component>

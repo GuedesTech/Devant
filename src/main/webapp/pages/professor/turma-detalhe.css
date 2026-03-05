@@ -69,7 +69,10 @@
 .grid{
     margin-top: 22px;
     display: grid;
-    grid-template-columns: 2.35fr 1fr 1fr 1fr 1fr; /* <- 5 colunas */
+  
+    /* 5 colunas iguais */
+    grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+  
     gap: 14px;
     align-items: start;
 }
@@ -108,16 +111,15 @@
     font-weight: 900;
 }
 
-/* ===== Gráfico (coluna 1, duas linhas) ===== */
 .grafico{
-    grid-column: 1 / 2;
-    grid-row: 1 / 3;
-    padding: 16px 18px 16px;
+    grid-column: 1 / 3;  
+    grid-row: 1 / 3;     
 }
 
 .chart-wrap{
     margin-top: 12px;
     height: 210px; /* um pouco menor e mais “clean” */
+    height: 100%;
 }
 
 .legend{
@@ -167,13 +169,12 @@
 /* posições exatas dos 3 cards do topo (último mais largo como no figma) */
 .kpi:nth-of-type(1){ grid-column: 2 / 3; grid-row: 1 / 2; }
 .kpi:nth-of-type(2){ grid-column: 3 / 4; grid-row: 1 / 2; }
-.kpi:nth-of-type(3){ grid-column: 4 / 6; grid-row: 1 / 2; } /* ocupa 2 colunas */
+.kpi:nth-of-type(3){ grid-column: 4 / 5; grid-row: 1 / 2; } /* ocupa 2 colunas */
 
 /* ===== Ranking (linha 2, col 2-5) ===== */
 .ranking{
-    grid-column: 2 / 6;
-    grid-row: 2 / 3;
-    padding: 14px 16px 16px;
+    grid-column: 3 / 6;   /* ocupa 3 colunas */
+    grid-row: 2 / 3;      /* começa abaixo dos KPIs */
 }
 
 .ranking-list{
@@ -209,7 +210,6 @@
     color: var(--navy);
 }
 
-/* ===== Últimas Observações (linha 3, col 1-2) ===== */
 .obs{
     grid-column: 1 / 3;
     grid-row: 3 / 4;
@@ -319,4 +319,250 @@
     padding: 10px 0;
     font-weight: 700;
     color: rgba(40,53,101,0.65);
+}
+
+.topcard .top-user{
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+/* o quadrado/círculo da foto NÃO pode crescer */
+.topcard .avatar-wrap-small{
+    width: 64px !important;
+    height: 64px !important;
+    border-radius: 999px !important;  /* círculo (troca por 12px se quiser quadrado) */
+    overflow: hidden !important;
+    background: rgba(40,53,101,0.12);
+    flex: 0 0 auto !important;
+}
+
+/* a imagem nunca pode estourar o container */
+.topcard img.avatar-small{
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    object-position: center !important;
+    display: block !important;
+}
+
+/* só pra garantir que nada no topcard vire "gigante" */
+.topcard{
+    min-height: 150px;
+}
+
+/* ========= ELLIPSIS NAS OBS ========= */
+.obs-line.ellipsis{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+}
+
+/* deixa clicável/bonito */
+.obs-item{
+    cursor: pointer;
+    border-radius: 10px;
+    padding: 6px 6px;
+    transition: background .12s ease, transform .12s ease;
+}
+.obs-item:hover{
+    background: rgba(40,53,101,0.05);
+    transform: translateY(-1px);
+}
+.obs-item:focus{
+    outline: 2px solid rgba(40,53,101,0.25);
+    outline-offset: 2px;
+}
+
+/* ========= OVERLAY / POPUP ========= */
+.overlay{
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.35);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 18px;
+    z-index: 9999;
+}
+.overlay.is-open{ display: flex; }
+
+.popup{
+    background: #fff;
+    width: min(980px, 96vw);
+    border-radius: 18px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.20);
+    padding: 18px 18px 22px;
+    position: relative;
+    border: 3px solid #34AD38;
+}
+.popup.tipo2{ border-color: #CD3434; }
+
+.popup-head{
+    display:flex;
+    justify-content: space-between;
+    gap: 12px;
+    align-items: flex-start;
+}
+
+.popup-user{
+    display:flex;
+    gap: 12px;
+    align-items: flex-start;
+}
+
+.popup-avatar{
+    width: 44px;
+    height: 44px;
+    border-radius: 999px;
+    object-fit: cover;
+    border: 3px solid #f3f4f6;
+}
+
+.popup-name{
+    font-weight: 800;
+    color: var(--navy);
+    font-size: 16px;
+}
+
+.popup-sub{
+    font-size: 13px;
+    color: rgba(40,53,101,0.65);
+    font-weight: 700;
+    margin-top: 2px;
+}
+
+.popup-date{
+    font-size: 13px;
+    font-weight: 800;
+    color: rgba(40,53,101,0.55);
+    white-space: nowrap;
+}
+
+.popup-body{
+    margin-top: 14px;
+    border-top: 1px solid rgba(40,53,101,0.12);
+    padding-top: 14px;
+    color: #1f2937;
+    font-size: 18px;
+    line-height: 1.55;
+    word-break: break-word;
+}
+
+.popup-back{
+    margin-top: 16px;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    height: 44px;
+    padding: 0 18px;
+    border-radius: 14px;
+    border: 2px solid var(--navy);
+    background: #ECF5FF;
+    color: var(--navy);
+    font-weight: 800;
+    cursor: pointer;
+    transition: filter .15s ease, transform .15s ease;
+}
+.popup-back:hover{
+    filter: brightness(0.98);
+    transform: translateY(-1px);
+}
+.popup-back .arrow{
+    font-size: 18px;
+    line-height: 1;
+}
+
+.obs-text{
+    min-width: 0; /* também ajuda no grid */
+}
+
+.obs-line{
+    display: block;
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.obs-item{
+    display: grid;
+    grid-template-columns: 6px minmax(0, 1fr) auto; /* <- ESSENCIAL pro ellipsis */
+    gap: 10px;
+    align-items: center;
+
+    cursor: pointer;
+    border-radius: 10px;
+    padding: 6px 6px;
+    transition: background .12s ease, transform .12s ease;
+}
+
+/* ===== FILTRO (botão + menu) ===== */
+.filter-wrap{
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+}
+
+.filter-btn{
+    width: 34px;
+    height: 34px;
+    border-radius: 10px;
+    border: 1px solid rgba(40,53,101,0.18);
+    background: #fff;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 6px 14px rgba(40,53,101,0.08);
+    transition: transform .12s ease, filter .12s ease;
+}
+.filter-btn:hover{ transform: translateY(-1px); filter: brightness(0.99); }
+
+.filter-img{
+    width: 18px;
+    height: 18px;
+    display: block;
+}
+
+/* menu estilo “aba” do seu anexo */
+.filter-menu{
+    position: absolute;
+    right: 0;
+    top: 42px;
+    width: 280px;                 /* ajuste se quiser */
+    background: rgba(255,255,255,0.95);
+    border: 1px solid rgba(40,53,101,0.18);
+    box-shadow: 0 18px 30px rgba(0,0,0,0.18);
+    border-radius: 18px;
+    padding: 10px;
+    display: none;
+    z-index: 999;
+    backdrop-filter: blur(10px);
+}
+
+.filter-menu.is-open{ display: block; }
+
+.filter-opt{
+    width: 100%;
+    height: 44px;
+    border-radius: 14px;
+    border: 0;
+    background: #F3F4F6;
+    text-align: left;
+    padding: 0 14px;
+    font-weight: 800;
+    font-size: 18px;
+    color: #111827;
+    cursor: pointer;
+}
+
+.filter-opt + .filter-opt{ margin-top: 10px; }
+
+.filter-opt.is-active{
+    background: #FFFFFF;
+    box-shadow: inset 0 0 0 1px rgba(40,53,101,0.20);
 }
