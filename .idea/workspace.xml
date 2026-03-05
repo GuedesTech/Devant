@@ -15,14 +15,12 @@
       <change afterPath="$PROJECT_DIR$/../.idea/misc.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../.idea/modules.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/secretariaescolar/controller/AlunosTurmaProfessorServlet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/pages/professor/alunosTurma.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/secretariaescolar/controller/DisciplinasProfessorServlet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/pages/professor/disciplinas-professor.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/secretariaescolar/dao/AlunoDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/secretariaescolar/dao/AlunoDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/secretariaescolar/dao/DisciplinaDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/secretariaescolar/dao/DisciplinaDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/secretariaescolar/dao/TurmaDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/secretariaescolar/dao/TurmaDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/pages/professor/alunos.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/pages/professor/alunos.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/pages/professor/turma-detalhe.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/pages/professor/turma-detalhe.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/pages/professor/turma-detalhe.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/pages/professor/turma-detalhe.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/secretariaescolar/model/Professor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/secretariaescolar/model/Professor.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

@@ -174,9 +174,6 @@ public class TurmaDAO {
         return map;
     }
 
-    // ===============================
-// MÉTRICAS DA TURMA (TELA DETALHE)
-// ===============================
 
     public int contarAlunosDaTurma(int idTurma) {
         String sql = "SELECT COUNT(*) AS total FROM aluno WHERE id_turma = ?";
@@ -218,9 +215,6 @@ public class TurmaDAO {
         return 0.0;
     }
 
-    /**
-     * Conta alunos cuja MÉDIA do aluno (AVG das notas do aluno) é >= limite
-     */
     public int contarAlunosComMediaAcimaDe(int idTurma, double limite) {
         String sql = """
         SELECT COUNT(*) AS total
