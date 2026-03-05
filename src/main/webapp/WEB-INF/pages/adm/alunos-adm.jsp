@@ -86,7 +86,7 @@
                         <i data-feather="users" class="w-7 h-7 text-[#274855]"></i>
                         <span class="w-full block text-[80%]">Total Alunos: 1</span>
                     </div>
-                    <button onclick="window.location.href='${pageContext.request.contextPath}/ad,/adicionar-aluno.jsp'"
+                    <button onclick="window.location.href='${pageContext.request.contextPath}/adm/adicionar-aluno.jsp'"
                         class="h-9 inline-flex items-center gap-2 bg-[#7F95AB] border border-[#274855] rounded-[10px] px-4 py-2 text-white font-semibold whitespace-nowrap hover:bg-[#667788] transition-all duration-200 ease-in-out">
                         <i data-feather="plus" class="w-7 h-7 text-white"></i>
                         <span class="w-full block text-[80%]">Adicionar Aluno</span>
@@ -151,7 +151,7 @@
                             </td>
                             <td class="px-2 py-1 border-b text-xs">
                                 <div class="flex space-x-2 justify-end"
-                                    onclick="window.location.href='alterar-aluno.htm'">
+                                    onclick="window.location.href='${pageContext.request.contextPath}/adm/alterar-aluno.jsp'">
                                     <button class="p-1 text-blue-600 hover:text-blue-800">
                                         <i data-feather="edit" class="w-4 h-4"></i>
                                     </button>
@@ -195,7 +195,7 @@
                             <td class="p-2 border-b text-center font-semibold text-[#3088E5]">APROVADO</td>
                             <td class="px-2 py-1 border-b text-xs">
                                 <div class="flex space-x-2 justify-end"
-                                    onclick="window.location.href='alterar-nota-adm.htm'">
+                                    onclick="window.location.href='${pageContext.request.contextPath}/adm/alterar-nota-adm.jsp'">
                                     <button class="p-1 text-blue-600 hover:text-blue-800">
                                         <i data-feather="edit" class="w-4 h-4"></i>
                                     </button>
