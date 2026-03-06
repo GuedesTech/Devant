@@ -58,4 +58,26 @@ public class ProfessorDAO {
         }
         return null;
     }
+
+    public Integer buscarPrimeiroProfessorDaDisciplina(int idDisciplina) {
+        String sql = """
+            SELECT id_professor
+            FROM professor
+            WHERE id_disciplina = ?
+            ORDER BY id_professor ASC
+            LIMIT 1
+        """;
+
+        try (Connection conn = Conexao.conectar();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, idDisciplina);
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) return rs.getInt("id_professor");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }

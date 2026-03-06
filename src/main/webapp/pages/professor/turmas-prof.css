@@ -7,13 +7,56 @@
     padding: 30px 26px 34px;
 }
 
-/* Linha de ações (Total + botão ver alunos) */
 .actions-row{
     margin-top: 14px;
     display: flex;
     align-items: center;
+    justify-content: space-between;
     gap: 12px;
     flex-wrap: wrap;
+}
+
+.actions-left{
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+/* pesquisa (igual padrão) */
+.search-form{
+    display:flex;
+    align-items:center;
+    border: 2px solid var(--navy);
+    border-radius: 10px;
+    padding: 0 10px;
+    height: 36px; /* igual botão/chip */
+    width: min(340px, 100%);
+    background: #fff;
+}
+
+.search-form input{
+    flex: 1;
+    border: none;
+    outline: none;
+    background: transparent;
+    font-family: Poppins, sans-serif;
+    font-weight: 600;
+    color: #334;
+}
+
+.search-form button{
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.search-form img{
+    height: 20px;
+    width: 20px;
 }
 
 .chip{

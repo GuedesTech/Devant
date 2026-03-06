@@ -15,12 +15,35 @@
       <change afterPath="$PROJECT_DIR$/../.idea/misc.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../.idea/modules.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/secretariaescolar/controller/DisciplinasProfessorServlet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/pages/professor/disciplinas-professor.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/secretariaescolar/controller/AdmAlunoDesempenhoServlet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/secretariaescolar/controller/AdmAlunoEditarServlet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/secretariaescolar/controller/AdmAlunoExcluirServlet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/secretariaescolar/controller/AdmAlunoNovoServlet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/secretariaescolar/controller/AdmAlunosServlet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/secretariaescolar/dao/AlunoAdmDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/secretariaescolar/dto/NotasAlunoDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/secretariaescolar/model/AlunoAdmView.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/pages/adm/aluno-desempenho.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/pages/adm/aluno-desempenho.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/pages/adm/aluno-editar.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/pages/adm/aluno-form.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/pages/adm/aluno-novo.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/pages/adm/alunos-adm.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/pages/adm/alunos-adm.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/webContexts.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/webContexts.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/secretariaescolar/controller/LoginServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/secretariaescolar/controller/LoginServlet.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/secretariaescolar/dao/DisciplinaDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/secretariaescolar/dao/DisciplinaDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/secretariaescolar/dao/NotaDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/secretariaescolar/dao/NotaDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/secretariaescolar/dao/ProfessorDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/secretariaescolar/dao/ProfessorDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/secretariaescolar/dao/TurmaDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/secretariaescolar/dao/TurmaDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/secretariaescolar/model/Professor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/secretariaescolar/model/Professor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/secretariaescolar/dto/AlunoDTO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/secretariaescolar/dto/UsuarioDTO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/pages/aluno/perfil-aluno.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/pages/aluno/perfil-aluno.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/pages/professor/disciplinas-professor.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/pages/professor/disciplinas-professor.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/pages/professor/turmas-prof.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/pages/professor/turmas-prof.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/pages/professor/turmas-prof.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/pages/professor/turmas-prof.jsp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,8 +56,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Jsp File" />
         <option value="Class" />
+        <option value="Jsp File" />
       </list>
     </option>
   </component>
@@ -88,7 +111,7 @@
     &quot;git-widget-placeholder&quot;: &quot;master&quot;,
     &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/juliomenezes-ieg/OneDrive - Instituto J&amp;F/Área de Trabalho/Escola/Devant/src/main/webapp/pages/professor&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/juliomenezes-ieg/OneDrive - Instituto J&amp;F/Área de Trabalho/Escola/Devant/src/main/webapp/pages/adm&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -103,11 +126,11 @@
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\juliomenezes-ieg\OneDrive - Instituto J&amp;F\Área de Trabalho\Escola\Devant\src\main\webapp\pages\adm" />
       <recent name="C:\Users\juliomenezes-ieg\OneDrive - Instituto J&amp;F\Área de Trabalho\Escola\Devant\src\main\webapp\pages\professor" />
       <recent name="C:\Users\juliomenezes-ieg\OneDrive - Instituto J&amp;F\Área de Trabalho\Escola\Devant\src\main\webapp\pages\assets" />
       <recent name="C:\Users\juliomenezes-ieg\OneDrive - Instituto J&amp;F\Área de Trabalho\Escola\Devant\src\main\webapp\pages\uploads" />
       <recent name="C:\Users\juliomenezes-ieg\OneDrive - Instituto J&amp;F\Área de Trabalho\Escola\Devant\src\main\webapp\pages\aluno" />
-      <recent name="C:\Users\juliomenezes-ieg\OneDrive - Instituto J&amp;F\Área de Trabalho\Escola\Devant\src\main\webapp\pages\login" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\juliomenezes-ieg\OneDrive - Instituto J&amp;F\Área de Trabalho\Escola\Devant\src\main\webapp\pages\CRUD" />
@@ -115,6 +138,9 @@
       <recent name="C:\Users\juliomenezes-ieg\OneDrive - Instituto J&amp;F\Área de Trabalho\Escola\Devant\out\artifacts\Devant_war_exploded\pages\login" />
       <recent name="C:\Users\juliomenezes-ieg\OneDrive - Instituto J&amp;F\Área de Trabalho\Escola\Devant\src\main\resources" />
       <recent name="C:\Users\guilhermemontoni-ieg\OneDrive - Instituto J&amp;F\Área de Trabalho\2º ano\Desenvolvimento - Diogo\Projeto Secretaria\SecretariaEscolar-main\src\main\webapp\pages\aluno" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.example.secretariaescolar.model" />
     </key>
   </component>
   <component name="RunManager" selected="Tomcat Server.Tomcat 11.0.11">
@@ -435,6 +461,10 @@
       <workItem from="1772588612944" duration="3878000" />
       <workItem from="1772618675783" duration="4324000" />
       <workItem from="1772666400221" duration="1529000" />
+      <workItem from="1772705233000" duration="5072000" />
+      <workItem from="1772737706495" duration="6072000" />
+      <workItem from="1772751944138" duration="3670000" />
+      <workItem from="1772761462653" duration="5741000" />
     </task>
     <servers />
   </component>

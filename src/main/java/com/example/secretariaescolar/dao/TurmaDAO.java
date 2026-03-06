@@ -42,30 +42,25 @@ public class TurmaDAO {
         return idGerado;
     }
 
-    public List<Turma> listarTodas() {
-        List<Turma> turmas = new ArrayList<>();
+        public List<Turma> listarTodas() {
+            List<Turma> list = new ArrayList<>();
+            String sql = "SELECT id_turma, nome FROM turma ORDER BY nome ASC";
 
-        String sql = "SELECT * FROM Turma";
+            try (Connection conn = Conexao.conectar();
+                 PreparedStatement stmt = conn.prepareStatement(sql);
+                 ResultSet rs = stmt.executeQuery()) {
 
-        try (Connection conn = Conexao.conectar();
-                PreparedStatement stmt = conn.prepareStatement(sql);
-                ResultSet rs = stmt.executeQuery()) {
-
-            while (rs.next()) {
-                Turma turma = new Turma();
-
-                turma.setId_turma(rs.getInt("id_turma"));
-                turma.setNome(rs.getString("nome"));
-
-                turmas.add(turma);
+                while (rs.next()) {
+                    Turma t = new Turma();
+                    t.setId_turma(rs.getInt("id_turma"));
+                    t.setNome(rs.getString("nome"));
+                    list.add(t);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-
-        } catch (SQLException e) {
-            System.err.println("Erro ao listar todas as turmas: " + e.getMessage());
+            return list;
         }
-
-        return turmas;
-    }
 
     public Turma buscarPorId(int idTurma) {
         String sql = "SELECT * FROM Turma WHERE id_turma = ?";

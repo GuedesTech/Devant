@@ -37,7 +37,6 @@ public class DisciplinaDAO {
         return null;
     }
 
-    // Buscar disciplina pelo nome
     public Disciplina buscarPorNome(String nome) {
         String sql = "SELECT id_disciplina, nome FROM disciplina WHERE LOWER(nome) = LOWER(?)";
 
@@ -85,7 +84,6 @@ public class DisciplinaDAO {
         return disciplinas;
     }
 
-    // ===== PROFESSOR: disciplina do professor (por id_user do usuario logado) =====
     public Disciplina buscarDisciplinaDoProfessorPorIdUser(int idUserProfessor) {
         String sql = """
             SELECT d.id_disciplina, d.nome
@@ -116,7 +114,6 @@ public class DisciplinaDAO {
         return null;
     }
 
-    // ===== PROFESSOR: todas as outras disciplinas (exceto a do professor) =====
     public List<Disciplina> listarOutrasDisciplinasDoProfessorPorIdUser(int idUserProfessor) {
         List<Disciplina> lista = new ArrayList<>();
 

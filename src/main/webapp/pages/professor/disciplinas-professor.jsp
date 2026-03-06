@@ -26,6 +26,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="icon" href="<%= ctx %>/assets/Group 551.ico" />
   <link rel="stylesheet" href="<%= ctx %>/pages/aluno/perfil.css" />
+  <link rel="stylesheet" href="<%= ctx %>/pages/professor/turmas-prof.css" />
   <title>Disciplinas - Devant</title>
 </head>
 
@@ -54,56 +55,19 @@
       <h1 class="page-title">Disciplinas</h1>
       <div class="title-line" aria-hidden="true"></div>
 
-      <!-- Linha: total alunos + ver alunos + pesquisa -->
-      <div style="margin-top:16px; display:flex; gap:12px; align-items:center; justify-content:space-between; flex-wrap:wrap;">
+      <div class="actions-row">
+        <div class="actions-left">
+          <div class="chip">
+            <img src="<%= ctx %>/pages/professor/pessoas.png" style="height: 17.5px; width: 24px">
+            <span>Total Alunos: <strong><%= totalAlunos %></strong></span>
+          </div>
 
-        <div style="
-              height: 40px;
-              display:inline-flex;
-              align-items:center;
-              gap:10px;
-              background:#ECF5FF;
-              border: 2px solid var(--navy);
-              border-radius: 10px;
-              padding: 0 14px;
-              font-weight: 700;
-              color: var(--navy);
-          ">
-          <img src="<%= ctx %>/pages/professor/pessoas.png" style="height: 17.5px; width: 24px">
-          <span style="font-size:14px;">Total Alunos: <%= totalAlunos %></span>
+          <a class="btn-primary" href="<%= ctx %>/professor/alunos">
+            Ver alunos <span class="btn-arrow">›</span>
+          </a>
         </div>
-
-        <a href="<%= ctx %>/professor/alunos"
-           style="
-              height:40px;
-              display:inline-flex;
-              align-items:center;
-              gap:10px;
-              padding: 0 16px;
-              border-radius: 10px;
-              background: #294c56;
-              color: #fff;
-              text-decoration:none;
-              font-weight: 800;
-              box-shadow: 0 10px 18px rgba(40, 53, 101, 0.10);
-           ">
-          Ver alunos <span style="font-size:18px; line-height:1;">›</span>
-        </a>
-
-        <form method="get" action="<%= ctx %>/professor/disciplinas"
-              style="display:flex; align-items:center; border:2px solid var(--navy); border-radius:10px; padding: 0 10px; height:40px; width:min(340px, 100%);">
-          <input name="q" value="<%= (request.getParameter("q") != null ? request.getParameter("q") : "") %>"
-                 type="text" placeholder="Pesquisar disciplina"
-                 style="flex:1; border:none; outline:none; background:transparent; font-family:Poppins, sans-serif; font-weight:600; color:#334;">
-          <button type="submit"
-                  style="border:none; background:transparent; cursor:pointer; font-weight:800; color:var(--navy);">
-            <img src="<%= ctx %>/pages/assets/lupa_icon.png" style="height: 20px;">
-          </button>
-        </form>
       </div>
-    </div>
 
-    <!-- ===== Minha Disciplina ===== -->
     <div style="margin-top:22px;">
       <div style="font-weight:900; color:var(--navy); font-size:18px;">Minha Disciplina</div>
 
@@ -197,7 +161,7 @@
         %>
       </div>
     </div>
-
+    </div>
   </section>
 </main>
 

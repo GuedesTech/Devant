@@ -4,97 +4,12 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.example.secretariaescolar.dto.NotasAlunoDTO;
 import com.example.secretariaescolar.model.MediaDisciplina;
 import com.example.secretariaescolar.model.Nota;
 import com.example.secretariaescolar.util.Conexao;
 
 public class NotaDAO {
-
-    public int inserir(Nota nota) {
-        String sql = "INSERT INTO Nota (titulo, valor, semestre, id_aluno, id_professor-disciplina) VALUES (?,?,?,?,?)";
-        int idGerado = -1;
-
-        try (Connection conn = Conexao.conectar();
-                PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
-
-            stmt.setString(1, nota.getTitulo());
-            stmt.setDouble(2, nota.getValor());
-            stmt.setString(3, nota.getSemestre());
-            stmt.setInt(4, nota.getId_aluno());
-            stmt.setInt(5, nota.getId_professorDisciplina());
-
-            int rowsAffected = stmt.executeUpdate();
-
-            if (rowsAffected > 0) {
-                try (ResultSet rs = stmt.getGeneratedKeys()) {
-                    if (rs.next()) {
-                        idGerado = rs.getInt(1);
-                    }
-                }
-            }
-
-        } catch (SQLException e) {
-            System.err.println("Erro ao inserir nota: " + e.getMessage());
-        }
-
-        return idGerado;
-    }
-
-    public List<Nota> listarPorAluno(int idAluno) {
-        List<Nota> notas = new ArrayList<>();
-
-        String sql = "SELECT * FROM Nota WHERE id_aluno = ?";
-
-        try (Connection conn = Conexao.conectar();
-                PreparedStatement stmt = conn.prepareStatement(sql)) {
-
-            stmt.setInt(1, idAluno);
-
-            try (ResultSet rs = stmt.executeQuery()) {
-                while (rs.next()) {
-                    Nota nota = new Nota();
-
-                    nota.setId_nota(rs.getInt("id_nota"));
-                    nota.setTitulo(rs.getString("titulo"));
-                    nota.setSemestre(rs.getString("semestre"));
-                    nota.setValor(rs.getDouble("valor"));
-                    nota.setId_aluno(rs.getInt("id_aluno"));
-                    nota.setId_professorDisciplina(rs.getInt("id_professor_disciplina"));
-
-                    notas.add(nota);
-
-                }
-
-            }
-
-        } catch (SQLException e) {
-            System.err.println("Erro ao listar notas dos alunos: " + e.getMessage());
-        }
-
-        return notas;
-    }
-
-    public boolean atualizar(Nota nota) {
-        String sql = "UPDATE Nota SET titulo = ?, valor = ?, semestre = ? WHERE id_nota = ?";
-
-        try (Connection conn = Conexao.conectar();
-                PreparedStatement stmt = conn.prepareStatement(sql)) {
-
-            stmt.setString(1, nota.getTitulo());
-            stmt.setDouble(2, nota.getValor());
-            stmt.setString(3, nota.getSemestre());
-            stmt.setInt(4, nota.getId_nota());
-
-            int linhasAfetadas = stmt.executeUpdate();
-
-            return linhasAfetadas > 0;
-
-        } catch (SQLException e) {
-            System.err.println("Erro ao atualizar as notas: " + e.getMessage());
-            return false;
-        }
-    }
-
     public List<Nota> listarPorProfessorDisciplina(int idProfessorDisciplina) {
         List<Nota> notas = new ArrayList<>();
 
@@ -318,5 +233,98 @@ public class NotaDAO {
         }
 
         return lista;
+    }
+
+    public NotasAlunoDTO buscarN1N2(int idAluno, int idDisciplina) {
+        String sql = """
+            SELECT semestre, valor
+            FROM nota
+            WHERE id_aluno = ? AND id_disciplina = ? AND semestre IN ('1','2')
+        """;
+
+        NotasAlunoDTO dto = new NotasAlunoDTO();
+        dto.setN1(0.0);
+        dto.setN2(0.0);
+
+        try (Connection conn = Conexao.conectar();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, idAluno);
+            stmt.setInt(2, idDisciplina);
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    String s = rs.getString("semestre");
+                    double v = rs.getDouble("valor");
+                    if ("1".equals(s)) dto.setN1(v);
+                    if ("2".equals(s)) dto.setN2(v);
+                }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return dto;
+    }
+
+    public boolean salvarOuAtualizarN1N2(int idAluno, int idDisciplina, int idProfessor,
+                                         double n1, double n2) {
+
+        // upsert manual: tenta UPDATE, se 0 rows, faz INSERT
+        String up1 = "UPDATE nota SET valor=?, titulo='Nota', id_professor=? WHERE id_aluno=? AND id_disciplina=? AND semestre='1'";
+        String in1 = "INSERT INTO nota (titulo, valor, semestre, id_aluno, id_professor, id_disciplina) VALUES ('Nota', ?, '1', ?, ?, ?)";
+
+        String up2 = "UPDATE nota SET valor=?, titulo='Nota', id_professor=? WHERE id_aluno=? AND id_disciplina=? AND semestre='2'";
+        String in2 = "INSERT INTO nota (titulo, valor, semestre, id_aluno, id_professor, id_disciplina) VALUES ('Nota', ?, '2', ?, ?, ?)";
+
+        try (Connection conn = Conexao.conectar()) {
+            conn.setAutoCommit(false);
+
+            // N1
+            int rows1;
+            try (PreparedStatement s = conn.prepareStatement(up1)) {
+                s.setDouble(1, n1);
+                s.setInt(2, idProfessor);
+                s.setInt(3, idAluno);
+                s.setInt(4, idDisciplina);
+                rows1 = s.executeUpdate();
+            }
+            if (rows1 == 0) {
+                try (PreparedStatement s = conn.prepareStatement(in1)) {
+                    s.setDouble(1, n1);
+                    s.setInt(2, idAluno);
+                    s.setInt(3, idProfessor);
+                    s.setInt(4, idDisciplina);
+                    s.executeUpdate();
+                }
+            }
+
+            // N2
+            int rows2;
+            try (PreparedStatement s = conn.prepareStatement(up2)) {
+                s.setDouble(1, n2);
+                s.setInt(2, idProfessor);
+                s.setInt(3, idAluno);
+                s.setInt(4, idDisciplina);
+                rows2 = s.executeUpdate();
+            }
+            if (rows2 == 0) {
+                try (PreparedStatement s = conn.prepareStatement(in2)) {
+                    s.setDouble(1, n2);
+                    s.setInt(2, idAluno);
+                    s.setInt(3, idProfessor);
+                    s.setInt(4, idDisciplina);
+                    s.executeUpdate();
+                }
+            }
+
+            conn.commit();
+            return true;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 }

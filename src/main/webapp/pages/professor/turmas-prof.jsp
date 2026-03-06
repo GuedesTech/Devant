@@ -48,7 +48,7 @@
 <body>
 <header class="topbar">
   <div class="topbar-inner">
-    <a class="topbar-left" href="<%= ctx %>/professor/turmas" aria-label="Voltar ao início">
+    <a class="topbar-left" href="<%= ctx %>/login/index.jsp" aria-label="Voltar ao início">
       <img class="topbar-logo" src="<%= ctx %>/pages/assets/logo.png" alt="Logo Devant">
     </a>
 
