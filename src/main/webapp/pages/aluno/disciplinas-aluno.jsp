@@ -49,23 +49,46 @@
       <h1 class="page-title">Minhas Disciplinas</h1>
       <div class="title-line" aria-hidden="true"></div>
 
-      <!-- Linha: total + pesquisa -->
+      <!-- Linha: total + botão pdf + pesquisa -->
       <div style="margin-top:16px; display:flex; gap:12px; align-items:center; justify-content:space-between; flex-wrap:wrap;">
+
         <!-- Total Disciplinas -->
         <div style="
-                    height: 40px;
-                    display:inline-flex;
-                    align-items:center;
-                    gap:10px;
-                    background:#ECF5FF;
-                    border: 2px solid var(--navy);
-                    border-radius: 10px;
-                    padding: 0 14px;
-                    font-weight: 700;
-                    color: var(--navy);
-                ">
+            height: 40px;
+            display:inline-flex;
+            align-items:center;
+            gap:10px;
+            background:#ECF5FF;
+            border: 2px solid var(--navy);
+            border-radius: 10px;
+            padding: 0 14px;
+            font-weight: 700;
+            color: var(--navy);
+        ">
           <span style="font-size:14px;">Total Disciplinas: <%= total %></span>
         </div>
+
+        <!-- Botão: boletim completo PDF -->
+        <a href="<%= ctx %>/aluno/boletim/pdf"
+           style="
+             height: 40px;
+             display:inline-flex;
+             align-items:center;
+             justify-content:center;
+             padding: 0 14px;
+             border-radius: 10px;
+             background:#274855;
+             color:#FAFAFA;
+             font-weight: 800;
+             text-decoration:none;
+             border:none;
+             box-shadow: 0 10px 18px rgba(40, 53, 101, 0.10);
+           "
+           target="_blank"
+           rel="noopener"
+        >
+          Gerar boletim completo
+        </a>
 
         <!-- Pesquisa (envia GET ?q=...) -->
         <form method="get" action="<%= ctx %>/aluno/disciplinas"
@@ -75,7 +98,7 @@
                  style="flex:1; border:none; outline:none; background:transparent; font-family:Poppins, sans-serif; font-weight:600; color:#334;">
           <button type="submit"
                   style="border:none; background:transparent; cursor:pointer; font-weight:800; color:var(--navy);">
-            <img src="<%= ctx %>/pages/assets/lupa_icon.png" style="height: 20px; height: 20px">
+            <img src="<%= ctx %>/pages/assets/lupa_icon.png" style="height: 20px; width: 20px">
           </button>
         </form>
       </div>
@@ -99,21 +122,22 @@
       %>
 
       <div style="
-                background: #fff;
-                border-radius: 10px;
-                border: 1px solid rgba(40, 53, 101, 0.18);
-                border-left: 10px solid #294c56;
-                padding: 16px 18px;
-                display:flex;
-                align-items:center;
-                justify-content:space-between;
-                box-shadow: 0 10px 18px rgba(40, 53, 101, 0.10);
-            ">
-                <span style="font-weight:800; font-size:20px; color: var(--navy);">
-                    <%= nome %>
-                </span>
+            background: #fff;
+            border-radius: 10px;
+            border: 1px solid rgba(40, 53, 101, 0.18);
+            border-left: 10px solid #294c56;
+            padding: 16px 18px;
+            display:flex;
+            align-items:center;
+            justify-content:space-between;
+            box-shadow: 0 10px 18px rgba(40, 53, 101, 0.10);
+      ">
+        <span style="font-weight:800; font-size:20px; color: var(--navy);">
+          <%= nome %>
+        </span>
 
-        <a href="<%= ctx %>/aluno/boletim?id_disciplina=<%= d.getId_disciplina() %> "style="font-weight:800; color:#294c56; text-decoration:none;">
+        <a href="<%= ctx %>/aluno/boletim?id_disciplina=<%= d.getId_disciplina() %>"
+           style="font-weight:800; color:#294c56; text-decoration:none;">
           Ver Boletim
         </a>
       </div>
@@ -132,7 +156,6 @@
       %>
     </div>
 
-    <%-- debug opcional --%>
     <% if (disciplinas == null) { %>
     <p style="margin-top:16px; font-weight:700; color:#283565;">
       DEBUG: "disciplinas" veio NULL (o servlet não setou request.setAttribute("disciplinas", ...))
@@ -156,7 +179,6 @@
       indicador.style.left = (rect.left - navRect.left) + "px";
     }
 
-    // posiciona ao carregar
     const ativo = nav.querySelector(".topbar-link.is-active") || links[0];
     moverPara(ativo);
 
@@ -165,21 +187,16 @@
       moverPara(a);
     });
 
-    // anima antes de navegar
     links.forEach((a) => {
       a.addEventListener("click", (e) => {
-        // deixa abrir em nova aba normal
         if (e.ctrlKey || e.metaKey || e.shiftKey || e.altKey) return;
 
         const href = a.getAttribute("href");
         if (!href) return;
 
         e.preventDefault();
-
-        // move indicador para o link clicado
         moverPara(a);
 
-        // pequena espera para a animação aparecer
         setTimeout(() => {
           window.location.href = href;
         }, 220);
