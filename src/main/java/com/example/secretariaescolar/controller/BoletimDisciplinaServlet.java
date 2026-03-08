@@ -30,13 +30,11 @@ public class BoletimDisciplinaServlet extends HttpServlet {
 
         Usuario usuario = (Usuario) session.getAttribute("usuario");
 
-        // aluno = tipo 1 (como você já usa)
         if (usuario.getId_tipo_user() != 1) {
             response.sendRedirect(request.getContextPath() + "/pages/login/index.jsp");
             return;
         }
 
-        // pega id_disciplina por parâmetro
         String idDiscStr = request.getParameter("id_disciplina");
         if (idDiscStr == null || idDiscStr.isBlank()) {
             response.sendRedirect(request.getContextPath() + "/aluno/disciplinas");
@@ -51,7 +49,6 @@ public class BoletimDisciplinaServlet extends HttpServlet {
             return;
         }
 
-        // pega aluno (id_aluno) pelo id_user
         AlunoDAO alunoDAO = new AlunoDAO();
         Aluno aluno = alunoDAO.buscarPorIdUser(usuario.getId_user());
 
@@ -61,11 +58,9 @@ public class BoletimDisciplinaServlet extends HttpServlet {
             return;
         }
 
-        // pega connection do seu projeto (use o mesmo padrão que você já usa)
-        // ✅ Se você já tem uma classe de conexão (ex: Conexao.getConnection()), troque aqui.
         Connection conn = null;
         try {
-            conn = Conexao.conectar(); // <-- ajuste para sua classe real
+            conn = Conexao.conectar();
             BoletimDAO boletimDAO = new BoletimDAO(conn);
 
             String nomeDisciplina = boletimDAO.buscarNomeDisciplina(idDisciplina);
@@ -80,7 +75,6 @@ public class BoletimDisciplinaServlet extends HttpServlet {
 
             List<Observacao> observacoes = boletimDAO.listarObservacoesDaDisciplina(aluno.getId_aluno(), idDisciplina);
 
-            // manda pro JSP
             request.setAttribute("aluno", aluno);
             request.setAttribute("disciplinaNome", nomeDisciplina != null ? nomeDisciplina : "Disciplina");
 
@@ -100,7 +94,9 @@ public class BoletimDisciplinaServlet extends HttpServlet {
             request.setAttribute("erro", "Erro ao carregar boletim: " + e.getMessage());
             request.getRequestDispatcher("/pages/aluno/boletim-disciplina.jsp").forward(request, response);
         } finally {
-            try { if (conn != null) conn.close(); } catch (Exception ignore) {}
+            try {
+                if (conn != null) conn.close();
+            } catch (Exception ignore) {}
         }
     }
 }

@@ -5,6 +5,7 @@
       <map>
         <entry key="file://$PROJECT_DIR$/src/main/webapp/pages/aluno/disciplinas-aluno.jsp" value="file://$PROJECT_DIR$/src/main/webapp/pages/aluno" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/pages/aluno/perfil-aluno.jsp" value="file://$PROJECT_DIR$/src/main/webapp/pages/aluno" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/pages/professor/aluno-analise.jsp" value="file://$PROJECT_DIR$/src/main/webapp/pages/professor" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/pages/professor/turma-detalhe.jsp" value="file://$PROJECT_DIR$/src/main/webapp/pages/professor" />
       </map>
     </option>

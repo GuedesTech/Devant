@@ -10,6 +10,46 @@ import java.util.List;
 import java.util.Map;
 
 public class AlunoDAO {
+    public Aluno buscarPorIdAluno(int idAluno) {
+
+        String sql = """
+            SELECT u.id_user, u.nome, u.login, u.foto,
+                   a.id_aluno, a.matricula, a.id_turma,
+                   t.nome AS nome_turma
+            FROM usuario u
+            INNER JOIN aluno a ON u.id_user = a.id_user
+            INNER JOIN turma t ON t.id_turma = a.id_turma
+            WHERE a.id_aluno = ?
+        """;
+
+        try (Connection conn = Conexao.conectar();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, idAluno);
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    Aluno aluno = new Aluno();
+
+                    aluno.setId_user(rs.getInt("id_user"));
+                    aluno.setNome(rs.getString("nome"));
+                    aluno.setLogin(rs.getString("login"));
+                    aluno.setFoto(rs.getString("foto"));
+                    aluno.setId_aluno(rs.getInt("id_aluno"));
+                    aluno.setMatricula(rs.getString("matricula"));
+                    aluno.setId_turma(rs.getInt("id_turma"));
+                    aluno.setNomeTurma(rs.getString("nome_turma"));
+
+                    return aluno;
+                }
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
 
     public boolean cadastrar(Aluno aluno) {
 

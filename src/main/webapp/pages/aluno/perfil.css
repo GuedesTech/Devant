@@ -22,7 +22,7 @@ body{
 ========================= */
 .topbar{
     background: var(--teal);
-    height: 78px;
+    height: 50px;
     display: flex;
     align-items: center;
 }
@@ -78,9 +78,9 @@ body{
 .nav-indicador{
     position: absolute;
     left: 0;
-    bottom: 6px;              /* controla a distância da linha */
+    bottom: -6px;              /* controla a distância da linha */
     height: 6px;
-    width: 40px;              /* o JS ajusta */
+    width: 40px;
     background: var(--white);
     border-radius: 999px;
     transition: left 0.35s ease, width 0.35s ease;

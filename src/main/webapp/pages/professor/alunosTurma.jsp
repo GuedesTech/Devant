@@ -26,6 +26,9 @@
   <link rel="icon" href="<%= ctx %>/assets/Group 551.ico" />
   <link rel="stylesheet" href="<%= ctx %>/pages/aluno/perfil.css" />
   <link rel="stylesheet" href="<%= ctx %>/pages/professor/alunos.css" />
+  <link          rel="icon"          type="image/png"          href="<%= request.getContextPath() %>/pages/assets/logo-dark.png"
+        />
+    <link
   <title>Alunos da Turma - Devant</title>
 </head>
 
@@ -78,8 +81,7 @@
           Double media = mediaPorAluno.get(a.getId_aluno());
           if (media == null) media = 0.0;
 
-          String href = ctx + "/professor/aluno?id_aluno=" + a.getId_aluno();
-      %>
+String href = ctx + "/professor/aluno/analise?id_aluno=" + a.getId_aluno();      %>
 
       <a class="aluno-card" href="<%= href %>">
         <img class="aluno-avatar" src="<%= fotoSrc %>" alt="Foto do aluno">

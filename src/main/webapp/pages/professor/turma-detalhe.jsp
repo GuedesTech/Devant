@@ -80,6 +80,8 @@
     <link rel="icon" href="<%= ctx %>/assets/Group 551.ico" />
     <link rel="stylesheet" href="<%= ctx %>/pages/aluno/perfil.css" />
     <link rel="stylesheet" href="<%= ctx %>/pages/professor/turma-detalhe.css" />
+    <link rel="icon" type="image/png" href="<%= request.getContextPath() %>/pages/assets/logo-dark.png"/>
+
     <title>Análise da Turma - <%= nomeTurma %></title>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>

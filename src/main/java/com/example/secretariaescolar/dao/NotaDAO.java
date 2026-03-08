@@ -9,6 +9,71 @@ import com.example.secretariaescolar.model.Nota;
 import com.example.secretariaescolar.util.Conexao;
 
 public class NotaDAO {
+    public MediaDisciplina buscarMediaDaDisciplinaPorAluno(int idAluno, int idDisciplina) {
+        String sql = """
+                    SELECT d.nome AS disciplina,
+                           ROUND(AVG(n.valor), 2) AS media
+                    FROM nota n
+                    JOIN disciplina d ON d.id_disciplina = n.id_disciplina
+                    WHERE n.id_aluno = ?
+                      AND n.id_disciplina = ?
+                    GROUP BY d.nome
+                """;
+
+        try (Connection conn = Conexao.conectar();
+                PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, idAluno);
+            stmt.setInt(2, idDisciplina);
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    return new MediaDisciplina(
+                            rs.getString("disciplina"),
+                            rs.getDouble("media"));
+                }
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
+    public MediaDisciplina buscarMediaDaDisciplinaPorAlunoESemestre(int idAluno, int idDisciplina, String semestre) {
+        String sql = """
+                    SELECT d.nome AS disciplina,
+                           ROUND(AVG(n.valor), 2) AS media
+                    FROM nota n
+                    JOIN disciplina d ON d.id_disciplina = n.id_disciplina
+                    WHERE n.id_aluno = ?
+                      AND n.id_disciplina = ?
+                      AND n.semestre = ?
+                    GROUP BY d.nome
+                """;
+
+        try (Connection conn = Conexao.conectar();
+                PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, idAluno);
+            stmt.setInt(2, idDisciplina);
+            stmt.setString(3, semestre);
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    return new MediaDisciplina(
+                            rs.getString("disciplina"),
+                            rs.getDouble("media"));
+                }
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
 
     public int inserir(Nota nota) {
         String sql = "INSERT INTO Nota (titulo, valor, semestre, id_aluno, id_professor-disciplina) VALUES (?,?,?,?,?)";
@@ -178,17 +243,17 @@ public class NotaDAO {
         List<MediaDisciplina> lista = new ArrayList<>();
 
         String sql = """
-            SELECT d.nome AS disciplina,
-                   ROUND(AVG(n.valor), 2) AS media
-            FROM nota n
-            JOIN disciplina d ON d.id_disciplina = n.id_disciplina
-            WHERE n.id_aluno = ?
-            GROUP BY d.nome
-            ORDER BY d.nome
-        """;
+                    SELECT d.nome AS disciplina,
+                           ROUND(AVG(n.valor), 2) AS media
+                    FROM nota n
+                    JOIN disciplina d ON d.id_disciplina = n.id_disciplina
+                    WHERE n.id_aluno = ?
+                    GROUP BY d.nome
+                    ORDER BY d.nome
+                """;
 
         try (Connection conn = Conexao.conectar();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+                PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setInt(1, idAluno);
 
@@ -196,8 +261,7 @@ public class NotaDAO {
                 while (rs.next()) {
                     lista.add(new MediaDisciplina(
                             rs.getString("disciplina"),
-                            rs.getDouble("media")
-                    ));
+                            rs.getDouble("media")));
                 }
             }
 
@@ -211,23 +275,24 @@ public class NotaDAO {
     // Quantas disciplinas com média >= 7
     public int contarDisciplinasAcimaOuIgual7(int idAluno) {
         String sql = """
-            SELECT COUNT(*) AS qtd
-            FROM (
-                SELECT n.id_disciplina
-                FROM nota n
-                WHERE n.id_aluno = ?
-                GROUP BY n.id_disciplina
-                HAVING AVG(n.valor) >= 7
-            ) x
-        """;
+                    SELECT COUNT(*) AS qtd
+                    FROM (
+                        SELECT n.id_disciplina
+                        FROM nota n
+                        WHERE n.id_aluno = ?
+                        GROUP BY n.id_disciplina
+                        HAVING AVG(n.valor) >= 7
+                    ) x
+                """;
 
         try (Connection conn = Conexao.conectar();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+                PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setInt(1, idAluno);
 
             try (ResultSet rs = stmt.executeQuery()) {
-                if (rs.next()) return rs.getInt("qtd");
+                if (rs.next())
+                    return rs.getInt("qtd");
             }
 
         } catch (SQLException e) {
@@ -240,23 +305,24 @@ public class NotaDAO {
     // Quantas disciplinas com média < 7
     public int contarDisciplinasAbaixo7(int idAluno) {
         String sql = """
-            SELECT COUNT(*) AS qtd
-            FROM (
-                SELECT n.id_disciplina
-                FROM nota n
-                WHERE n.id_aluno = ?
-                GROUP BY n.id_disciplina
-                HAVING AVG(n.valor) < 7
-            ) x
-        """;
+                    SELECT COUNT(*) AS qtd
+                    FROM (
+                        SELECT n.id_disciplina
+                        FROM nota n
+                        WHERE n.id_aluno = ?
+                        GROUP BY n.id_disciplina
+                        HAVING AVG(n.valor) < 7
+                    ) x
+                """;
 
         try (Connection conn = Conexao.conectar();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+                PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setInt(1, idAluno);
 
             try (ResultSet rs = stmt.executeQuery()) {
-                if (rs.next()) return rs.getInt("qtd");
+                if (rs.next())
+                    return rs.getInt("qtd");
             }
 
         } catch (SQLException e) {
@@ -270,12 +336,13 @@ public class NotaDAO {
         String sql = "SELECT ROUND(AVG(valor), 2) AS media FROM nota WHERE id_aluno = ?";
 
         try (Connection conn = Conexao.conectar();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+                PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setInt(1, idAluno);
 
             try (ResultSet rs = stmt.executeQuery()) {
-                if (rs.next()) return rs.getDouble("media");
+                if (rs.next())
+                    return rs.getDouble("media");
             }
 
         } catch (SQLException e) {
@@ -289,17 +356,17 @@ public class NotaDAO {
         List<MediaDisciplina> lista = new ArrayList<>();
 
         String sql = """
-        SELECT d.nome AS disciplina,
-               ROUND(AVG(n.valor), 2) AS media
-        FROM nota n
-        JOIN disciplina d ON d.id_disciplina = n.id_disciplina
-        WHERE n.id_aluno = ? AND n.semestre = ?
-        GROUP BY d.nome
-        ORDER BY d.nome
-    """;
+                    SELECT d.nome AS disciplina,
+                           ROUND(AVG(n.valor), 2) AS media
+                    FROM nota n
+                    JOIN disciplina d ON d.id_disciplina = n.id_disciplina
+                    WHERE n.id_aluno = ? AND n.semestre = ?
+                    GROUP BY d.nome
+                    ORDER BY d.nome
+                """;
 
         try (Connection conn = Conexao.conectar();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+                PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setInt(1, idAluno);
             stmt.setString(2, semestre);
@@ -308,8 +375,7 @@ public class NotaDAO {
                 while (rs.next()) {
                     lista.add(new MediaDisciplina(
                             rs.getString("disciplina"),
-                            rs.getDouble("media")
-                    ));
+                            rs.getDouble("media")));
                 }
             }
 

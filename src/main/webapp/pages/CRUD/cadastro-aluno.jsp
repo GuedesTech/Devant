@@ -9,6 +9,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+            <link rel="icon" type="image/png" href="<%= request.getContextPath() %>/pages/assets/logo-dark.png"/>
+
+    <link
     <title>Cadastro de Aluno</title>
 </head>
 <body>

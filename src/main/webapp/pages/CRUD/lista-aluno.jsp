@@ -8,6 +8,9 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <html>
 <head>
+          <link rel="icon" type="image/png" href="<%= request.getContextPath() %>/pages/assets/logo-dark.png"/>
+
+    <link
     <title>Lista de Alunos</title>
 </head>
 <body>

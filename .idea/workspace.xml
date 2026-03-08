@@ -9,8 +9,39 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e8ba3ed6-07e3-48b7-a7c9-a388cea4a781" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/secretariaescolar/controller/BoletimPdfServlet.java" afterDir="false" />
+    <list default="true" id="e8ba3ed6-07e3-48b7-a7c9-a388cea4a781" name="Changes" comment="varias alterações">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/secretariaescolar/controller/ProfessorAlunoServlet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/pages/assets/logo-dark.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/pages/assets/textura-fundo.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/pages/professor/aluno-observacoes.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/pages/professor/aluno-observacoes.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/webContexts.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/webContexts.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/secretariaescolar/controller/BoletimDisciplinaServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/secretariaescolar/controller/BoletimDisciplinaServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/secretariaescolar/dao/AlunoDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/secretariaescolar/dao/AlunoDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/secretariaescolar/dao/NotaDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/secretariaescolar/dao/NotaDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/secretariaescolar/dao/ObservacaoDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/secretariaescolar/dao/ObservacaoDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/pages/CRUD/cadastro-aluno.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/pages/CRUD/cadastro-aluno.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/pages/CRUD/lista-aluno.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/pages/CRUD/lista-aluno.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/pages/aluno/boletim-disciplina.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/pages/aluno/boletim-disciplina.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/pages/aluno/disciplinas-aluno.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/pages/aluno/disciplinas-aluno.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/pages/aluno/notas-aluno.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/pages/aluno/notas-aluno.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/pages/aluno/observacoes-aluno.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/pages/aluno/observacoes-aluno.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/pages/aluno/perfil-aluno.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/pages/aluno/perfil-aluno.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/pages/aluno/perfil.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/pages/aluno/perfil.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/pages/assets/logo.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/pages/assets/logo.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/pages/assets/minimalismo.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/pages/assets/minimalismo.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/pages/login/criar_login.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/pages/login/criar_login.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/pages/login/fundo login.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/pages/login/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/pages/login/index.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/pages/login/login_adm.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/pages/login/login_adm.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/pages/login/login_prof.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/pages/login/login_prof.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/pages/login/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/pages/login/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/pages/professor/alunos.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/pages/professor/alunos.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/pages/professor/alunosTurma.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/pages/professor/alunosTurma.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/pages/professor/disciplinas-professor.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/pages/professor/disciplinas-professor.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/pages/professor/turma-detalhe.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/pages/professor/turma-detalhe.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/pages/professor/turmas-prof.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/pages/professor/turmas-prof.jsp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,8 +54,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Jsp File" />
         <option value="Class" />
+        <option value="Jsp File" />
       </list>
     </option>
   </component>
@@ -100,11 +131,11 @@
       <recent name="C:\Users\juliomenezes-ieg\OneDrive - Instituto J&amp;F\Área de Trabalho\Escola\Devant\src\main\webapp\pages\login" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\heitormiasato-ieg\OneDrive - Instituto J&amp;F\Área de Trabalho\Segundo Ano TECH\TECH\Desenvolvimento\Devant\src\main\webapp\pages\assets" />
       <recent name="C:\Users\juliomenezes-ieg\OneDrive - Instituto J&amp;F\Área de Trabalho\Escola\Devant\src\main\webapp\pages\CRUD" />
       <recent name="C:\Users\juliomenezes-ieg\OneDrive - Instituto J&amp;F\Área de Trabalho\Escola\Devant\src\main\webapp\pages\login" />
       <recent name="C:\Users\juliomenezes-ieg\OneDrive - Instituto J&amp;F\Área de Trabalho\Escola\Devant\out\artifacts\Devant_war_exploded\pages\login" />
       <recent name="C:\Users\juliomenezes-ieg\OneDrive - Instituto J&amp;F\Área de Trabalho\Escola\Devant\src\main\resources" />
-      <recent name="C:\Users\guilhermemontoni-ieg\OneDrive - Instituto J&amp;F\Área de Trabalho\2º ano\Desenvolvimento - Diogo\Projeto Secretaria\SecretariaEscolar-main\src\main\webapp\pages\aluno" />
     </key>
   </component>
   <component name="RunManager" selected="Tomcat Server.Tomcat 11.0.11">
@@ -425,7 +456,26 @@
       <workItem from="1772588612944" duration="3878000" />
       <workItem from="1772618675783" duration="4324000" />
       <workItem from="1772666400221" duration="1529000" />
+      <workItem from="1772791818778" duration="2767000" />
+      <workItem from="1772916569221" duration="10236000" />
+      <workItem from="1772981826886" duration="222000" />
+      <workItem from="1772984326725" duration="5911000" />
     </task>
+    <task id="LOCAL-00001" summary="Fazendo o boletim funcional">
+      <created>1772758213250</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1772758213250</updated>
+    </task>
+    <task id="LOCAL-00002" summary="atualizando a logo">
+      <created>1772758265431</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1772758265431</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -447,5 +497,9 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="Fazendo o boletim funcional" />
+    <MESSAGE value="atualizando a logo" />
+    <MESSAGE value="varias alterações" />
+    <option name="LAST_COMMIT_MESSAGE" value="varias alterações" />
   </component>
 </project>

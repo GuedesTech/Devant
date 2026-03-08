@@ -1,15 +1,18 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap");
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
 }
 
 body {
-  height: 100vh;
-  background: linear-gradient(rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7)), url('fundo login.jpg') no-repeat left center;
+  background: linear-gradient(
+      rgba(255, 255, 255, 0.67),
+      rgba(255, 255, 255, 0.67)
+    ),
+    url("../assets/textura-fundo.jpg") no-repeat left center;
   background-size: cover;
 }
 
@@ -28,7 +31,7 @@ header img {
 
 .botao-adm {
   background-color: #203c44;
-  color: white;
+  color: #fafafa;
   border: none;
   padding: 8px 25px;
   border-radius: 20px;
@@ -37,7 +40,7 @@ header img {
   transition: 0.3s ease;
 }
 
-header:hover .botao-adm {
+.botao-adm:hover {
   opacity: 1;
 }
 
@@ -67,17 +70,14 @@ header:hover .botao-adm {
   background: #f5f5f5;
   padding: 30px 80px;
   border-radius: 12px 12px 0 0;
-  box-shadow: 0px 15px 30px rgba(0,0,0,0.12);
+  box-shadow: 0px 15px 30px rgba(0, 0, 0, 0.12);
   text-align: center;
 }
+.bloco-login {
+  position: relative;
 
-.card h1 {
-  font-size: 26px;
-  font-weight: 600;
-  color: #7c88a5;
-  margin-bottom: 40px;
+  top: 60px;
 }
-
 .input {
   width: 100%;
   padding: 14px;
@@ -226,4 +226,13 @@ header:hover .botao-adm {
 #mensagem_confirm {
   color: #3d4b63;
   font-size: 15px;
+}
+.bem-vindo {
+  font-family: "Lato", sans-serif;
+  font-weight: 300;
+  font-size: 16px;
+  color: #c7c7c7;
+  width: 550px;
+  margin: 0 auto 18px auto;
+  text-align: left;
 }
