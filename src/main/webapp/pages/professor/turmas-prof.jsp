@@ -35,11 +35,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="icon" href="<%= ctx %>/assets/Group 551.ico" />
-
-  <!-- reaproveita sua topbar e base -->
+  <link rel="icon" type="image/png" href="<%= request.getContextPath() %>/pages/login/minimalismo.png">
   <link rel="stylesheet" href="<%= ctx %>/pages/aluno/perfil.css" />
-  <!-- css específico dessa tela -->
   <link rel="stylesheet" href="<%= ctx %>/pages/professor/turmas-prof.css" />
 
   <title>Turmas - Devant</title>
@@ -48,7 +45,7 @@
 <body>
 <header class="topbar">
   <div class="topbar-inner">
-    <a class="topbar-left" href="<%= ctx %>/login/index.jsp" aria-label="Voltar ao início">
+    <a class="topbar-left" href="<%= ctx %>/professor/turmas" aria-label="Voltar ao início">
       <img class="topbar-logo" src="<%= ctx %>/pages/assets/logo.png" alt="Logo Devant">
     </a>
 
@@ -59,7 +56,11 @@
       <span class="nav-indicador" aria-hidden="true"></span>
     </nav>
 
-    <div class="topbar-right"></div>
+    <div class="topbar-right">
+      <a href="<%= ctx %>/pages/login/index.jsp" class="logout-btn">
+        Sair
+      </a>
+    </div>
   </div>
 </header>
 
@@ -114,7 +115,6 @@
         </div>
       </div>
 
-      <!-- 2º ano -->
       <div class="acc" data-acc>
         <button class="acc-head" type="button" data-acc-btn>
           <span class="acc-title">2° ano</span>
@@ -145,7 +145,6 @@
         </div>
       </div>
 
-      <!-- 3º ano -->
       <div class="acc" data-acc>
         <button class="acc-head" type="button" data-acc-btn>
           <span class="acc-title">3° ano</span>

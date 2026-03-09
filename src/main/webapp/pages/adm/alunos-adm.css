@@ -131,8 +131,7 @@
     background: #DCE4F6;
     color: var(--navy);
     font-weight: 900;
-    text-align: left;
-    padding: 12px 12px;
+    padding: 12px 35px;
     border-bottom: 1px solid rgba(40,53,101,0.14);
 }
 
@@ -150,6 +149,10 @@
 
 .center{
     text-align:center;
+}
+
+.left{
+    text-align:left;
 }
 
 .right{
@@ -448,37 +451,4 @@
     color: #1f2937;
     font-weight: 700;
     line-height: 1.5;
-}
-
-@media (max-width: 900px){
-    .grid-3{
-        grid-template-columns: 1fr;
-    }
-
-    .perf-media-field{
-        max-width: 100%;
-    }
-}
-
-@media (max-width: 720px){
-    .grid-2{
-        grid-template-columns: 1fr;
-    }
-
-    .actions-row{
-        align-items: stretch;
-    }
-
-    .search{
-        margin-left: 0;
-        width: 100%;
-    }
-
-    .search input{
-        width: 100%;
-    }
-
-    .profile-row{
-        flex-wrap: wrap;
-    }
 }

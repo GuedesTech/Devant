@@ -371,7 +371,6 @@
     min-height: 150px;
 }
 
-/* ========= ELLIPSIS NAS OBS ========= */
 .obs-line.ellipsis{
     white-space: nowrap;
     overflow: hidden;

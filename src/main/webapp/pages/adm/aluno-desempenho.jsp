@@ -30,7 +30,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="icon" href="<%= ctx %>/assets/Group 551.ico" />
+  <link rel="icon" type="image/png" href="<%= request.getContextPath() %>/pages/login/minimalismo.png">
   <link rel="stylesheet" href="<%= ctx %>/pages/aluno/perfil.css" />
   <link rel="stylesheet" href="<%= ctx %>/pages/adm/aluno-desempenho.css" />
   <title>Desempenho do Aluno - ADM</title>

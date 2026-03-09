@@ -81,7 +81,7 @@ public class AdmAlunoDesempenhoServlet extends HttpServlet {
         NotaDAO notaDAO = new NotaDAO();
         notaDAO.salvarOuAtualizarN1N2(idAluno, idDisciplina, idProfessor, n1, n2);
 
-        response.sendRedirect(request.getContextPath() + "/adm/aluno/desempenho?id_aluno=" + idAluno + "&id_disciplina=" + idDisciplina + "&ok=1");
+        response.sendRedirect(request.getContextPath() + "/adm/alunos?ok=nota_salva");
     }
 
     private double parseDoubleSafe(String s) {

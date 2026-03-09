@@ -1,5 +1,6 @@
 package com.example.secretariaescolar.dao;
 
+import com.example.secretariaescolar.dto.NotasAlunoDTO;
 import com.example.secretariaescolar.model.AlunoAdmView;
 import com.example.secretariaescolar.util.Conexao;
 
@@ -7,7 +8,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class AlunoAdmDAO {
 
@@ -217,5 +220,46 @@ public class AlunoAdmDAO {
             e.printStackTrace();
             return false;
         }
+    }
+
+    public Map<String, NotasAlunoDTO> buscarNotasMap() {
+        Map<String, NotasAlunoDTO> mapa = new HashMap<>();
+
+        String sql = """
+        SELECT
+            id_aluno,
+            id_disciplina,
+            MAX(CASE WHEN semestre = '1' THEN valor END) AS n1,
+            MAX(CASE WHEN semestre = '2' THEN valor END) AS n2
+        FROM nota
+        GROUP BY id_aluno, id_disciplina
+    """;
+
+        try (Connection con = Conexao.conectar();
+             PreparedStatement ps = con.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
+
+            while (rs.next()) {
+                int idAluno = rs.getInt("id_aluno");
+                int idDisciplina = rs.getInt("id_disciplina");
+
+                double n1 = rs.getDouble("n1");
+                if (rs.wasNull()) n1 = 0.0;
+
+                double n2 = rs.getDouble("n2");
+                if (rs.wasNull()) n2 = 0.0;
+
+                NotasAlunoDTO dto = new NotasAlunoDTO();
+                dto.setN1(n1);
+                dto.setN2(n2);
+
+                mapa.put(idAluno + "_" + idDisciplina, dto);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return mapa;
     }
 }

@@ -1,0 +1,135 @@
+.ranking-card{
+    padding: 28px 26px 34px;
+}
+
+.page-title-row{
+    display:flex;
+    align-items:center;
+    gap: 14px;
+    margin-top: 6px;
+}
+
+.back-btn{
+    width: 36px;
+    height: 36px;
+    border-radius: 999px;
+    border: 0;
+    background: transparent;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: var(--navy);
+    font-size: 22px;
+    line-height: 1;
+}
+
+.chip{
+    margin-top: 14px;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: #EFF5FF;
+    border: 2px solid rgba(40,53,101,0.20);
+    border-radius: 12px;
+    height: 36px;
+    padding: 0 14px;
+    font-weight: 500;
+    color: var(--navy);
+    box-shadow: 0 6px 14px rgba(40, 53, 101, 0.06);
+}
+
+.ranking-list-full{
+    margin-top: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.ranking-item-card{
+    display: grid;
+    grid-template-columns: 90px 1fr auto;
+    align-items: center;
+    gap: 18px;
+
+    background: #fff;
+    border: 1px solid rgba(40,53,101,0.14);
+    border-left: 10px solid #34AD38;
+    border-radius: 16px;
+    padding: 18px 20px;
+    box-shadow: 0 8px 18px rgba(40, 53, 101, 0.06);
+
+    text-decoration: none;
+    transition: transform .14s ease, box-shadow .14s ease, filter .14s ease;
+}
+
+.ranking-item-card:hover{
+    transform: translateY(-2px);
+    box-shadow: 0 14px 26px rgba(40, 53, 101, 0.10);
+    filter: brightness(1.01);
+}
+
+.ranking-item-card.ok{
+    border-left-color: #34AD38;
+}
+
+.ranking-item-card.bad{
+    border-left-color: #CD3434;
+}
+
+.ranking-pos{
+    font-size: 34px;
+    font-weight: 900;
+    color: var(--navy);
+    text-align: center;
+}
+
+.ranking-student{
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    min-width: 0;
+}
+
+.ranking-avatar{
+    width: 72px;
+    height: 72px;
+    border-radius: 999px;
+    object-fit: cover;
+    background: rgba(40,53,101,0.12);
+    flex: 0 0 auto;
+}
+
+.ranking-info{
+    min-width: 0;
+}
+
+.ranking-name{
+    font-size: 24px;
+    font-weight: 900;
+    color: var(--navy);
+    line-height: 1.15;
+}
+
+.ranking-media-wrap{
+    text-align: right;
+}
+
+.ranking-media-label{
+    font-size: 12px;
+    font-weight: 800;
+    color: rgba(40,53,101,0.60);
+}
+
+.ranking-media{
+    margin-top: 4px;
+    font-size: 30px;
+    font-weight: 900;
+    color: var(--navy);
+}
+
+.empty{
+    padding: 18px 0;
+    font-weight: 700;
+    color: rgba(40,53,101,0.65);
+}

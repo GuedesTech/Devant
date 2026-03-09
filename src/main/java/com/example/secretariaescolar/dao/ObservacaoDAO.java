@@ -9,7 +9,6 @@ import java.util.List;
 
 public class ObservacaoDAO {
 
-    // Professor envia observação para o aluno
     public boolean salvar(Observacao o) {
         String sql = """
             INSERT INTO observacao (mensagem, data, id_aluno, id_professor, id_disciplina, tipo)
@@ -33,8 +32,6 @@ public class ObservacaoDAO {
             return false;
         }
     }
-
-    // Aluno visualiza suas observações (com nome do professor + disciplina)
     public List<Observacao> listarPorAluno(int idAluno) {
         List<Observacao> lista = new ArrayList<>();
 

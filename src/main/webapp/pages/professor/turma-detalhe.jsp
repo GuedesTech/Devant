@@ -77,13 +77,14 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" href="<%= ctx %>/assets/Group 551.ico" />
+    <link rel="icon" type="image/png" href="<%= request.getContextPath() %>/pages/login/minimalismo.png">
     <link rel="stylesheet" href="<%= ctx %>/pages/aluno/perfil.css" />
     <link rel="stylesheet" href="<%= ctx %>/pages/professor/turma-detalhe.css" />
-    <title>Análise da Turma - <%= nomeTurma %></title>
+    <title>Instituto Devant</title>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
+
 
 <body>
 <header class="topbar">
@@ -99,7 +100,11 @@
             <span class="nav-indicador" aria-hidden="true"></span>
         </nav>
 
-        <div class="topbar-right"></div>
+        <div class="topbar-right">
+            <a href="<%= ctx %>/pages/login/index.jsp" class="logout-btn">
+                Sair
+            </a>
+        </div>
     </div>
 </header>
 
@@ -109,7 +114,7 @@
         <div class="card-header">
             <div class="page-title-row">
                 <button class="back-btn" type="button" onclick="history.back()" aria-label="Voltar">←</button>
-                <h1 class="page-title" style="margin:0;">Análise geral da turma <%= nomeTurma %></h1>
+                <h1 class="page-title" style="margin:0;">Análise Geral - <%= nomeTurma %></h1>
             </div>
 
             <div class="title-line" aria-hidden="true"></div>
@@ -126,7 +131,6 @@
         </div>
 
         <div class="grid">
-            <!-- ===== Gráfico ===== -->
             <div class="box grafico">
                 <div class="box-title">Quantidade de alunos por média</div>
                 <div class="box-sub">*As médias das notas estão arredondadas.</div>
@@ -142,7 +146,6 @@
                 </div>
             </div>
 
-            <!-- ===== Cards topo ===== -->
             <div class="box kpi">
                 <div class="kpi-number"><%= String.format(java.util.Locale.US, "%.1f", mediaTurma) %></div>
                 <div class="kpi-label">Média geral da turma</div>
@@ -158,10 +161,24 @@
                 <div class="kpi-label">Alunos abaixo de 7</div>
             </div>
 
-            <!-- ===== Ranking ===== -->
             <div class="box ranking">
                 <div class="box-head">
                     <div class="box-title">Ranking de Alunos</div>
+
+                    <a
+                            href="<%= ctx %>/professor/ranking-completo?id_turma=<%= turma.getId_turma() %>"
+                            style="
+                                   font-size: 12px;
+                                   font-weight: 600;
+                                   color: rgba(40,53,101,0.55);
+                                   text-decoration: none;
+                                   line-height: 1;
+                                   display: inline-block;
+                                                          "
+                            onmouseover="this.style.color='rgba(40,53,101,0.75)'"
+                            onmouseout="this.style.color='rgba(40,53,101,0.55)'">
+                        Ver Ranking Completo
+                    </a>
                 </div>
 
                 <div class="ranking-list">

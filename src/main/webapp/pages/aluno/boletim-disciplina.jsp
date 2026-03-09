@@ -42,7 +42,6 @@
           ? (ctx + "/pages/uploads/" + foto)
           : (ctx + "/pages/aluno/foto_sem_foto.png");
 
-  // classes para borda dos cards (>=7 verde, <7 vermelho)
   String clsNota1 = (nota1 >= 7.0) ? "green" : "red";
   String clsNota2 = (nota2 >= 7.0) ? "green" : "red";
   String clsMedia = (media >= 7.0) ? "green" : "red";
@@ -53,12 +52,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="icon" href="<%= ctx %>/assets/Group 551.ico" />
+  <link rel="icon" type="image/png" href="<%= request.getContextPath() %>/pages/login/minimalismo.png">
   <link rel="stylesheet" href="<%= ctx %>/pages/aluno/perfil.css" />
   <title>Boletim - <%= disciplinaNome %></title>
 
   <style>
-    /* ===== Cabeçalho da página (igual Notas) ===== */
     .page-title-row{
       display: flex;
       align-items: center;
@@ -239,7 +237,6 @@
       color: rgba(40,53,101,0.65);
     }
 
-    /* ===== Popup (igual Observações) ===== */
     .overlay{
       position: fixed;
       inset: 0;
@@ -341,19 +338,12 @@
     /* ===== Indicador do header ===== */
     .topbar-nav{ position: relative; }
     .nav-indicador{
-      position:absolute;
-      bottom: -12px;
       left: 0;
       height: 6px;
       border-radius: 999px;
       background: var(--white);
       opacity: .95;
       transition: all .35s ease;
-    }
-
-    @media (max-width: 980px){
-      .cards-notas{ grid-template-columns: 1fr; }
-      .stat-card{ min-width: 140px; }
     }
   </style>
 </head>
@@ -371,7 +361,11 @@
       <span class="nav-indicador" aria-hidden="true"></span>
     </nav>
 
-    <div class="topbar-right"></div>
+    <div class="topbar-right">
+      <a href="<%= ctx %>/pages/login/index.jsp" class="logout-btn">
+        Sair
+      </a>
+    </div>
   </div>
 </header>
 

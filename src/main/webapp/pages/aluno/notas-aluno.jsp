@@ -53,12 +53,11 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" href="<%= ctx %>/assets/Group 551.ico" />
+    <link rel="icon" type="image/png" href="<%= request.getContextPath() %>/pages/login/minimalismo.png">
     <link rel="stylesheet" href="<%= ctx %>/pages/aluno/perfil.css" />
     <title>Notas - Devant</title>
 
     <style>
-        /* Página Notas (estilo fiel ao resto) */
         .page-title-row{
             display: flex;
             align-items: center;
@@ -204,22 +203,14 @@
             color: rgba(40,53,101,0.60);
         }
 
-        /* Indicador animado */
         .topbar-nav{ position: relative; }
         .nav-indicador{
-            position:absolute;
-            bottom: -12px;
             left: 0;
             height: 6px;
             border-radius: 999px;
             background: var(--white);
             opacity: .95;
             transition: all .35s ease;
-        }
-
-        @media (max-width: 980px){
-            .cards-row{ grid-template-columns: repeat(2, minmax(0, 1fr)); }
-            .grid-main{ grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -237,7 +228,11 @@
             <span class="nav-indicador" aria-hidden="true"></span>
         </nav>
 
-        <div class="topbar-right"></div>
+        <div class="topbar-right">
+            <a href="<%= ctx %>/pages/login/index.jsp" class="logout-btn">
+                Sair
+            </a>
+        </div>
     </div>
 </header>
 
@@ -269,7 +264,6 @@
 
             <div class="cards-row">
 
-                <!-- 1) Disciplina destaque -->
                 <div class="disc-card">
                     <div class="disc-nome"><%= (cardDestaque != null ? cardDestaque.getDisciplina() : "—") %></div>
                     <div class="disc-sub">
@@ -343,11 +337,9 @@
     </section>
 </main>
 
-<!-- Chart.js -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <script>
-    // ===== Indicador animado no header =====
     (function () {
         const nav = document.querySelector(".topbar-nav");
         const indicador = nav ? nav.querySelector(".nav-indicador") : null;
@@ -471,14 +463,14 @@
                     y: { min: 0, max: 10, ticks: { stepSize: 1 } },
                     x: {
                         ticks: {
-                            autoSkip: false,          // ✅ não pula nenhuma label
+                            autoSkip: false,
                             maxRotation: 0,
                             minRotation: 0,
                             padding: 8,
                             callback: function(value) {
                                 // "value" aqui é o índice do label
                                 const label = this.getLabelForValue(value) || "";
-                                const max = 7;          // ✅ ajuste: quantos caracteres antes do "..."
+                                const max = 7;
                                 return label.length > max ? (label.slice(0, max) + "...") : label;
                             }
                         }

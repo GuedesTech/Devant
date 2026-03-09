@@ -40,7 +40,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" href="<%= ctx %>/assets/Group 551.ico" />
+    <link rel="icon" type="image/png" href="<%= request.getContextPath() %>/pages/login/minimalismo.png">
     <link rel="stylesheet" href="<%= ctx %>/pages/aluno/perfil.css" />
     <title>Observações - Devant</title>
 
@@ -292,8 +292,6 @@
 
         .topbar-nav{ position: relative; }
         .nav-indicador{
-            position:absolute;
-            bottom: -12px;
             left: 0;
             height: 6px;
             border-radius: 999px;
@@ -347,7 +345,11 @@
             <span class="nav-indicador" aria-hidden="true"></span>
         </nav>
 
-        <div class="topbar-right"></div>
+        <div class="topbar-right">
+            <a href="<%= ctx %>/pages/login/index.jsp" class="logout-btn">
+                Sair
+            </a>
+        </div>
     </div>
 </header>
 
@@ -377,10 +379,6 @@
                 <div class="stat-card red">
                     <div class="stat-number"><%= totalPdm %></div>
                     <div class="stat-label">Pontos de melhoria</div>
-                </div>
-
-                <div class="search-box">
-                    <input id="buscaObs" type="text" placeholder="Pesquisar observação..." />
                 </div>
             </div>
         </div>

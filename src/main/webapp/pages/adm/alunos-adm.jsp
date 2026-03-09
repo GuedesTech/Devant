@@ -42,7 +42,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" href="<%= ctx %>/assets/Group 551.ico" />
+    <link rel="icon" type="image/png" href="<%= request.getContextPath() %>/pages/login/minimalismo.png">
     <link rel="stylesheet" href="<%= ctx %>/pages/aluno/perfil.css" />
     <link rel="stylesheet" href="<%= ctx %>/pages/adm/alunos-adm.css" />
     <title>Alunos - ADM</title>
@@ -64,6 +64,11 @@
             <a class="topbar-link" href="<%= ctx %>/adm/observacoes">Observações</a>
             <span class="nav-indicador" aria-hidden="true"></span>
         </nav>
+        <div class="topbar-right">
+            <a href="<%= ctx %>/pages/login/index.jsp" class="logout-btn">
+                Sair
+            </a>
+        </div>
     </div>
 </header>
 
@@ -79,6 +84,10 @@
 
             <% if ("1".equals(ok)) { %>
             <div class="alert ok">Operação realizada com sucesso.</div>
+            <% } %>
+
+            <% if ("nota_salva".equals(ok)) { %>
+            <div class="alert ok">Notas salvas com sucesso.</div>
             <% } %>
 
             <% if ("sem_prof".equals(erroParam)) { %>
@@ -106,7 +115,7 @@
             <table class="table">
                 <thead>
                 <tr>
-                    <th>Nome</th>
+                    <th class="left">Nome</th>
                     <th class="center">Matrícula</th>
                     <th class="center">Turma</th>
                     <th class="center">E-mail</th>
@@ -178,7 +187,7 @@
                                 data-login="<%= loginSafe %>"
                                 data-senha="<%= senhaSafe %>"
                                 data-foto-src="<%= fotoSafe %>">
-                            Editar
+                            <img src="<%= ctx %>/pages/adm/edit.png" style="width: 20px; height: 20px">
                         </button>
 
                         <button
@@ -187,7 +196,7 @@
                                 data-open-popup="popupExcluir"
                                 data-id-aluno="<%= a.getIdAluno() %>"
                                 data-nome="<%= nomeSafe %>">
-                            Excluir
+                            <img src="<%= ctx %>/pages/adm/delete.png" style="width: 17px; height: 20px">
                         </button>
                     </td>
                 </tr>
@@ -267,7 +276,7 @@
         </div>
 
         <button class="btn-small" type="button" data-open-popup-from="popupEditar" data-target-popup="popupDesempenho" id="btnIrDesempenho">
-            Ver desempenho
+            Ver Desempenho
         </button>
     </div>
 
@@ -312,7 +321,6 @@
             <label class="field">
                 <span>Foto</span>
                 <input name="foto" type="file" accept="image/*">
-                <small class="hint">Se não escolher arquivo, mantém a foto atual.</small>
             </label>
         </div>
 
@@ -447,13 +455,17 @@
     <%
     boolean firstNota = true;
     for (Map.Entry<String, NotasAlunoDTO> entry : notasMap.entrySet()) {
+
         String key = entry.getKey();
         NotasAlunoDTO dto = entry.getValue();
+
         double n1 = dto != null ? dto.getN1() : 0.0;
         double n2 = dto != null ? dto.getN2() : 0.0;
         double media = dto != null ? dto.getMedia() : ((n1 + n2) / 2.0);
 
-        if (!firstNota) out.print(",");
+        if (!firstNota) {
+%>,<%
+    }
 %>
       "<%= key %>": {
         n1: <%= String.format(java.util.Locale.US, "%.1f", n1) %>,
@@ -517,7 +529,6 @@
   (function () {
     const editButtons = document.querySelectorAll(".btn-editar");
     const editIdAluno = document.getElementById("editIdAluno");
-    const editIdAlunoLabel = document.getElementById("editIdAlunoLabel");
     const editNome = document.getElementById("editNome");
     const editMatricula = document.getElementById("editMatricula");
     const editTurma = document.getElementById("editTurma");
@@ -538,14 +549,13 @@
         const fotoSrc = this.dataset.fotoSrc || "";
 
         editIdAluno.value = idAluno;
-        editIdAlunoLabel.textContent = idAluno;
         editNome.value = nome;
         editMatricula.value = matricula;
         editTurma.value = idTurma;
         editLogin.value = login;
         editSenha.value = senha;
         editNomeTitulo.textContent = nome || "Aluno";
-        editFotoPreview.src = fotoSrc || "";
+        editFotoPreview.src = fotoSrc || "<%= ctx %>/pages/aluno/foto_sem_foto.png";
 
         btnIrDesempenho.dataset.idAluno = idAluno;
         btnIrDesempenho.dataset.nome = nome;
@@ -553,23 +563,45 @@
     });
 
     btnIrDesempenho.addEventListener("click", function () {
-      const idAluno = this.dataset.idAluno || "";
-      const nome = this.dataset.nome || "";
+  const idAluno = this.dataset.idAluno || "";
+  const nome = this.dataset.nome || "";
 
-      closeAllPopups();
+  closeAllPopups();
 
-      document.getElementById("perfIdAluno").value = idAluno;
-      document.getElementById("perfIdAlunoLabel").textContent = idAluno;
-      document.getElementById("perfNomeAluno").textContent = nome || "Aluno";
+  document.getElementById("perfIdAluno").value = idAluno;
+  document.getElementById("perfNomeAluno").textContent = nome || "Aluno";
 
-      document.getElementById("perfDisciplinaSelect").value = "";
-      document.getElementById("perfIdDisciplinaHidden").value = "";
-      document.getElementById("perfN1").value = "0.0";
-      document.getElementById("perfN2").value = "0.0";
-      document.getElementById("perfMedia").textContent = "0.0";
+  const perfDisciplinaSelect = document.getElementById("perfDisciplinaSelect");
+  const perfIdDisciplinaHidden = document.getElementById("perfIdDisciplinaHidden");
+  const perfN1 = document.getElementById("perfN1");
+  const perfN2 = document.getElementById("perfN2");
+  const perfMedia = document.getElementById("perfMedia");
 
-      openPopup("popupDesempenho");
-    });
+  function limparNotas() {
+    perfDisciplinaSelect.value = "";
+    perfIdDisciplinaHidden.value = "";
+    perfN1.value = "0.0";
+    perfN2.value = "0.0";
+    perfMedia.textContent = "0.0";
+  }
+
+  const options = Array.from(perfDisciplinaSelect.options)
+    .filter(opt => opt.value && notasMap[idAluno + "_" + opt.value]);
+
+  if (options.length > 0) {
+    perfDisciplinaSelect.value = options[0].value;
+    perfIdDisciplinaHidden.value = options[0].value;
+
+    const nota = notasMap[idAluno + "_" + options[0].value];
+    perfN1.value = Number(nota.n1).toFixed(1);
+    perfN2.value = Number(nota.n2).toFixed(1);
+    perfMedia.textContent = Number(nota.media).toFixed(1);
+  } else {
+    limparNotas();
+  }
+
+  openPopup("popupDesempenho");
+});
   })();
 </script>
 
@@ -577,7 +609,6 @@
   (function () {
     const buttons = document.querySelectorAll(".btn-desempenho");
     const perfIdAluno = document.getElementById("perfIdAluno");
-    const perfIdAlunoLabel = document.getElementById("perfIdAlunoLabel");
     const perfNomeAluno = document.getElementById("perfNomeAluno");
     const perfDisciplinaSelect = document.getElementById("perfDisciplinaSelect");
     const perfIdDisciplinaHidden = document.getElementById("perfIdDisciplinaHidden");
@@ -592,6 +623,12 @@
       perfMedia.textContent = media.toFixed(1);
     }
 
+    function limparNotas() {
+      perfN1.value = "0.0";
+      perfN2.value = "0.0";
+      perfMedia.textContent = "0.0";
+    }
+
     function carregarNotas() {
       const idAluno = perfIdAluno.value;
       const idDisc = perfDisciplinaSelect.value;
@@ -599,9 +636,7 @@
       perfIdDisciplinaHidden.value = idDisc;
 
       if (!idAluno || !idDisc) {
-        perfN1.value = "0.0";
-        perfN2.value = "0.0";
-        atualizarMedia();
+        limparNotas();
         return;
       }
 
@@ -613,9 +648,21 @@
         perfN2.value = Number(nota.n2).toFixed(1);
         perfMedia.textContent = Number(nota.media).toFixed(1);
       } else {
-        perfN1.value = "0.0";
-        perfN2.value = "0.0";
-        atualizarMedia();
+        limparNotas();
+      }
+    }
+
+    function selecionarPrimeiraDisciplinaComNota(idAluno) {
+      const options = Array.from(perfDisciplinaSelect.options)
+        .filter(opt => opt.value && notasMap[idAluno + "_" + opt.value]);
+
+      if (options.length > 0) {
+        perfDisciplinaSelect.value = options[0].value;
+        carregarNotas();
+      } else {
+        perfDisciplinaSelect.value = "";
+        perfIdDisciplinaHidden.value = "";
+        limparNotas();
       }
     }
 
@@ -625,13 +672,9 @@
         const nome = this.dataset.nome || "";
 
         perfIdAluno.value = idAluno;
-        perfIdAlunoLabel.textContent = idAluno;
         perfNomeAluno.textContent = nome || "Aluno";
-        perfDisciplinaSelect.value = "";
-        perfIdDisciplinaHidden.value = "";
-        perfN1.value = "0.0";
-        perfN2.value = "0.0";
-        perfMedia.textContent = "0.0";
+
+        selecionarPrimeiraDisciplinaComNota(idAluno);
       });
     });
 

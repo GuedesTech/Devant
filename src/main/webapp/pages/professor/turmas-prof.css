@@ -2,16 +2,14 @@
     /* usa as mesmas variáveis do seu perfil.css */
 }
 
-/* Card mais “cheio” como no print */
 .turmas-card{
     padding: 30px 26px 34px;
 }
 
-.actions-row{
+.actions-row {
     margin-top: 14px;
     display: flex;
     align-items: center;
-    justify-content: space-between;
     gap: 12px;
     flex-wrap: wrap;
 }

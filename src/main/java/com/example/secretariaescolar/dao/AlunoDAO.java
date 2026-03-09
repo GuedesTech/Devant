@@ -317,4 +317,47 @@ public class AlunoDAO {
 
         return map;
     }
+
+    public List<Map<String, Object>> buscarRankingCompletoDaTurma(int idTurma) {
+        List<Map<String, Object>> lista = new ArrayList<>();
+
+        String sql = """
+        SELECT
+            a.id_aluno,
+            u.nome,
+            u.foto,
+            ROUND(COALESCE(AVG(n.valor), 0), 1) AS media
+        FROM aluno a
+        JOIN usuario u ON u.id_user = a.id_user
+        LEFT JOIN nota n ON n.id_aluno = a.id_aluno
+        WHERE a.id_turma = ?
+        GROUP BY a.id_aluno, u.nome, u.foto
+        ORDER BY media DESC, u.nome ASC
+    """;
+
+        try (Connection conn = Conexao.conectar();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, idTurma);
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    Map<String, Object> item = new HashMap<>();
+                    item.put("id_aluno", rs.getInt("id_aluno"));
+                    item.put("nome", rs.getString("nome"));
+                    item.put("foto", rs.getString("foto"));
+
+                    double media = rs.getDouble("media");
+                    item.put("media", rs.wasNull() ? 0.0 : media);
+
+                    lista.add(item);
+                }
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return lista;
+    }
 }

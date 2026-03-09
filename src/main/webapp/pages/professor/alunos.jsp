@@ -20,7 +20,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="icon" href="<%= ctx %>/assets/Group 551.ico" />
+  <link rel="icon" type="image/png" href="<%= request.getContextPath() %>/pages/login/minimalismo.png">
   <link rel="stylesheet" href="<%= ctx %>/pages/aluno/perfil.css" />
   <link rel="stylesheet" href="<%= ctx %>/pages/professor/alunos.css" />
   <title>Seus Alunos - Devant</title>
@@ -34,13 +34,17 @@
     </a>
 
     <nav class="topbar-nav" aria-label="Navegação principal">
-      <a class="topbar-link" href="<%= ctx %>/professor/turmas">Turmas</a>
+      <a class="topbar-link is-active" href="<%= ctx %>/professor/turmas">Turmas</a>
       <a class="topbar-link" href="<%= ctx %>/professor/disciplinas">Disciplinas</a>
       <a class="topbar-link" href="<%= ctx %>/professor/perfil">Perfil</a>
       <span class="nav-indicador" aria-hidden="true"></span>
     </nav>
 
-    <div class="topbar-right"></div>
+    <div class="topbar-right">
+      <a href="<%= ctx %>/pages/login/index.jsp" class="logout-btn">
+        Sair
+      </a>
+    </div>
   </div>
 </header>
 
@@ -74,7 +78,6 @@
           Double media = mediaPorAluno.get(a.getId_aluno());
           if (media == null) media = 0.0;
 
-          // destino futuro (tela do aluno)
           String href = ctx + "/professor/aluno?id_aluno=" + a.getId_aluno();
       %>
 

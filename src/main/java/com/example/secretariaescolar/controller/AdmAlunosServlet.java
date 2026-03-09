@@ -3,6 +3,7 @@ package com.example.secretariaescolar.controller;
 import com.example.secretariaescolar.dao.AlunoAdmDAO;
 import com.example.secretariaescolar.dao.DisciplinaDAO;
 import com.example.secretariaescolar.dao.TurmaDAO;
+import com.example.secretariaescolar.dto.NotasAlunoDTO;
 import com.example.secretariaescolar.model.AlunoAdmView;
 import com.example.secretariaescolar.model.Disciplina;
 import com.example.secretariaescolar.model.Turma;
@@ -13,6 +14,7 @@ import jakarta.servlet.http.*;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 @WebServlet("/adm/alunos")
 public class AdmAlunosServlet extends HttpServlet {
@@ -47,12 +49,15 @@ public class AdmAlunosServlet extends HttpServlet {
         List<Turma> turmas = turmaDao.listarTodas();
         List<Disciplina> disciplinas = disciplinaDao.listarTodas();
 
+        Map<String, NotasAlunoDTO> notasMap = alunoDao.buscarNotasMap();
+
+
         request.setAttribute("alunos", alunos);
         request.setAttribute("totalAlunos", alunos.size());
         request.setAttribute("q", (q == null ? "" : q));
-
         request.setAttribute("turmas", turmas);
         request.setAttribute("disciplinas", disciplinas);
+        request.setAttribute("notasMap", notasMap);
 
         request.getRequestDispatcher("/pages/adm/alunos-adm.jsp").forward(request, response);
     }
