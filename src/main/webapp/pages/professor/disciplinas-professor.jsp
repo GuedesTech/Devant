@@ -73,7 +73,10 @@
       </div>
 
     <div style="margin-top:22px;">
-      <div style="font-weight:900; color:var(--navy); font-size:18px;">Minha Disciplina</div>
+      <a href="<%= ctx %>/professor/disciplina?id_disciplina=<%= minha.getId_disciplina() %>"
+         style="font-weight:800; color:#294c56; text-decoration:none;">
+        Sua Disciplina
+      </a>
 
       <%
         String nomeMinha = (minha.getNome() != null) ? minha.getNome() : "";
@@ -111,7 +114,10 @@
             </span>
 
           <!-- se quiser ação aqui (ex: ver turmas da disciplina), pode colocar -->
-          <span style="font-weight:800; color:#294c56;">Sua disciplina</span>
+          <a href="<%= ctx %>/professor/disciplina?id_disciplina=<%= minha.getId_disciplina() %>"
+             style="font-weight:800; color:#294c56; text-decoration:none;">
+            Ver Desempenho
+          </a>
         </div>
       </div>
       <%
@@ -149,7 +155,10 @@
             <%= nome %>
           </span>
 
-          <span style="font-weight:800; color:#294c56;">—</span>
+          <a href="<%= ctx %>/professor/disciplina?id_disciplina=<%= minha.getId_disciplina() %>"
+             style="font-weight:800; color:#294c56; text-decoration:none;">
+            Ver Desempenho
+          </a>
         </div>
 
         <%

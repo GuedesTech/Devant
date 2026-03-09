@@ -123,7 +123,6 @@ public class NotaDAO {
         return lista;
     }
 
-    // Quantas disciplinas com média >= 7
     public int contarDisciplinasAcimaOuIgual7(int idAluno) {
         String sql = """
             SELECT COUNT(*) AS qtd

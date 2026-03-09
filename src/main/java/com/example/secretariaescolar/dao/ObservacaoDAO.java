@@ -112,4 +112,57 @@ public class ObservacaoDAO {
         }
         return 0;
     }
+
+    public int contarTotalPorAlunoEDisciplina(int idAluno, int idDisciplina) {
+        String sql = """
+        SELECT COUNT(*) AS total
+        FROM observacao
+        WHERE id_aluno = ? AND id_disciplina = ?
+    """;
+
+        try (Connection conn = Conexao.conectar();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, idAluno);
+            stmt.setInt(2, idDisciplina);
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt("total");
+                }
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return 0;
+    }
+
+    public int contarPorAlunoETipoEDisciplina(int idAluno, int tipo, int idDisciplina) {
+        String sql = """
+        SELECT COUNT(*) AS total
+        FROM observacao
+        WHERE id_aluno = ? AND tipo = ? AND id_disciplina = ?
+    """;
+
+        try (Connection conn = Conexao.conectar();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, idAluno);
+            stmt.setInt(2, tipo);
+            stmt.setInt(3, idDisciplina);
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt("total");
+                }
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return 0;
+    }
 }

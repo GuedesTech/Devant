@@ -448,12 +448,9 @@
                         displayColors: false,
                         callbacks: {
                             title: function(items) {
-                                // ✅ primeira linha do tooltip = nome da matéria (label do eixo X)
-                                // items é array; pegamos o primeiro
                                 return items[0].label || "";
                             },
                             label: function(ctx) {
-                                // ✅ segunda linha = Nota 1/Nota 2/Média + valor
                                 return ctx.dataset.label + ": " + ctx.parsed.y;
                             }
                         }

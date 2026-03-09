@@ -16,78 +16,24 @@
       <change afterPath="$PROJECT_DIR$/../.idea/modules.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../.idea/vcs.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../Devant.zip" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/secretariaescolar/controller/AdmDisciplinaEditarServlet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/secretariaescolar/controller/AdmDisciplinaExcluirServlet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/secretariaescolar/controller/AdmDisciplinaNovoServlet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/secretariaescolar/controller/AdmDisciplinasServlet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/secretariaescolar/controller/AdmEditarServlet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/secretariaescolar/controller/AdmExcluirServlet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/secretariaescolar/controller/AdmNovoServlet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/secretariaescolar/controller/AdmObservacaoEditarServlet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/secretariaescolar/controller/AdmObservacaoExcluirServlet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/secretariaescolar/controller/AdmObservacaoNovoServlet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/secretariaescolar/controller/AdmObservacoesServlet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/secretariaescolar/controller/AdmPerfilServlet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/secretariaescolar/controller/AdmProfessorEditarServlet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/secretariaescolar/controller/AdmProfessorExcluirServlet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/secretariaescolar/controller/AdmProfessorNovoServlet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/secretariaescolar/controller/AdmProfessoresServlet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/secretariaescolar/controller/AdmTurmaEditarServlet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/secretariaescolar/controller/AdmTurmaExcluirServlet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/secretariaescolar/controller/AdmTurmaNovoServlet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/secretariaescolar/controller/AdmTurmasServlet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/secretariaescolar/controller/RankingCompletoServlet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/secretariaescolar/dao/AdmPerfilDAO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/secretariaescolar/dao/DisciplinaAdmDAO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/secretariaescolar/dao/ObservacaoAdmDAO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/secretariaescolar/dao/ProfessorAdmDAO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/secretariaescolar/dao/TurmaAdmDAO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/secretariaescolar/model/AdmPerfilView.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/secretariaescolar/model/ObservacaoAdmView.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/secretariaescolar/model/ProfessorAdmView.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/pages/adm/delete.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/pages/adm/disciplinas-adm.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/pages/adm/edit.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/pages/adm/observacoes-adm.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/pages/adm/perfil-adm.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/pages/adm/perfil-adm.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/pages/adm/professores-adm.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/pages/adm/turmas-adm.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/pages/adm/vizu.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/pages/professor/ranking-completo.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/pages/professor/ranking-completo.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/pages/uploads/foto_perfi_1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/secretariaescolar/controller/DisciplinaDetalheProfessorServlet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/secretariaescolar/controller/PerfilProfessorServlet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/secretariaescolar/controller/ProfessorAlunoAnaliseServlet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/secretariaescolar/controller/ProfessorAlunoSalvarNotasServlet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/secretariaescolar/dto/AnaliseDisciplinaDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/pages/professor/aluno-analise.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/pages/professor/disciplina-detalhe.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/pages/professor/disciplina-detalhe.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/pages/professor/perfil-professor.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/webContexts.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/webContexts.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/secretariaescolar/controller/AdmAlunoDesempenhoServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/secretariaescolar/controller/AdmAlunoDesempenhoServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/secretariaescolar/controller/AdmAlunosServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/secretariaescolar/controller/AdmAlunosServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/secretariaescolar/dao/AlunoAdmDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/secretariaescolar/dao/AlunoAdmDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/secretariaescolar/dao/AlunoDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/secretariaescolar/dao/AlunoDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/secretariaescolar/dao/NotaDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/secretariaescolar/dao/NotaDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/secretariaescolar/dao/ObservacaoDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/secretariaescolar/dao/ObservacaoDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/secretariaescolar/dao/TurmaDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/secretariaescolar/dao/TurmaDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/pages/CRUD/cadastro-aluno.jsp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/pages/CRUD/lista-aluno.jsp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/pages/adm/aluno-desempenho.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/pages/adm/aluno-desempenho.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/pages/adm/alunos-adm.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/pages/adm/alunos-adm.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/pages/adm/alunos-adm.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/pages/adm/alunos-adm.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/pages/aluno/boletim-disciplina.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/pages/aluno/boletim-disciplina.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/pages/aluno/disciplinas-aluno.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/pages/aluno/disciplinas-aluno.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/secretariaescolar/dao/ProfessorDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/secretariaescolar/dao/ProfessorDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/pages/aluno/notas-aluno.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/pages/aluno/notas-aluno.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/pages/aluno/observacoes-aluno.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/pages/aluno/observacoes-aluno.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/pages/aluno/perfil-aluno.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/pages/aluno/perfil-aluno.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/pages/aluno/perfil.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/pages/aluno/perfil.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/pages/login/cadastrar.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/pages/login/cadastrar.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/pages/login/criar_login.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/pages/login/criar_login.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/pages/login/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/pages/login/index.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/pages/login/login_adm.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/pages/login/login_adm.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/pages/login/login_prof.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/pages/login/login_prof.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/pages/professor/alunos.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/pages/professor/alunos.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/pages/professor/alunosTurma.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/pages/professor/alunosTurma.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/pages/professor/disciplinas-professor.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/pages/professor/disciplinas-professor.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/pages/professor/turma-detalhe.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/pages/professor/turma-detalhe.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/pages/professor/turma-detalhe.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/pages/professor/turma-detalhe.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/pages/professor/turmas-prof.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/pages/professor/turmas-prof.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/pages/professor/turmas-prof.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/pages/professor/turmas-prof.jsp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -512,6 +458,8 @@
       <workItem from="1772791783913" duration="5597000" />
       <workItem from="1772893002665" duration="6566000" />
       <workItem from="1772979153227" duration="24033000" />
+      <workItem from="1773036535297" duration="6145000" />
+      <workItem from="1773050726864" duration="2543000" />
     </task>
     <servers />
   </component>
