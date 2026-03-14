@@ -37,7 +37,7 @@ header img {
   transition: 0.3s ease;
 }
 
-header:hover .botao-adm {
+.botao-adm:hover {
   opacity: 1;
 }
 
