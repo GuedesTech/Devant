@@ -29,7 +29,8 @@ public class EsqueciSenhaServlet extends HttpServlet {
             return;
         }
 
-        String codigo = "6734"; //
+       int numero = (int) (Math.random() * 9000) + 1000;
+       String codigo = String.valueOf(numero);
 
         HttpSession session = request.getSession();
         session.setAttribute("codigoRecuperacao", codigo);
