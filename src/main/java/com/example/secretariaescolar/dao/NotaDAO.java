@@ -93,17 +93,17 @@ public class NotaDAO {
         List<MediaDisciplina> lista = new ArrayList<>();
 
         String sql = """
-            SELECT d.nome AS disciplina,
-                   ROUND(AVG(n.valor), 2) AS media
-            FROM nota n
-            JOIN disciplina d ON d.id_disciplina = n.id_disciplina
-            WHERE n.id_aluno = ?
-            GROUP BY d.nome
-            ORDER BY d.nome
-        """;
+                    SELECT d.nome AS disciplina,
+                           ROUND(AVG(n.valor), 2) AS media
+                    FROM nota n
+                    JOIN disciplina d ON d.id_disciplina = n.id_disciplina
+                    WHERE n.id_aluno = ?
+                    GROUP BY d.nome
+                    ORDER BY d.nome
+                """;
 
         try (Connection conn = Conexao.conectar();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+                PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setInt(1, idAluno);
 
@@ -111,8 +111,7 @@ public class NotaDAO {
                 while (rs.next()) {
                     lista.add(new MediaDisciplina(
                             rs.getString("disciplina"),
-                            rs.getDouble("media")
-                    ));
+                            rs.getDouble("media")));
                 }
             }
 
@@ -125,23 +124,24 @@ public class NotaDAO {
 
     public int contarDisciplinasAcimaOuIgual7(int idAluno) {
         String sql = """
-            SELECT COUNT(*) AS qtd
-            FROM (
-                SELECT n.id_disciplina
-                FROM nota n
-                WHERE n.id_aluno = ?
-                GROUP BY n.id_disciplina
-                HAVING AVG(n.valor) >= 7
-            ) x
-        """;
+                    SELECT COUNT(*) AS qtd
+                    FROM (
+                        SELECT n.id_disciplina
+                        FROM nota n
+                        WHERE n.id_aluno = ?
+                        GROUP BY n.id_disciplina
+                        HAVING AVG(n.valor) >= 7
+                    ) x
+                """;
 
         try (Connection conn = Conexao.conectar();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+                PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setInt(1, idAluno);
 
             try (ResultSet rs = stmt.executeQuery()) {
-                if (rs.next()) return rs.getInt("qtd");
+                if (rs.next())
+                    return rs.getInt("qtd");
             }
 
         } catch (SQLException e) {
@@ -154,23 +154,24 @@ public class NotaDAO {
     // Quantas disciplinas com média < 7
     public int contarDisciplinasAbaixo7(int idAluno) {
         String sql = """
-            SELECT COUNT(*) AS qtd
-            FROM (
-                SELECT n.id_disciplina
-                FROM nota n
-                WHERE n.id_aluno = ?
-                GROUP BY n.id_disciplina
-                HAVING AVG(n.valor) < 7
-            ) x
-        """;
+                    SELECT COUNT(*) AS qtd
+                    FROM (
+                        SELECT n.id_disciplina
+                        FROM nota n
+                        WHERE n.id_aluno = ?
+                        GROUP BY n.id_disciplina
+                        HAVING AVG(n.valor) < 7
+                    ) x
+                """;
 
         try (Connection conn = Conexao.conectar();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+                PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setInt(1, idAluno);
 
             try (ResultSet rs = stmt.executeQuery()) {
-                if (rs.next()) return rs.getInt("qtd");
+                if (rs.next())
+                    return rs.getInt("qtd");
             }
 
         } catch (SQLException e) {
@@ -184,12 +185,13 @@ public class NotaDAO {
         String sql = "SELECT ROUND(AVG(valor), 2) AS media FROM nota WHERE id_aluno = ?";
 
         try (Connection conn = Conexao.conectar();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+                PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setInt(1, idAluno);
 
             try (ResultSet rs = stmt.executeQuery()) {
-                if (rs.next()) return rs.getDouble("media");
+                if (rs.next())
+                    return rs.getDouble("media");
             }
 
         } catch (SQLException e) {
@@ -203,17 +205,17 @@ public class NotaDAO {
         List<MediaDisciplina> lista = new ArrayList<>();
 
         String sql = """
-        SELECT d.nome AS disciplina,
-               ROUND(AVG(n.valor), 2) AS media
-        FROM nota n
-        JOIN disciplina d ON d.id_disciplina = n.id_disciplina
-        WHERE n.id_aluno = ? AND n.semestre = ?
-        GROUP BY d.nome
-        ORDER BY d.nome
-    """;
+                    SELECT d.nome AS disciplina,
+                           ROUND(AVG(n.valor), 2) AS media
+                    FROM nota n
+                    JOIN disciplina d ON d.id_disciplina = n.id_disciplina
+                    WHERE n.id_aluno = ? AND n.semestre = ?
+                    GROUP BY d.nome
+                    ORDER BY d.nome
+                """;
 
         try (Connection conn = Conexao.conectar();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+                PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setInt(1, idAluno);
             stmt.setString(2, semestre);
@@ -222,8 +224,7 @@ public class NotaDAO {
                 while (rs.next()) {
                     lista.add(new MediaDisciplina(
                             rs.getString("disciplina"),
-                            rs.getDouble("media")
-                    ));
+                            rs.getDouble("media")));
                 }
             }
 
@@ -236,17 +237,17 @@ public class NotaDAO {
 
     public NotasAlunoDTO buscarN1N2(int idAluno, int idDisciplina) {
         String sql = """
-            SELECT semestre, valor
-            FROM nota
-            WHERE id_aluno = ? AND id_disciplina = ? AND semestre IN ('1','2')
-        """;
+                    SELECT semestre, valor
+                    FROM nota
+                    WHERE id_aluno = ? AND id_disciplina = ? AND semestre IN ('1','2')
+                """;
 
         NotasAlunoDTO dto = new NotasAlunoDTO();
         dto.setN1(0.0);
         dto.setN2(0.0);
 
         try (Connection conn = Conexao.conectar();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+                PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setInt(1, idAluno);
             stmt.setInt(2, idDisciplina);
@@ -255,8 +256,10 @@ public class NotaDAO {
                 while (rs.next()) {
                     String s = rs.getString("semestre");
                     double v = rs.getDouble("valor");
-                    if ("1".equals(s)) dto.setN1(v);
-                    if ("2".equals(s)) dto.setN2(v);
+                    if ("1".equals(s))
+                        dto.setN1(v);
+                    if ("2".equals(s))
+                        dto.setN2(v);
                 }
             }
 
@@ -268,7 +271,7 @@ public class NotaDAO {
     }
 
     public boolean salvarOuAtualizarN1N2(int idAluno, int idDisciplina, int idProfessor,
-                                         double n1, double n2) {
+            double n1, double n2) {
 
         // upsert manual: tenta UPDATE, se 0 rows, faz INSERT
         String up1 = "UPDATE nota SET valor=?, titulo='Nota', id_professor=? WHERE id_aluno=? AND id_disciplina=? AND semestre='1'";

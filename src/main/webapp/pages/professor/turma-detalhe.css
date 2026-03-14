@@ -1,9 +1,7 @@
-/* ===== CONTAINER ===== */
 .turma-card{
     padding: 28px 26px 34px;
 }
 
-/* header */
 .page-title-row{
     display:flex;
     align-items:center;
@@ -26,7 +24,6 @@
     line-height: 1;
 }
 
-/* ações */
 .actions-row{
     margin-top: 14px;
     display: flex;
@@ -65,25 +62,22 @@
 .btn-primary:hover{ filter: brightness(1.04); }
 .btn-arrow{ font-size: 18px; line-height: 1; }
 
-/* ===== GRID (igual figma: 1 grande + 4 pequenas) ===== */
 .grid{
     margin-top: 22px;
     display: grid;
   
-    /* 5 colunas iguais */
     grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
   
     gap: 14px;
     align-items: start;
 }
 
-/* ===== BOX base ===== */
 .box{
     background: #fff;
     border: 1px solid rgba(40,53,101,0.14);
     border-radius: 12px;
     padding: 14px 16px;
-    box-shadow: 0 8px 18px rgba(40, 53, 101, 0.06); /* mais leve, estilo figma */
+    box-shadow: 0 8px 18px rgba(40, 53, 101, 0.06); 
 }
 
 .box-title{
@@ -118,14 +112,14 @@
 
 .chart-wrap{
     margin-top: 12px;
-    height: 210px; /* um pouco menor e mais “clean” */
+    height: 210px; 
     height: 100%;
 }
 
 .legend{
     margin-top: 10px;
     display: grid;
-    grid-template-columns: 1fr 1fr; /* 2 colunas */
+    grid-template-columns: 1fr 1fr; 
     gap: 10px 14px;
     align-items: center;
     font-size: 12px;
@@ -148,8 +142,8 @@
 }
 
 .legend .leg:nth-child(3){
-    grid-column: 1 / -1;     /* ocupa as 2 colunas */
-    justify-self: center;     /* centraliza */
+    grid-column: 1 / -1;     
+    justify-self: center;    
 }
 
 .dot{
@@ -162,7 +156,6 @@
 .dot.blue{ background:#A6B1D9; }
 .dot.red{ background:#D16F6F; }
 
-/* ===== KPIs (linha 1, col 2-5) ===== */
 .kpi{
     display:flex;
     flex-direction: column;
@@ -186,21 +179,19 @@
     color: rgba(40,53,101,0.65);
 }
 
-/* posições exatas dos 3 cards do topo (último mais largo como no figma) */
 .kpi:nth-of-type(1){ grid-column: 2 / 3; grid-row: 1 / 2; }
 .kpi:nth-of-type(2){ grid-column: 3 / 4; grid-row: 1 / 2; }
-.kpi:nth-of-type(3){ grid-column: 4 / 5; grid-row: 1 / 2; } /* ocupa 2 colunas */
+.kpi:nth-of-type(3){ grid-column: 4 / 5; grid-row: 1 / 2; } 
 
-/* ===== Ranking (linha 2, col 2-5) ===== */
 .ranking{
-    grid-column: 3 / 6;   /* ocupa 3 colunas */
+    grid-column: 3 / 6;   
     grid-row: 2 / 3;
     height: 100%;
     font-size: 20px;
 }
 
 .ranking-list{
-    margin-top: 22px; /* aumenta o espaço acima */
+    margin-top: 22px;                                
     display:flex;
     flex-direction: column;
     gap: 10px;
@@ -335,7 +326,7 @@
     color: var(--navy);
 }
 
-/* vazio */
+                     
 .empty{
     padding: 10px 0;
     font-weight: 700;
@@ -378,7 +369,6 @@
     max-width: 100%;
 }
 
-/* deixa clicável/bonito */
 .obs-item{
     cursor: pointer;
     border-radius: 10px;
@@ -394,7 +384,6 @@
     outline-offset: 2px;
 }
 
-/* ========= OVERLAY / POPUP ========= */
 .overlay{
     position: fixed;
     inset: 0;

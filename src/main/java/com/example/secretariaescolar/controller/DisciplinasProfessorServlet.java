@@ -4,7 +4,6 @@ import com.example.secretariaescolar.dao.DisciplinaDAO;
 import com.example.secretariaescolar.dao.TurmaDAO;
 import com.example.secretariaescolar.model.Disciplina;
 import com.example.secretariaescolar.model.Usuario;
-import com.example.secretariaescolar.util.Conexao;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
@@ -31,7 +30,7 @@ public class DisciplinasProfessorServlet extends HttpServlet {
             return;
         }
 
-        int idUser = usuario.getId_user(); 
+        int idUser = usuario.getId_user();
 
         DisciplinaDAO disciplinaDAO = new DisciplinaDAO();
         TurmaDAO turmaDAO = new TurmaDAO();

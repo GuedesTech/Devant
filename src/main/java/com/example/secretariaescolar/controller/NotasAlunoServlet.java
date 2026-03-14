@@ -47,40 +47,37 @@ public class NotasAlunoServlet extends HttpServlet {
         List<MediaDisciplina> mediasS1 = notaDAO.listarMediasPorDisciplinaPorSemestre(aluno.getId_aluno(), "1");
         List<MediaDisciplina> mediasS2 = notaDAO.listarMediasPorDisciplinaPorSemestre(aluno.getId_aluno(), "2");
 
-        // ✅ stats laterais
         int acima7 = notaDAO.contarDisciplinasAcimaOuIgual7(aluno.getId_aluno());
         int abaixo7 = notaDAO.contarDisciplinasAbaixo7(aluno.getId_aluno());
         double mediaGeralAluno = notaDAO.calcularMediaGeral(aluno.getId_aluno());
 
-        // =========================================================
-        // ✅ CÁLCULOS DOS 4 CARDS
-        // =========================================================
-
-        MediaDisciplina destaque = null; // maior média geral
-        MediaDisciplina atencao = null;  // menor média geral
+        MediaDisciplina destaque = null;
+        MediaDisciplina atencao = null;
 
         for (MediaDisciplina md : mediasGeral) {
-            if (destaque == null || md.getMedia() > destaque.getMedia()) destaque = md;
-            if (atencao == null || md.getMedia() < atencao.getMedia()) atencao = md;
+            if (destaque == null || md.getMedia() > destaque.getMedia())
+                destaque = md;
+            if (atencao == null || md.getMedia() < atencao.getMedia())
+                atencao = md;
         }
 
-        // Map disciplina -> média semestre
         Map<String, Double> mapS1 = new HashMap<>();
-        for (MediaDisciplina md : mediasS1) mapS1.put(md.getDisciplina(), md.getMedia());
+        for (MediaDisciplina md : mediasS1)
+            mapS1.put(md.getDisciplina(), md.getMedia());
 
         Map<String, Double> mapS2 = new HashMap<>();
-        for (MediaDisciplina md : mediasS2) mapS2.put(md.getDisciplina(), md.getMedia());
+        for (MediaDisciplina md : mediasS2)
+            mapS2.put(md.getDisciplina(), md.getMedia());
 
-        // evolução/regressão: delta = S2 - S1
         String discMaiorEvolucao = null;
         double maiorEvolucao = Double.NEGATIVE_INFINITY;
 
         String discMaiorRegressao = null;
         double maiorRegressao = Double.POSITIVE_INFINITY;
 
-        // percorre as disciplinas que existem nos dois semestres
         for (String disc : mapS1.keySet()) {
-            if (!mapS2.containsKey(disc)) continue;
+            if (!mapS2.containsKey(disc))
+                continue;
 
             double delta = mapS2.get(disc) - mapS1.get(disc);
 
@@ -94,22 +91,18 @@ public class NotasAlunoServlet extends HttpServlet {
             }
         }
 
-        // ✅ manda tudo pro JSP
         request.setAttribute("aluno", aluno);
 
-        // gráfico
         request.setAttribute("mediasGeral", mediasGeral);
         request.setAttribute("mediasS1", mediasS1);
         request.setAttribute("mediasS2", mediasS2);
 
-        // stats
         request.setAttribute("acima7", acima7);
         request.setAttribute("abaixo7", abaixo7);
         request.setAttribute("mediaGeral", mediaGeralAluno);
 
-        // cards (valores prontos)
-        request.setAttribute("cardDestaque", destaque); // MediaDisciplina (disciplina + media)
-        request.setAttribute("cardAtencao", atencao);   // MediaDisciplina
+        request.setAttribute("cardDestaque", destaque);
+        request.setAttribute("cardAtencao", atencao);
 
         request.setAttribute("discMaiorEvolucao", discMaiorEvolucao);
         request.setAttribute("maiorEvolucao", maiorEvolucao);

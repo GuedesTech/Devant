@@ -4,7 +4,8 @@ public class MediaDisciplina {
     private String disciplina;
     private double media;
 
-    public MediaDisciplina() {}
+    public MediaDisciplina() {
+    }
 
     public MediaDisciplina(String disciplina, double media) {
         this.disciplina = disciplina;

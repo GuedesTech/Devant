@@ -96,7 +96,11 @@ public class BoletimDisciplinaServlet extends HttpServlet {
             request.setAttribute("erro", "Erro ao carregar boletim: " + e.getMessage());
             request.getRequestDispatcher("/pages/aluno/boletim-disciplina.jsp").forward(request, response);
         } finally {
-            try { if (conn != null) conn.close(); } catch (Exception ignore) {}
+            try {
+                if (conn != null)
+                    conn.close();
+            } catch (Exception ignore) {
+            }
         }
     }
 }
