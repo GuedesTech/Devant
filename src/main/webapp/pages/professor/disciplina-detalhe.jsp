@@ -3,12 +3,20 @@
 <%@ page import="java.sql.Date" %>
 <%@ page import="java.time.format.DateTimeFormatter" %>
 <%@ page import="com.example.secretariaescolar.model.Disciplina" %>
+<%@ page import="com.example.secretariaescolar.model.Turma" %>
 
 <%
   String ctx = request.getContextPath();
 
   Disciplina disciplina = (Disciplina) request.getAttribute("disciplina");
   String nomeDisciplina = (disciplina != null && disciplina.getNome() != null) ? disciplina.getNome() : "Disciplina";
+
+  String filtroSelecionado = (String) request.getAttribute("filtroSelecionado");
+  if (filtroSelecionado == null || filtroSelecionado.isBlank()) filtroSelecionado = "geral";
+
+  @SuppressWarnings("unchecked")
+  List<Turma> turmasDaDisciplina = (List<Turma>) request.getAttribute("turmasDaDisciplina");
+  if (turmasDaDisciplina == null) turmasDaDisciplina = new ArrayList<>();
 
   Integer totalAlunos = (Integer) request.getAttribute("totalAlunos");
   if (totalAlunos == null) totalAlunos = 0;
@@ -37,26 +45,16 @@
   DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM");
 
   String fotoPos = (topPositivo != null) ? (String) topPositivo.get("foto") : null;
-
-  boolean semFotoPos = (fotoPos == null)
-          || fotoPos.isBlank()
+  boolean semFotoPos = (fotoPos == null) || fotoPos.isBlank()
           || "null".equalsIgnoreCase(fotoPos.trim())
           || "[null]".equalsIgnoreCase(fotoPos.trim());
-
-  String fotoPosSrc = !semFotoPos
-          ? (ctx + "/pages/uploads/" + fotoPos)
-          : (ctx + "/pages/aluno/foto_sem_foto.png");
+  String fotoPosSrc = !semFotoPos ? (ctx + "/pages/uploads/" + fotoPos) : (ctx + "/pages/aluno/foto_sem_foto.png");
 
   String fotoNeg = (topNegativo != null) ? (String) topNegativo.get("foto") : null;
-
-  boolean semFotoNeg = (fotoNeg == null)
-          || fotoNeg.isBlank()
+  boolean semFotoNeg = (fotoNeg == null) || fotoNeg.isBlank()
           || "null".equalsIgnoreCase(fotoNeg.trim())
           || "[null]".equalsIgnoreCase(fotoNeg.trim());
-
-  String fotoNegSrc = !semFotoNeg
-          ? (ctx + "/pages/uploads/" + fotoNeg)
-          : (ctx + "/pages/aluno/foto_sem_foto.png");
+  String fotoNegSrc = !semFotoNeg ? (ctx + "/pages/uploads/" + fotoNeg) : (ctx + "/pages/aluno/foto_sem_foto.png");
 %>
 
 <!DOCTYPE html>
@@ -85,9 +83,7 @@
     </nav>
 
     <div class="topbar-right">
-      <a href="<%= ctx %>/pages/login/index.jsp" class="logout-btn">
-        Sair
-      </a>
+      <a href="<%= ctx %>/pages/login/index.jsp" class="logout-btn">Sair</a>
     </div>
   </div>
 </header>
@@ -102,9 +98,23 @@
 
       <div class="title-line" aria-hidden="true"></div>
 
-      <div class="actions-row">
-        <select class="periodo-select">
-          <option>Geral</option>
+      <form class="actions-row" method="get" action="<%= ctx %>/professor/disciplina">
+        <input type="hidden" name="id_disciplina" value="<%= disciplina != null ? disciplina.getId_disciplina() : 0 %>">
+
+        <select class="periodo-select" name="filtro" onchange="this.form.submit()">
+          <option value="geral" <%= "geral".equals(filtroSelecionado) ? "selected" : "" %>>Geral</option>
+          <option value="1geral" <%= "1geral".equals(filtroSelecionado) ? "selected" : "" %>>1°s em geral</option>
+          <option value="2geral" <%= "2geral".equals(filtroSelecionado) ? "selected" : "" %>>2°s em geral</option>
+          <option value="3geral" <%= "3geral".equals(filtroSelecionado) ? "selected" : "" %>>3°s em geral</option>
+
+          <%
+            for (Turma t : turmasDaDisciplina) {
+              String val = String.valueOf(t.getId_turma());
+          %>
+          <option value="<%= val %>" <%= val.equals(filtroSelecionado) ? "selected" : "" %>><%= t.getNome() %></option>
+          <%
+            }
+          %>
         </select>
 
         <div class="chip">
@@ -113,10 +123,10 @@
         </div>
 
         <a class="btn-primary"
-           href="<%= ctx %>/professor/alunos-disciplina?id_disciplina=<%= disciplina != null ? disciplina.getId_disciplina() : 0 %>">
+           href="<%= ctx %>/professor/alunos-disciplina?id_disciplina=<%= disciplina != null ? disciplina.getId_disciplina() : 0 %>&filtro=<%= filtroSelecionado %>">
           Ver alunos <span class="btn-arrow">›</span>
         </a>
-      </div>
+      </form>
     </div>
 
     <div class="grid">
@@ -148,16 +158,12 @@
           <%
           } else {
             for (Map<String, Object> o : ultimasObs) {
-
               String paraNome = String.valueOf(o.get("nome"));
               String msg = String.valueOf(o.get("mensagem"));
 
-              String deNome = null;
-              if (o.get("professor") != null) deNome = String.valueOf(o.get("professor"));
-              else if (o.get("de") != null) deNome = String.valueOf(o.get("de"));
-              else if (o.get("autor") != null) deNome = String.valueOf(o.get("autor"));
-              else if (o.get("nome_professor") != null) deNome = String.valueOf(o.get("nome_professor"));
-              else deNome = "Professor";
+              String deNome = (o.get("nome_professor") != null)
+                      ? String.valueOf(o.get("nome_professor"))
+                      : "Professor";
 
               Object tipoObj = o.get("tipo");
               int tipo = 1;
@@ -209,11 +215,6 @@
       <div class="box ranking">
         <div class="box-head">
           <div class="box-title">Ranking de Alunos</div>
-
-          <a href="<%= ctx %>/professor/ranking-disciplina?id_disciplina=<%= disciplina != null ? disciplina.getId_disciplina() : 0 %>"
-             class="rank-link">
-            Ver Ranking Completo
-          </a>
         </div>
 
         <div class="ranking-list">
@@ -255,14 +256,11 @@
             <%
               String nomePos = (topPositivo != null) ? String.valueOf(topPositivo.get("nome")) : "";
               String nomeFormatadoPos = "—";
-
               if(!nomePos.isBlank()){
                 String[] partes = nomePos.split(" ");
-                if(partes.length > 1){
-                  nomeFormatadoPos = partes[0] + " " + partes[1].charAt(0) + ".";
-                } else {
-                  nomeFormatadoPos = partes[0];
-                }
+                nomeFormatadoPos = (partes.length > 1)
+                        ? partes[0] + " " + partes[1].charAt(0) + "."
+                        : partes[0];
               }
             %>
             <%= nomeFormatadoPos %>
@@ -280,14 +278,11 @@
             <%
               String nomeNeg = (topNegativo != null) ? String.valueOf(topNegativo.get("nome")) : "";
               String nomeFormatadoNeg = "—";
-
               if(!nomeNeg.isBlank()){
                 String[] partes = nomeNeg.split(" ");
-                if(partes.length > 1){
-                  nomeFormatadoNeg = partes[0] + " " + partes[1].charAt(0) + ".";
-                } else {
-                  nomeFormatadoNeg = partes[0];
-                }
+                nomeFormatadoNeg = (partes.length > 1)
+                        ? partes[0] + " " + partes[1].charAt(0) + "."
+                        : partes[0];
               }
             %>
             <%= nomeFormatadoNeg %>

@@ -310,7 +310,7 @@
 
             <label class="field">
                 <span>E-mail</span>
-                <input name="login" id="editLogin" type="email" placeholder="ex: aluno@devant.org.br">
+                <input name="login" id="editLogin" type="text" placeholder="ex: aluno@devant.org.br">
             </label>
 
             <label class="field">

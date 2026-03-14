@@ -43,7 +43,6 @@ public class NotasAlunoServlet extends HttpServlet {
 
         NotaDAO notaDAO = new NotaDAO();
 
-        // ✅ listas do gráfico
         List<MediaDisciplina> mediasGeral = notaDAO.listarMediasPorDisciplina(aluno.getId_aluno());
         List<MediaDisciplina> mediasS1 = notaDAO.listarMediasPorDisciplinaPorSemestre(aluno.getId_aluno(), "1");
         List<MediaDisciplina> mediasS2 = notaDAO.listarMediasPorDisciplinaPorSemestre(aluno.getId_aluno(), "2");

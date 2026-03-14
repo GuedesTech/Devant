@@ -1,22 +1,21 @@
 package com.example.secretariaescolar.controller;
 
 import com.example.secretariaescolar.dao.ProfessorDAO;
-import com.example.secretariaescolar.dao.NotaDAO;
+import com.example.secretariaescolar.dao.ObservacaoDAO;
 import com.example.secretariaescolar.model.Disciplina;
 import com.example.secretariaescolar.model.Usuario;
 
-import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
 
 import java.io.IOException;
 
-@WebServlet("/professor/aluno/notas/salvar")
-public class ProfessorAlunoSalvarNotasServlet extends HttpServlet {
+@WebServlet("/professor/observacao/nova")
+public class ProfessorObservacaoNovoServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws IOException {
 
         request.setCharacterEncoding("UTF-8");
 
@@ -36,46 +35,35 @@ public class ProfessorAlunoSalvarNotasServlet extends HttpServlet {
 
         try {
             int idAluno = Integer.parseInt(request.getParameter("id_aluno"));
-            double n1 = parseDoubleSafe(request.getParameter("n1"));
-            double n2 = parseDoubleSafe(request.getParameter("n2"));
+            String mensagem = request.getParameter("mensagem");
+            int tipo = Integer.parseInt(request.getParameter("tipo"));
 
             ProfessorDAO professorDAO = new ProfessorDAO();
             Integer idProfessor = professorDAO.buscarIdProfessorPorIdUser(usuario.getId_user());
 
             if (idProfessor == null) {
-                response.sendRedirect(request.getContextPath() + "/professor/aluno/analise?id_aluno=" + idAluno + "&erro=sem_prof");
+                response.sendRedirect(request.getContextPath() + "/professor/aluno/observacoes?id_aluno=" + idAluno + "&erro=sem_prof");
                 return;
             }
 
-            Disciplina disciplinaProfessor = professorDAO.getDisciplina(idProfessor);
-            if (disciplinaProfessor == null) {
-                response.sendRedirect(request.getContextPath() + "/professor/aluno/analise?id_aluno=" + idAluno + "&erro=sem_disc");
+            Disciplina disciplina = professorDAO.getDisciplina(idProfessor);
+            if (disciplina == null) {
+                response.sendRedirect(request.getContextPath() + "/professor/aluno/observacoes?id_aluno=" + idAluno + "&erro=sem_disc");
                 return;
             }
 
-            int idDisciplina = disciplinaProfessor.getId_disciplina();
-
-            NotaDAO notaDAO = new NotaDAO();
-            boolean ok = notaDAO.salvarOuAtualizarN1N2(idAluno, idDisciplina, idProfessor, n1, n2);
+            ObservacaoDAO obsDAO = new ObservacaoDAO();
+            boolean ok = obsDAO.inserirProfessor(idAluno, idProfessor, disciplina.getId_disciplina(), mensagem, tipo);
 
             if (ok) {
-                response.sendRedirect(request.getContextPath() + "/professor/aluno/analise?id_aluno=" + idAluno + "&ok=nota_salva");
+                response.sendRedirect(request.getContextPath() + "/professor/aluno/observacoes?id_aluno=" + idAluno + "&ok=1");
             } else {
-                response.sendRedirect(request.getContextPath() + "/professor/aluno/analise?id_aluno=" + idAluno + "&erro=nota");
+                response.sendRedirect(request.getContextPath() + "/professor/aluno/observacoes?id_aluno=" + idAluno + "&erro=1");
             }
 
         } catch (Exception e) {
             e.printStackTrace();
             response.sendRedirect(request.getContextPath() + "/professor/turmas");
-        }
-    }
-
-    private double parseDoubleSafe(String s) {
-        try {
-            if (s == null || s.isBlank()) return 0.0;
-            return Double.parseDouble(s.replace(",", "."));
-        } catch (Exception e) {
-            return 0.0;
         }
     }
 }

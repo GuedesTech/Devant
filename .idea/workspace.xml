@@ -15,25 +15,38 @@
       <change afterPath="$PROJECT_DIR$/../.idea/misc.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../.idea/modules.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../Devant.zip" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/secretariaescolar/controller/DisciplinaDetalheProfessorServlet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/secretariaescolar/controller/PerfilProfessorServlet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/secretariaescolar/controller/ProfessorAlunoAnaliseServlet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/secretariaescolar/controller/ProfessorAlunoSalvarNotasServlet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/secretariaescolar/dto/AnaliseDisciplinaDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/pages/professor/aluno-analise.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/pages/professor/disciplina-detalhe.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/pages/professor/disciplina-detalhe.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/pages/professor/perfil-professor.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/webContexts.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/webContexts.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/secretariaescolar/controller/ProfessorAlunoDetalheServlet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/secretariaescolar/controller/ProfessorAlunoObservacoesServlet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/secretariaescolar/controller/ProfessorObservacaoExcluirServlet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/secretariaescolar/controller/ProfessorObservacaoNovoServlet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/secretariaescolar/controller/ProfessorObservacaoSalvarServlet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/pages/professor/professor-aluno-observacoes.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/pages/professor/vizu_branco.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/secretariaescolar/controller/BoletimDisciplinaServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/secretariaescolar/controller/BoletimDisciplinaServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/secretariaescolar/controller/DisciplinaDetalheProfessorServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/secretariaescolar/controller/DisciplinaDetalheProfessorServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/secretariaescolar/controller/DisciplinasProfessorServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/secretariaescolar/controller/DisciplinasProfessorServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/secretariaescolar/controller/NotasAlunoServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/secretariaescolar/controller/NotasAlunoServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/secretariaescolar/controller/ProfessorAlunoAnaliseServlet.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/secretariaescolar/controller/ProfessorAlunoSalvarNotasServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/secretariaescolar/controller/ProfessorAlunoSalvarNotasServlet.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/secretariaescolar/dao/AlunoDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/secretariaescolar/dao/AlunoDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/secretariaescolar/dao/NotaDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/secretariaescolar/dao/NotaDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/secretariaescolar/dao/DisciplinaDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/secretariaescolar/dao/DisciplinaDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/secretariaescolar/dao/ObservacaoDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/secretariaescolar/dao/ObservacaoDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/secretariaescolar/dao/ProfessorDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/secretariaescolar/dao/ProfessorDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/pages/aluno/notas-aluno.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/pages/aluno/notas-aluno.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/pages/professor/alunos.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/pages/professor/alunos.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/secretariaescolar/dao/TurmaDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/secretariaescolar/dao/TurmaDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/pages/adm/aluno-desempenho.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/pages/adm/aluno-desempenho.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/pages/adm/aluno-editar.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/pages/adm/aluno-form.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/pages/adm/aluno-novo.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/pages/adm/alunos-adm.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/pages/adm/alunos-adm.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/pages/aluno/observacoes-aluno.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/pages/aluno/observacoes-aluno.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/pages/professor/aluno-analise.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/pages/professor/aluno-analise.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/pages/professor/disciplina-detalhe.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/pages/professor/disciplina-detalhe.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/pages/professor/disciplina-detalhe.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/pages/professor/disciplina-detalhe.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/pages/professor/disciplinas-professor.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/pages/professor/disciplinas-professor.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/pages/professor/ranking-completo.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/pages/professor/ranking-completo.jsp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -101,7 +114,7 @@
     &quot;git-widget-placeholder&quot;: &quot;master&quot;,
     &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/juliomenezes-ieg/OneDrive - Instituto J&amp;F/Área de Trabalho/Escola/Devant/src/main/webapp/pages/adm&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/juliomenezes-ieg/OneDrive - Instituto J&amp;F/Área de Trabalho/Escola/Devant/src/main/webapp/pages/professor&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -116,9 +129,9 @@
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\juliomenezes-ieg\OneDrive - Instituto J&amp;F\Área de Trabalho\Escola\Devant\src\main\webapp\pages\professor" />
       <recent name="C:\Users\juliomenezes-ieg\OneDrive - Instituto J&amp;F\Área de Trabalho\Escola\Devant\src\main\webapp\pages\adm" />
       <recent name="C:\Users\juliomenezes-ieg\OneDrive - Instituto J&amp;F\Área de Trabalho\Escola\Devant\src\main\webapp\pages\uploads" />
-      <recent name="C:\Users\juliomenezes-ieg\OneDrive - Instituto J&amp;F\Área de Trabalho\Escola\Devant\src\main\webapp\pages\professor" />
       <recent name="C:\Users\juliomenezes-ieg\OneDrive - Instituto J&amp;F\Área de Trabalho\Escola\Devant\src\main\webapp\pages\assets" />
       <recent name="C:\Users\juliomenezes-ieg\OneDrive - Instituto J&amp;F\Área de Trabalho\Escola\Devant\src\main\webapp\pages\aluno" />
     </key>
@@ -459,7 +472,13 @@
       <workItem from="1772893002665" duration="6566000" />
       <workItem from="1772979153227" duration="24033000" />
       <workItem from="1773036535297" duration="6145000" />
-      <workItem from="1773050726864" duration="2543000" />
+      <workItem from="1773050726864" duration="6364000" />
+      <workItem from="1773061624132" duration="1839000" />
+      <workItem from="1773276204553" duration="9902000" />
+      <workItem from="1773310359154" duration="3950000" />
+      <workItem from="1773367724223" duration="2384000" />
+      <workItem from="1773407256035" duration="226000" />
+      <workItem from="1773451334498" duration="364000" />
     </task>
     <servers />
   </component>

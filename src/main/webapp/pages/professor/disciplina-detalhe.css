@@ -34,7 +34,7 @@
 
 .periodo-select{
     height: 36px;
-    min-width: 120px;
+    min-width: 160px;
     padding: 0 12px;
     border-radius: 12px;
     border: 1px solid rgba(40,53,101,0.20);
@@ -101,17 +101,6 @@
     align-items:center;
     justify-content: space-between;
     gap: 10px;
-}
-
-.rank-link{
-    font-size: 12px;
-    font-weight: 600;
-    color: rgba(40,53,101,0.55);
-    text-decoration: none;
-}
-
-.rank-link:hover{
-    color: rgba(40,53,101,0.75);
 }
 
 .kpi{
@@ -406,4 +395,20 @@
 .popup-back .arrow{
     font-size: 18px;
     line-height: 1;
+}
+
+@media (max-width: 1100px){
+    .grid{
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .obs,
+    .ranking,
+    .totalobs,
+    .topcard,
+    .topcard.pos,
+    .topcard.neg{
+        grid-column: auto;
+        grid-row: auto;
+    }
 }

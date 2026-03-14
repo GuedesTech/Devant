@@ -125,7 +125,7 @@ public class AlunoDAO {
             e.printStackTrace();
         }
 
-        return false; // matrícula não existe ou erro
+        return false;
     }
 
     public Aluno buscarPorIdUser(int idUser) {
@@ -159,7 +159,6 @@ public class AlunoDAO {
                     aluno.setMatricula(rs.getString("matricula"));
                     aluno.setId_turma(rs.getInt("id_turma"));
 
-                    // ✅ aqui vem o nome da turma
                     aluno.setNomeTurma(rs.getString("nome_turma"));
 
                     return aluno;

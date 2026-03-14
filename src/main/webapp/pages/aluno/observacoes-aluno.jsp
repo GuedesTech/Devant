@@ -7,7 +7,6 @@
 <%
     String ctx = request.getContextPath();
 
-    // ✅ Agora tipado corretamente
     List<Observacao> observacoes = (List<Observacao>) request.getAttribute("observacoes");
 
     Integer totalObs = (Integer) request.getAttribute("totalObs");

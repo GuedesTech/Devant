@@ -155,7 +155,7 @@
             <%= nome %>
           </span>
 
-          <a href="<%= ctx %>/professor/disciplina?id_disciplina=<%= minha.getId_disciplina() %>"
+          <a href="<%= ctx %>/professor/disciplina?id_disciplina=<%= d.getId_disciplina() %>"
              style="font-weight:800; color:#294c56; text-decoration:none;">
             Ver Desempenho
           </a>

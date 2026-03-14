@@ -51,7 +51,6 @@ public class BoletimDisciplinaServlet extends HttpServlet {
             return;
         }
 
-        // pega aluno (id_aluno) pelo id_user
         AlunoDAO alunoDAO = new AlunoDAO();
         Aluno aluno = alunoDAO.buscarPorIdUser(usuario.getId_user());
 
@@ -61,8 +60,6 @@ public class BoletimDisciplinaServlet extends HttpServlet {
             return;
         }
 
-        // pega connection do seu projeto (use o mesmo padrão que você já usa)
-        // ✅ Se você já tem uma classe de conexão (ex: Conexao.getConnection()), troque aqui.
         Connection conn = null;
         try {
             conn = Conexao.conectar(); // <-- ajuste para sua classe real
@@ -80,7 +77,6 @@ public class BoletimDisciplinaServlet extends HttpServlet {
 
             List<Observacao> observacoes = boletimDAO.listarObservacoesDaDisciplina(aluno.getId_aluno(), idDisciplina);
 
-            // manda pro JSP
             request.setAttribute("aluno", aluno);
             request.setAttribute("disciplinaNome", nomeDisciplina != null ? nomeDisciplina : "Disciplina");
 

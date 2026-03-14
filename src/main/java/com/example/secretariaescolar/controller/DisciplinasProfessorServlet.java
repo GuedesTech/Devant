@@ -31,7 +31,7 @@ public class DisciplinasProfessorServlet extends HttpServlet {
             return;
         }
 
-        int idUser = usuario.getId_user(); // precisa existir no seu model Usuario
+        int idUser = usuario.getId_user(); 
 
         DisciplinaDAO disciplinaDAO = new DisciplinaDAO();
         TurmaDAO turmaDAO = new TurmaDAO();

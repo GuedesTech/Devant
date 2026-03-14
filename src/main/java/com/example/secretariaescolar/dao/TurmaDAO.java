@@ -443,4 +443,66 @@ public class TurmaDAO {
         }
         return null;
     }
+
+    public List<Turma> listarTurmasPorSerie(int serie) {
+        List<Turma> list = new ArrayList<>();
+
+        String sql = """
+        SELECT id_turma, nome
+        FROM turma
+        WHERE nome LIKE ?
+        ORDER BY nome ASC
+    """;
+
+        try (Connection conn = Conexao.conectar();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, serie + "%");
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    Turma t = new Turma();
+                    t.setId_turma(rs.getInt("id_turma"));
+                    t.setNome(rs.getString("nome"));
+                    list.add(t);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return list;
+    }
+
+    public List<Turma> listarTurmasDaDisciplina(int idDisciplina) {
+        List<Turma> list = new ArrayList<>();
+
+        String sql = """
+        SELECT DISTINCT t.id_turma, t.nome
+        FROM turma t
+        JOIN aluno a ON a.id_turma = t.id_turma
+        JOIN nota n ON n.id_aluno = a.id_aluno
+        WHERE n.id_disciplina = ?
+        ORDER BY t.nome ASC
+    """;
+
+        try (Connection conn = Conexao.conectar();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, idDisciplina);
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    Turma t = new Turma();
+                    t.setId_turma(rs.getInt("id_turma"));
+                    t.setNome(rs.getString("nome"));
+                    list.add(t);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return list;
+    }
 }
