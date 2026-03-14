@@ -7,6 +7,15 @@
   font-family: 'Poppins', sans-serif;
 }
 
+.sucesso {
+  color: #0f8b4c;
+  background: #e8fff1;
+  border: 1px solid #8ed9ad;
+  border-radius: 8px;
+  padding: 10px 14px;
+  margin-bottom: 12px;
+  font-weight: 700;
+}
 body {
   height: 100vh;
   background: linear-gradient(rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7)), url('fundo login.jpg') no-repeat left center;

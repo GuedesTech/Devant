@@ -6,6 +6,55 @@ import com.example.secretariaescolar.util.Conexao;
 import java.sql.*;
 
 public class UsuarioDAO {
+    public Usuario buscarPorLogin(String login) {
+    String sql = """
+        SELECT id_user, nome, login, senha, id_tipo_user, foto
+        FROM usuario
+        WHERE login = ?
+    """;
+
+    try (Connection conn = Conexao.conectar();
+         PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+        stmt.setString(1, login);
+
+        ResultSet rs = stmt.executeQuery();
+
+        if (rs.next()) {
+            Usuario user = new Usuario();
+            user.setId_user(rs.getInt("id_user"));
+            user.setNome(rs.getString("nome"));
+            user.setLogin(rs.getString("login"));
+            user.setSenha(rs.getString("senha"));
+            user.setId_tipo_user(rs.getInt("id_tipo_user"));
+            user.setFoto(rs.getString("foto"));
+            return user;
+        }
+
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+
+    return null;
+}
+
+public boolean atualizarSenhaPorLogin(String login, String novaSenha) {
+    String sql = "UPDATE usuario SET senha = ? WHERE login = ?";
+
+    try (Connection conn = Conexao.conectar();
+         PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+        stmt.setString(1, novaSenha);
+        stmt.setString(2, login);
+
+        return stmt.executeUpdate() > 0;
+
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+
+    return false;
+}
 
     public int inserir(Usuario user) {
 

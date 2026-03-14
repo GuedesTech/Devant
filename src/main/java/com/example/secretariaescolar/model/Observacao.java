@@ -10,11 +10,10 @@ public class Observacao {
     private int id_aluno;
     private int id_professor;
     private int id_disciplina;
-    private int tipo; // 1 = boa (verde), 2 = negativa (vermelha)
+    private int tipo; 
 
     public Observacao() {}
 
-    // Para INSERT (sem id_observacao)
     public Observacao(String mensagem, LocalDate data, int id_aluno, int id_professor, int id_disciplina, int tipo) {
         this.mensagem = mensagem;
         this.data = data;
@@ -24,7 +23,7 @@ public class Observacao {
         this.tipo = tipo;
     }
 
-    // Para SELECT (com id_observacao)
+
     public Observacao(int id_observacao, String mensagem, LocalDate data, int id_aluno, int id_professor, int id_disciplina, int tipo) {
         this.id_observacao = id_observacao;
         this.mensagem = mensagem;
