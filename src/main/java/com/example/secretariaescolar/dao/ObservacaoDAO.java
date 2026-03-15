@@ -46,10 +46,10 @@ public class ObservacaoDAO {
                 o.id_professor,
                 o.id_disciplina,
                 o.tipo,
-                u.nome AS nome_professor
+                COALESCE(u.nome, 'Secretaria') AS nome_professor
             FROM observacao o
-            INNER JOIN professor p ON p.id_professor = o.id_professor
-            INNER JOIN usuario u ON u.id_user = p.id_user
+            LEFT JOIN professor p ON p.id_professor = o.id_professor
+            LEFT JOIN usuario u ON u.id_user = p.id_user
             WHERE o.id_aluno = ?
             ORDER BY o.data DESC, o.id_observacao DESC
         """;
@@ -66,7 +66,10 @@ public class ObservacaoDAO {
                     o.setMensagem(rs.getString("mensagem"));
                     o.setData(rs.getDate("data").toLocalDate());
                     o.setId_aluno(rs.getInt("id_aluno"));
-                    o.setId_professor(rs.getInt("id_professor"));
+
+                    int idProfessor = rs.getInt("id_professor");
+                    o.setId_professor(rs.wasNull() ? 0 : idProfessor);
+
                     o.setId_disciplina(rs.getInt("id_disciplina"));
                     o.setTipo(rs.getInt("tipo"));
                     o.setNomeProfessor(rs.getString("nome_professor"));
@@ -82,6 +85,7 @@ public class ObservacaoDAO {
         return lista;
     }
 
+
     public List<Observacao> listarPorAlunoEDisciplina(int idAluno, int idDisciplina) {
         List<Observacao> lista = new ArrayList<>();
 
@@ -94,10 +98,10 @@ public class ObservacaoDAO {
                 o.id_professor,
                 o.id_disciplina,
                 o.tipo,
-                u.nome AS nome_professor
+                COALESCE(u.nome, 'Secretaria') AS nome_professor
             FROM observacao o
-            INNER JOIN professor p ON p.id_professor = o.id_professor
-            INNER JOIN usuario u ON u.id_user = p.id_user
+            LEFT JOIN professor p ON p.id_professor = o.id_professor
+            LEFT JOIN usuario u ON u.id_user = p.id_user
             WHERE o.id_aluno = ?
               AND o.id_disciplina = ?
             ORDER BY o.data DESC, o.id_observacao DESC
@@ -116,7 +120,10 @@ public class ObservacaoDAO {
                     o.setMensagem(rs.getString("mensagem"));
                     o.setData(rs.getDate("data").toLocalDate());
                     o.setId_aluno(rs.getInt("id_aluno"));
-                    o.setId_professor(rs.getInt("id_professor"));
+
+                    int idProfessor = rs.getInt("id_professor");
+                    o.setId_professor(rs.wasNull() ? 0 : idProfessor);
+
                     o.setId_disciplina(rs.getInt("id_disciplina"));
                     o.setTipo(rs.getInt("tipo"));
                     o.setNomeProfessor(rs.getString("nome_professor"));

@@ -4,6 +4,7 @@ import io.github.cdimascio.dotenv.Dotenv;
 import jakarta.mail.*;
 import jakarta.mail.internet.InternetAddress;
 import jakarta.mail.internet.MimeMessage;
+import jakarta.mail.PasswordAuthentication;
 
 import java.util.Properties;
 

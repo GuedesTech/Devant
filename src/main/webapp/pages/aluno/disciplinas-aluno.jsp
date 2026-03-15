@@ -52,7 +52,11 @@
                 <span class="nav-indicador" aria-hidden="true"></span>
             </nav>
 
-            <div class="topbar-right"></div>
+            <div class="topbar-right">
+                <a href="<%= ctx %>/pages/login/index.jsp" class="logout-btn">
+                    Sair
+                </a>
+            </div>
         </div>
     </header>
 
@@ -92,8 +96,10 @@
                     <a
                         href="<%= ctx %>/aluno/boletim/pdf"
                         style="
+                            margin-left: -450px;
                             height: 40px;
                             display: inline-flex;
+                            gap: 8px;
                             align-items: center;
                             justify-content: center;
                             padding: 0 14px;
@@ -108,7 +114,7 @@
                         target="_blank"
                         rel="noopener"
                     >
-                        Gerar boletim completo
+                        <img src="<%= ctx %>/pages/aluno/icon_pdf.png" style="width: 18px; height: 18px;" /> Boletim Completo
                     </a>
 
                     <form

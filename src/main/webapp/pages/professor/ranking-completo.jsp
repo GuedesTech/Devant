@@ -91,7 +91,7 @@
 
           boolean aprovado = media >= 7.0;
 
-          String href = ctx + "/professor/aluno/analise?id_aluno=" + item.getId_aluno();
+          String href = ctx + "/professor/aluno/analise?id_aluno=" + idAluno;
       %>
       <a class="ranking-item-card <%= aprovado ? "ok" : "bad" %>" href="<%= href %>">
         <div class="ranking-pos"><%= posicao %>°</div>
