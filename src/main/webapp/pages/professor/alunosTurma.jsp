@@ -82,7 +82,7 @@
           Double media = mediaPorAluno.get(a.getId_aluno());
           if (media == null) media = 0.0;
 
-          String href = ctx + "/professor/aluno?id_aluno=" + a.getId_aluno();
+          String href = ctx + "/professor/aluno/analise?id_aluno=" + a.getId_aluno();
       %>
 
       <a class="aluno-card" href="<%= href %>">

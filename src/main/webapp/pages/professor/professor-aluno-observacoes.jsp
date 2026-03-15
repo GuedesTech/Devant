@@ -374,6 +374,7 @@
       font-size:18px;
       line-height:1.55;
       word-break:break-word;
+      white-space:pre-wrap;
     }
 
     .popup-back{
@@ -431,6 +432,7 @@
       color:#1f2937;
       outline:none;
       resize:vertical;
+      white-space:pre-wrap;
     }
 
     .radio-row{
@@ -619,41 +621,56 @@
         </div>
 
         <button class="add-card" type="button" id="btnAbrirNovaObs">
-          <div class="add-icon">⊕</div>
-          <div>Adicionar<br>Observação</div>
+          <img src="<%= ctx %>/pages/professor/add_icon.png" style="width: 46px; height: 46px">
+          <div style="font-size: 14px">Adicionar Observação</div>
         </button>
       </div>
     </div>
 
     <div class="obs-list" id="obsList">
-      <%
-        if (observacoes.isEmpty()) {
-      %>
+      <% if (observacoes.isEmpty()) { %>
       <div class="empty-box">Nenhuma observação encontrada para este aluno.</div>
-      <%
-      } else {
-        for (Observacao obs : observacoes) {
-          String mensagem = (obs.getMensagem() != null) ? obs.getMensagem() : "";
-          String de = (obs.getNomeProfessor() != null && !obs.getNomeProfessor().isBlank())
-                  ? obs.getNomeProfessor()
-                  : "Professor";
+      <% } else { %>
 
-          String data = (obs.getData() != null) ? obs.getData().format(fmt) : "";
-          int tipo = obs.getTipo();
-          String cls = (tipo == 2) ? "tipo2" : "";
+      <% for (Observacao obs : observacoes) {
+        String mensagem = (obs.getMensagem() != null) ? obs.getMensagem() : "";
+        String de = (obs.getNomeProfessor() != null && !obs.getNomeProfessor().isBlank())
+                ? obs.getNomeProfessor()
+                : "Professor";
 
-          String mensagemAttr = mensagem
-                  .replace("&", "&amp;")
-                  .replace("\"", "&quot;")
-                  .replace("'", "&#39;")
-                  .replace("<", "&lt;")
-                  .replace(">", "&gt;")
-                  .replace("\n", " ")
-                  .replace("\r", " ");
+        String data = (obs.getData() != null) ? obs.getData().format(fmt) : "";
+        int tipo = obs.getTipo();
+        String cls = (tipo == 2) ? "tipo2" : "";
 
-          String deAttr = de.replace("\"", "&quot;");
-          boolean podeEditar = obs.getId_professor() == idProfessorLogado;
+        String mensagemAttr = mensagem
+                .replace("&", "&amp;")
+                .replace("\"", "&quot;")
+                .replace("'", "&#39;")
+                .replace("<", "&lt;")
+                .replace(">", "&gt;")
+                .replace("\n", " ")
+                .replace("\r", " ");
+
+        String mensagemHtml = mensagem
+                .replace("&", "&amp;")
+                .replace("<", "&lt;")
+                .replace(">", "&gt;");
+
+        String deAttr = de
+                .replace("&", "&amp;")
+                .replace("\"", "&quot;")
+                .replace("'", "&#39;")
+                .replace("<", "&lt;")
+                .replace(">", "&gt;");
+
+        String deHtml = de
+                .replace("&", "&amp;")
+                .replace("<", "&lt;")
+                .replace(">", "&gt;");
+
+        boolean podeEditar = obs.getId_professor() == idProfessorLogado;
       %>
+
       <div class="obs-item <%= cls %>"
            data-id-observacao="<%= obs.getId_observacao() %>"
            data-de="<%= deAttr %>"
@@ -663,10 +680,10 @@
 
         <div class="obs-main">
           <div class="obs-top">
-            <div class="obs-de">De: <%= de %></div>
+            <div class="obs-de">De: <%= deHtml %></div>
             <div class="obs-data"><%= data %></div>
           </div>
-          <div class="obs-msg"><%= mensagem %></div>
+          <div class="obs-msg"><%= mensagemHtml %></div>
         </div>
 
         <% if (podeEditar) { %>
@@ -687,10 +704,9 @@
         </div>
         <% } %>
       </div>
-      <%
-          }
-        }
-      %>
+
+      <% } %>
+      <% } %>
     </div>
   </section>
 </main>
@@ -727,7 +743,7 @@
       <input type="hidden" name="id_aluno" value="<%= aluno != null ? aluno.getId_aluno() : 0 %>">
 
       <div class="chip-info" style="margin-top:0;">
-        Disciplina automática:
+        Disciplina:
         <strong><%= disciplinaProfessor != null ? disciplinaProfessor.getNome() : "—" %></strong>
       </div>
 
@@ -750,7 +766,7 @@
 
       <div class="popup-actions">
         <button class="btn-ghost" type="button" id="btnFecharNovaObs">Cancelar</button>
-        <button class="btn-primary" type="submit">Salvar observação</button>
+        <button class="btn-primary" type="submit">Adicionar Observação</button>
       </div>
     </form>
   </div>
@@ -810,164 +826,171 @@
 </div>
 
 <script>
-    (function () {
-        const nav = document.querySelector(".topbar-nav");
-        const indicador = nav ? nav.querySelector(".nav-indicador") : null;
-        const links = nav ? nav.querySelectorAll(".topbar-link") : [];
-        if (!nav || !indicador || links.length === 0) return;
+  (function () {
+    const nav = document.querySelector(".topbar-nav");
+    const indicador = nav ? nav.querySelector(".nav-indicador") : null;
+    const links = nav ? nav.querySelectorAll(".topbar-link") : [];
+    if (!nav || !indicador || links.length === 0) return;
 
-        function moverPara(el) {
-            const rect = el.getBoundingClientRect();
-            const navRect = nav.getBoundingClientRect();
-            indicador.style.width = rect.width + "px";
-            indicador.style.left = (rect.left - navRect.left) + "px";
-        }
-
-        const ativo = nav.querySelector(".topbar-link.is-active") || links[0];
-        moverPara(ativo);
-
-        window.addEventListener("resize", () => {
-            const a = nav.querySelector(".topbar-link.is-active") || links[0];
-            moverPara(a);
-        });
-
-        links.forEach((a) => {
-            a.addEventListener("click", (e) => {
-                if (e.ctrlKey || e.metaKey || e.shiftKey || e.altKey) return;
-                const href = a.getAttribute("href");
-                if (!href) return;
-                e.preventDefault();
-                moverPara(a);
-                setTimeout(() => window.location.href = href, 220);
-            });
-        });
-    })();
-
-    function abrirOverlay(id) {
-        const overlay = document.getElementById(id);
-        if (!overlay) return;
-        overlay.classList.add("is-open");
-        document.body.classList.add("no-scroll");
+    function moverPara(el) {
+      const rect = el.getBoundingClientRect();
+      const navRect = nav.getBoundingClientRect();
+      indicador.style.width = rect.width + "px";
+      indicador.style.left = (rect.left - navRect.left) + "px";
     }
 
-    function fecharOverlay(id) {
-        const overlay = document.getElementById(id);
-        if (!overlay) return;
-        overlay.classList.remove("is-open");
-        document.body.classList.remove("no-scroll");
-    }
+    const ativo = nav.querySelector(".topbar-link.is-active") || links[0];
+    moverPara(ativo);
 
-    (function () {
-        const overlay = document.getElementById("overlayLeitura");
-        const popup = document.getElementById("popupLeitura");
-        const btnFechar = document.getElementById("btnFecharLeitura");
-
-        const popDe = document.getElementById("popDe");
-        const popData = document.getElementById("popData");
-        const popTexto = document.getElementById("popTexto");
-
-        function abrir(item){
-            popDe.textContent = item.getAttribute("data-de") || "";
-            popData.textContent = item.getAttribute("data-data") || "";
-            popTexto.textContent = item.getAttribute("data-texto") || "";
-
-            const tipo = item.getAttribute("data-tipo");
-            popup.classList.toggle("tipo2", String(tipo) === "2");
-
-            abrirOverlay("overlayLeitura");
-        }
-
-        function fechar(){
-            fecharOverlay("overlayLeitura");
-        }
-
-        document.querySelectorAll(".obs-item").forEach(item => {
-            item.addEventListener("click", (e) => {
-                if (e.target.closest(".obs-actions")) return;
-                abrir(item);
-            });
-        });
-
-        btnFechar && btnFechar.addEventListener("click", fechar);
-        overlay && overlay.addEventListener("click", (e) => {
-            if (e.target === overlay) fechar();
-        });
-    })();
-
-    (function () {
-        const btnAbrir = document.getElementById("btnAbrirNovaObs");
-        const btnFechar = document.getElementById("btnFecharNovaObs");
-        const overlay = document.getElementById("overlayNova");
-
-        btnAbrir && btnAbrir.addEventListener("click", () => abrirOverlay("overlayNova"));
-        btnFechar && btnFechar.addEventListener("click", () => fecharOverlay("overlayNova"));
-
-        overlay && overlay.addEventListener("click", (e) => {
-            if (e.target === overlay) fecharOverlay("overlayNova");
-        });
-    })();
-
-    (function () {
-        const overlay = document.getElementById("overlayEditar");
-        const btnFechar = document.getElementById("btnFecharEditarObs");
-        const editId = document.getElementById("editIdObservacao");
-        const editMensagem = document.getElementById("editMensagem");
-        const editTipo1 = document.getElementById("editTipo1");
-        const editTipo2 = document.getElementById("editTipo2");
-
-        document.querySelectorAll(".btn-editar-obs").forEach(btn => {
-            btn.addEventListener("click", (e) => {
-                e.stopPropagation();
-
-                const id = btn.getAttribute("data-id-observacao") || "";
-                const mensagem = btn.getAttribute("data-mensagem") || "";
-                const tipo = btn.getAttribute("data-tipo") || "1";
-
-                editId.value = id;
-                editMensagem.value = mensagem;
-
-                editTipo1.checked = String(tipo) === "1";
-                editTipo2.checked = String(tipo) === "2";
-
-                abrirOverlay("overlayEditar");
-            });
-        });
-
-        btnFechar && btnFechar.addEventListener("click", () => fecharOverlay("overlayEditar"));
-
-        overlay && overlay.addEventListener("click", (e) => {
-            if (e.target === overlay) fecharOverlay("overlayEditar");
-        });
-    })();
-
-    (function () {
-        const overlay = document.getElementById("overlayExcluir");
-        const btnFechar = document.getElementById("btnFecharExcluirObs");
-        const deleteId = document.getElementById("deleteIdObservacao");
-
-        document.querySelectorAll(".btn-excluir-obs").forEach(btn => {
-            btn.addEventListener("click", (e) => {
-                e.stopPropagation();
-                deleteId.value = btn.getAttribute("data-id-observacao") || "";
-                abrirOverlay("overlayExcluir");
-            });
-        });
-
-        btnFechar && btnFechar.addEventListener("click", () => fecharOverlay("overlayExcluir"));
-
-        overlay && overlay.addEventListener("click", (e) => {
-            if (e.target === overlay) fecharOverlay("overlayExcluir");
-        });
-    })();
-
-    document.addEventListener("keydown", (e) => {
-        if (e.key === "Escape") {
-            fecharOverlay("overlayLeitura");
-            fecharOverlay("overlayNova");
-            fecharOverlay("overlayEditar");
-            fecharOverlay("overlayExcluir");
-        }
+    window.addEventListener("resize", () => {
+      const a = nav.querySelector(".topbar-link.is-active") || links[0];
+      moverPara(a);
     });
+
+    links.forEach((a) => {
+      a.addEventListener("click", (e) => {
+        if (e.ctrlKey || e.metaKey || e.shiftKey || e.altKey) return;
+        const href = a.getAttribute("href");
+        if (!href) return;
+        e.preventDefault();
+        moverPara(a);
+        setTimeout(() => window.location.href = href, 220);
+      });
+    });
+  })();
+
+  function abrirOverlay(id) {
+    const overlay = document.getElementById(id);
+    if (!overlay) return;
+    overlay.classList.add("is-open");
+    document.body.classList.add("no-scroll");
+  }
+
+  function fecharOverlay(id) {
+    const overlay = document.getElementById(id);
+    if (!overlay) return;
+    overlay.classList.remove("is-open");
+    document.body.classList.remove("no-scroll");
+  }
+
+  (function () {
+    const overlay = document.getElementById("overlayLeitura");
+    const popup = document.getElementById("popupLeitura");
+    const btnFechar = document.getElementById("btnFecharLeitura");
+
+    const popDe = document.getElementById("popDe");
+    const popData = document.getElementById("popData");
+    const popTexto = document.getElementById("popTexto");
+
+    function abrir(item){
+      popDe.textContent = item.getAttribute("data-de") || "";
+      popData.textContent = item.getAttribute("data-data") || "";
+      popTexto.textContent = item.getAttribute("data-texto") || "";
+
+      const tipo = item.getAttribute("data-tipo");
+      popup.classList.toggle("tipo2", String(tipo) === "2");
+
+      abrirOverlay("overlayLeitura");
+    }
+
+    function fechar(){
+      fecharOverlay("overlayLeitura");
+    }
+
+    document.querySelectorAll(".obs-item").forEach(item => {
+      item.addEventListener("click", (e) => {
+        if (e.target.closest(".obs-actions")) return;
+        abrir(item);
+      });
+    });
+
+    if (btnFechar) btnFechar.addEventListener("click", fechar);
+    if (overlay) {
+      overlay.addEventListener("click", (e) => {
+        if (e.target === overlay) fechar();
+      });
+    }
+  })();
+
+  (function () {
+    const btnAbrir = document.getElementById("btnAbrirNovaObs");
+    const btnFechar = document.getElementById("btnFecharNovaObs");
+    const overlay = document.getElementById("overlayNova");
+
+    if (btnAbrir) btnAbrir.addEventListener("click", () => abrirOverlay("overlayNova"));
+    if (btnFechar) btnFechar.addEventListener("click", () => fecharOverlay("overlayNova"));
+
+    if (overlay) {
+      overlay.addEventListener("click", (e) => {
+        if (e.target === overlay) fecharOverlay("overlayNova");
+      });
+    }
+  })();
+
+  (function () {
+    const overlay = document.getElementById("overlayEditar");
+    const btnFechar = document.getElementById("btnFecharEditarObs");
+    const editId = document.getElementById("editIdObservacao");
+    const editMensagem = document.getElementById("editMensagem");
+    const editTipo1 = document.getElementById("editTipo1");
+    const editTipo2 = document.getElementById("editTipo2");
+
+    document.querySelectorAll(".btn-editar-obs").forEach(btn => {
+      btn.addEventListener("click", (e) => {
+        e.stopPropagation();
+
+        const id = btn.getAttribute("data-id-observacao") || "";
+        const mensagem = btn.getAttribute("data-mensagem") || "";
+        const tipo = btn.getAttribute("data-tipo") || "1";
+
+        editId.value = id;
+        editMensagem.value = mensagem;
+        editTipo1.checked = String(tipo) === "1";
+        editTipo2.checked = String(tipo) === "2";
+
+        abrirOverlay("overlayEditar");
+      });
+    });
+
+    if (btnFechar) btnFechar.addEventListener("click", () => fecharOverlay("overlayEditar"));
+
+    if (overlay) {
+      overlay.addEventListener("click", (e) => {
+        if (e.target === overlay) fecharOverlay("overlayEditar");
+      });
+    }
+  })();
+
+  (function () {
+    const overlay = document.getElementById("overlayExcluir");
+    const btnFechar = document.getElementById("btnFecharExcluirObs");
+    const deleteId = document.getElementById("deleteIdObservacao");
+
+    document.querySelectorAll(".btn-excluir-obs").forEach(btn => {
+      btn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        deleteId.value = btn.getAttribute("data-id-observacao") || "";
+        abrirOverlay("overlayExcluir");
+      });
+    });
+
+    if (btnFechar) btnFechar.addEventListener("click", () => fecharOverlay("overlayExcluir"));
+
+    if (overlay) {
+      overlay.addEventListener("click", (e) => {
+        if (e.target === overlay) fecharOverlay("overlayExcluir");
+      });
+    }
+  })();
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+      fecharOverlay("overlayLeitura");
+      fecharOverlay("overlayNova");
+      fecharOverlay("overlayEditar");
+      fecharOverlay("overlayExcluir");
+    }
+  });
 </script>
 
 </body>

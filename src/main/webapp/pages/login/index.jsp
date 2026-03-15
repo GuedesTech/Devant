@@ -114,34 +114,21 @@
             </button>
           </form>
 
-          <div
-            style="
-              margin-top: 10px;
-              width: 550px;
-              margin-left: auto;
-              margin-right: auto;
-              text-align: right;
-            "
-          >
+          <div class="links-login">
             <a
-              href="#"
-              onclick="abrirModalEsqueciSenha(); return false;"
-              style="
-                color: #274855;
-                font-weight: 700;
-                text-decoration: none;
-                font-family: 'Lato', sans-serif;
-              "
+                    href="#"
+                    class="link-esqueci"
+                    onclick="abrirModalEsqueciSenha(); return false;"
             >
               Esqueci minha senha
             </a>
-          </div>
 
-          <div class="cadastro">
-            Não tem login?
-            <a href="<%= request.getContextPath() %>/pages/login/cadastrar.jsp">
-              Cadastre-se
-            </a>
+            <div class="cadastro">
+              Não tem login?
+              <a href="<%= request.getContextPath() %>/pages/login/cadastrar.jsp">
+                Cadastre-se
+              </a>
+            </div>
           </div>
         </div>
 
@@ -160,41 +147,11 @@
       </div>
     </div>
 
-    <div
-      id="modalEsqueciSenha"
-      style="
-        display: none;
-        position: fixed;
-        inset: 0;
-        background: rgba(0, 0, 0, 0.45);
-        z-index: 9999;
-        align-items: center;
-        justify-content: center;
-      "
-    >
-      <div
-        style="
-          width: 360px;
-          background: #2f3136;
-          border-radius: 14px;
-          padding: 20px;
-          color: white;
-          text-align: center;
-          box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
-        "
-      >
-        <h3 style="margin-bottom: 12px; font-family: 'Lato', sans-serif;">
-          Recuperar senha
-        </h3>
+    <div id="modalEsqueciSenha" class="modal-recuperacao">
+      <div class="modal-recuperacao-box">
+        <h3 class="modal-recuperacao-titulo">Recuperar senha</h3>
 
-        <p
-          style="
-            font-size: 13px;
-            opacity: 0.9;
-            margin-bottom: 14px;
-            font-family: 'Lato', sans-serif;
-          "
-        >
+        <p class="modal-recuperacao-texto">
           Digite seu email para receber o código de 4 dígitos.
         </p>
 
@@ -202,227 +159,87 @@
           <input type="hidden" name="cargo" value="aluno" />
 
           <input
-            type="text"
-            name="login"
-            placeholder="Digite seu email"
-            required
-            style="
-              width: 100%;
-              height: 40px;
-              border: none;
-              border-radius: 8px;
-              padding: 0 10px;
-              margin-bottom: 12px;
-              box-sizing: border-box;
-            "
+                  type="text"
+                  name="login"
+                  placeholder="Digite seu email"
+                  required
+                  class="modal-recuperacao-input"
           />
 
-          <button
-            type="submit"
-            style="
-              width: 100%;
-              height: 40px;
-              border: none;
-              border-radius: 8px;
-              background: #5865f2;
-              color: white;
-              font-weight: 700;
-              cursor: pointer;
-            "
-          >
+          <button type="submit" class="modal-btn modal-btn-confirmar">
             Enviar código
           </button>
         </form>
 
         <button
-          type="button"
-          onclick="fecharModal('modalEsqueciSenha')"
-          style="
-            margin-top: 10px;
-            width: 100%;
-            height: 38px;
-            border: none;
-            border-radius: 8px;
-            background: #444;
-            color: white;
-            cursor: pointer;
-          "
+                type="button"
+                onclick="fecharModal('modalEsqueciSenha')"
+                class="modal-btn modal-btn-cancelar"
         >
           Cancelar
         </button>
       </div>
     </div>
 
-    <div
-      id="modalCodigo"
-      style="
-        display: none;
-        position: fixed;
-        inset: 0;
-        background: rgba(0, 0, 0, 0.45);
-        z-index: 9999;
-        align-items: center;
-        justify-content: center;
-      "
-    >
-      <div
-        style="
-          width: 360px;
-          background: #2f3136;
-          border-radius: 14px;
-          padding: 20px;
-          color: white;
-          text-align: center;
-          box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
-        "
-      >
-        <h3 style="margin-bottom: 12px; font-family: 'Lato', sans-serif;">
-          Verificação
-        </h3>
+    <div id="modalCodigo" class="modal-recuperacao">
+      <div class="modal-recuperacao-box">
+        <h3 class="modal-recuperacao-titulo">Verificação</h3>
 
-        <p
-          style="
-            font-size: 13px;
-            opacity: 0.9;
-            margin-bottom: 14px;
-            font-family: 'Lato', sans-serif;
-          "
-        >
+        <p class="modal-recuperacao-texto">
           Digite o código de 4 dígitos enviado no email.
         </p>
 
         <form action="<%= request.getContextPath() %>/verificar-codigo" method="post">
           <input
-            type="text"
-            name="codigo"
-            maxlength="4"
-            placeholder="Digite o código"
-            required
-            style="
-              width: 100%;
-              height: 40px;
-              border: none;
-              border-radius: 8px;
-              padding: 0 10px;
-              margin-bottom: 12px;
-              box-sizing: border-box;
-              text-align: center;
-              letter-spacing: 3px;
-              font-size: 16px;
-            "
+                  type="text"
+                  name="codigo"
+                  maxlength="4"
+                  placeholder="Digite o código"
+                  required
+                  class="modal-recuperacao-input modal-codigo-input"
           />
 
-          <button
-            type="submit"
-            style="
-              width: 100%;
-              height: 40px;
-              border: none;
-              border-radius: 8px;
-              background: #5865f2;
-              color: white;
-              font-weight: 700;
-              cursor: pointer;
-            "
-          >
+          <button type="submit" class="modal-btn modal-btn-confirmar">
             Verificar
           </button>
         </form>
 
         <button
-          type="button"
-          onclick="fecharModal('modalCodigo')"
-          style="
-            margin-top: 10px;
-            width: 100%;
-            height: 38px;
-            border: none;
-            border-radius: 8px;
-            background: #444;
-            color: white;
-            cursor: pointer;
-          "
+                type="button"
+                onclick="fecharModal('modalCodigo')"
+                class="modal-btn modal-btn-cancelar"
         >
           Cancelar
         </button>
       </div>
     </div>
 
+    <div id="modalNovaSenha" class="modal-recuperacao">
+      <div class="modal-recuperacao-box">
+        <h3 class="modal-recuperacao-titulo">Nova senha</h3>
 
-    <div
-      id="modalNovaSenha"
-      style="
-        display: none;
-        position: fixed;
-        inset: 0;
-        background: rgba(0, 0, 0, 0.45);
-        z-index: 9999;
-        align-items: center;
-        justify-content: center;
-      "
-    >
-      <div
-        style="
-          width: 360px;
-          background: #2f3136;
-          border-radius: 14px;
-          padding: 20px;
-          color: white;
-          text-align: center;
-          box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
-        "
-      >
-        <h3 style="margin-bottom: 12px; font-family: 'Lato', sans-serif;">
-          Nova senha
-        </h3>
+        <p class="modal-recuperacao-texto">
+          Digite sua nova senha para concluir a redefinição.
+        </p>
 
         <form action="<%= request.getContextPath() %>/redefinir-senha" method="post">
           <input
-            type="password"
-            name="novaSenha"
-            placeholder="Digite a nova senha"
-            required
-            style="
-              width: 100%;
-              height: 40px;
-              border: none;
-              border-radius: 8px;
-              padding: 0 10px;
-              margin-bottom: 12px;
-              box-sizing: border-box;
-            "
+                  type="password"
+                  name="novaSenha"
+                  placeholder="Digite a nova senha"
+                  required
+                  class="modal-recuperacao-input"
           />
 
-          <button
-            type="submit"
-            style="
-              width: 100%;
-              height: 40px;
-              border: none;
-              border-radius: 8px;
-              background: #5865f2;
-              color: white;
-              font-weight: 700;
-              cursor: pointer;
-            "
-          >
+          <button type="submit" class="modal-btn modal-btn-confirmar">
             Salvar nova senha
           </button>
         </form>
 
         <button
-          type="button"
-          onclick="fecharModal('modalNovaSenha')"
-          style="
-            margin-top: 10px;
-            width: 100%;
-            height: 38px;
-            border: none;
-            border-radius: 8px;
-            background: #444;
-            color: white;
-            cursor: pointer;
-          "
+                type="button"
+                onclick="fecharModal('modalNovaSenha')"
+                class="modal-btn modal-btn-cancelar"
         >
           Cancelar
         </button>
